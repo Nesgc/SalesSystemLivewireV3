@@ -45,7 +45,7 @@
                                     <td class="text-center">
                                         <a href="javascript:void(0)" class="btn btn-dark mtmobile" title="Edit"
                                             data-bs-toggle="modal" data-bs-target="#theModal"
-                                            wire:click='Edit({{ $category->id }})'><i
+                                            wire:click="Edit({{ $category->id }})"><i
                                                 class="fa-solid fa-pen-to-square"></i></a>
                                         <a href="javascript:void(0)" onclick="Confirm('{{ $category->id }}')"
                                             class="btn btn-dark" title="Delete"><i class="fa-solid fa-trash"></i></a>

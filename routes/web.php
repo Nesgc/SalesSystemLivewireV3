@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Categories;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\PostComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,5 +32,6 @@ Route::middleware('auth')->group(function () {
 
 Route::get('categories', Categories::class);
 
+Route::get('/posts', PostComponent::class)->name('posts');
 
 require __DIR__ . '/auth.php';
