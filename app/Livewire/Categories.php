@@ -39,11 +39,19 @@ class Categories extends Component
 
     public function Edit($id)
     {
-        $record = Category::find($id);
+        $record = Category::find($id, ['id', 'name', 'image']);
         $this->name = $record->name;
         $this->selected_id = $record->id;
         $this->image = null;
 
         $this->dispatch('show-modal', 'show modal!');
+    }
+
+    public function Store()
+    {
+    }
+
+    public function resetUI()
+    {
     }
 }
