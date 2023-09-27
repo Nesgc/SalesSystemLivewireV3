@@ -64,11 +64,3 @@
     </div>
     @include('livewire.category.form')
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        window.livewire.on('show-modal', msg => {
-            $('#theModal').modal('show')
-        });
-    });
-</script>

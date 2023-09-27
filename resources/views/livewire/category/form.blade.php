@@ -5,7 +5,7 @@
 
 
         <div class="input-group mb-3">
-            <span class="input-group-text fas fa-edit" id="basic-addon1">@</span>
+            <span class="input-group-text fas fa-edit" id="basic-addon1"></span>
             <input type="text" wire:model.lazy='name' class="form-control" placeholder="courses example"
                 aria-label="Username" aria-describedby="basic-addon1">
         </div>
