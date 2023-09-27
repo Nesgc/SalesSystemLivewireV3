@@ -16,7 +16,9 @@ class Categories extends Component
     use WithFileUploads;
     use WithPagination;
 
-    public $name, $image, $searchengine, $selected_id, $pageTitle, $componentName;
+    public $name, $searchengine, $selected_id, $pageTitle, $componentName;
+    #[Rule('image|max:1024')] // 1MB Max
+    public $image;
 
     public function mount()
     {
@@ -27,7 +29,7 @@ class Categories extends Component
     {
 
         if ($this->searchengine == "") {
-            $categories = Category::paginate(2);
+            $categories = Category::paginate(4);
         } else {
             $categories = Category::where('name', 'like', '%' . $this->searchengine . '%')->paginate(50);
         }
@@ -49,9 +51,31 @@ class Categories extends Component
 
     public function Store()
     {
+        $rules = [
+            'name' => 'required|unique:categories|min:3'
+        ];
+        $messages = [
+            'name.required' => 'Nombre de la categoria es requerido',
+            'name.unique' => 'Ya existe el nombre de la categoria',
+            'name.min' => 'El nombre de la categoria debe tener almenos 3 caracteres'
+        ];
+        $this->validate($rules, $messages);
+        $category = Category::create([
+            'name' => $this->name
+        ]);
+
+        $this->image->store('categories');
+
+
+        $this->resetUI();
+        $this->dispatch('category-added', 'Categoria Registrada');
     }
 
     public function resetUI()
     {
+        $this->name = '';
+        $this->image = null;
+        $this->searchengine = '';
+        $this->selected_id = 0;
     }
 }

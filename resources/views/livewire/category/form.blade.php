@@ -15,13 +15,17 @@
         @enderror
     </div>
     <div class="col-sm-12 mt-3">
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Recipient's username"
-                aria-label="Recipient's username" aria-describedby="button-addon2" wire:model='image'
+
+
+        <div class="col-sm-12 mt-3">
+
+            <label for="formFile" class="form-label">Image {{ $image }}</label>
+            <input wire:model='image' class="form-control" type="file" id="formFile"
                 accept="image/x-png, image/gif, image/jpeg">
-            <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+
         </div>
-        <label for="" class="custom-file-label">Image {{ $image }}</label>
+
+
 
 
 
