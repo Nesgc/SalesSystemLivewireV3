@@ -1,0 +1,34 @@
+@import '../../base/base';
+textarea {
+  resize: none;
+}
+
+.clipboard-input {
+  position: relative;
+
+  .copy-icon {
+    position: absolute;
+    top: 12px;
+    left: 10px;
+    cursor: pointer;
+
+    svg {
+      width: 17px;
+      height: 17px;
+    }
+
+    &:hover svg {
+      color: #515365;
+    }
+  }
+}
+
+.clipboard.copy-txt {
+  background-color: #060818;
+
+  .otp-pass span {
+    font-size: 24px;
+    font-weight: 600;
+    color: #009688;
+  }
+}

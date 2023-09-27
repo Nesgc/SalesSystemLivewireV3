@@ -1,0 +1,34 @@
+@import '../../base/base';
+body.dark {
+.ecommerce-create-section {
+  border-radius: 8px;
+  border: 1px solid #0e1726;
+}
+
+.ql-toolbar.ql-snow {
+  border-radius: 8px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+
+  + .ql-container.ql-snow {
+    margin-top: 0;
+    padding: 13px 0;
+    border: 1px solid #1b2e4b;
+    border-top: none;
+    border-radius: 0;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    background: #1b2e4b;
+    height: 280px;
+  }
+}
+
+.multiple-file-upload .filepond {
+  margin: 0;
+}
+
+.tagify {
+  border: 1px solid #1b2e4b;
+}
+
+}

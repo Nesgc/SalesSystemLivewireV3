@@ -1,0 +1,103 @@
+@import '../../base/base';
+body {
+  &:before {
+    display: none;
+  }
+}
+
+.auth-container {
+  min-height: 100vh;
+
+  .container {
+    max-width: 1440px;
+  }
+
+  .card {
+    background-color: transparent;
+    box-shadow: none;
+    border: none;
+
+    .card-body {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+}
+
+.seperator {
+  position: relative;
+
+  .seperator-text {
+    position: absolute;
+    top: -10px;
+    display: block;
+    text-align: center;
+    width: 100%;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 1px;
+
+    span {
+      background-color: #fafafa;
+      padding: 0 12px;
+      display: inline-block;
+    }
+  }
+}
+
+.auth-cover-bg-image {
+  position: absolute;
+  width: 55%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.auth-cover img {
+  width: 450px;
+  height: 450px;
+}
+
+.auth-overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  border-radius: inherit;
+  background-image: linear-gradient(-225deg, #231557 0%, #44107A 29%, rgb(255 19 97 / 75%) 100%);
+  width: 55%;
+}
+
+.opt-input {
+  padding: 12px 14px;
+  text-align: center;
+}
+
+.btn-social-login img {
+  width: 25px;
+  height: 25px;
+}
+
+@media (max-width: 1599px) and (min-width: 1400px) {
+  .ms-lg-auto {
+    margin-left: 110px!important;
+    padding: 0;
+  }
+  .auth-cover-bg-image {
+    width: 50%;
+  }
+  .auth-overlay {
+    width: 50%;
+  }
+}
+
+@media (max-width: 575px) {
+  .auth-container {
+    height: auto;
+
+    .card .card-body {
+      padding-top: 24px;
+      padding-bottom: 24px;
+    }
+  }
+}

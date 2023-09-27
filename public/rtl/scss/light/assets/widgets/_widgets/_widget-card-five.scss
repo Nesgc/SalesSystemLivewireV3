@@ -1,0 +1,85 @@
+@import '../../base/base';
+.widget.widget-card-five {
+  padding: 25px 23px;
+  background-color: #fff;
+  overflow: hidden;
+  
+  .account-box {
+
+    .info-box {
+      display: flex;
+      justify-content: space-between;
+
+      .icon {
+
+        &:before {
+          content: '';
+          background: #f2eafa;
+          position: absolute;
+          top: -29px;
+          right: -34px;
+          height: 150px;
+          width: 150px;
+          border-radius: 50%;
+        }
+
+        span {
+          display: inline-block;
+          position: absolute;
+          top: 12px;
+          right: -1px;
+
+          img {
+            width: 90px;
+            height: 90px;
+          }
+        }
+        
+        svg {
+          width: 22px;
+          height: 22px;
+        }
+      }
+      
+      .balance-info {
+        text-align: left;
+        h6 {
+          margin-bottom: 0;
+          font-size: 17px;
+          color: #e95f2b;
+        }
+        p {
+          margin-bottom: 0;
+          font-size: 25px;
+          font-weight: 700;
+          color: #0e1726;
+        }
+      }
+    }
+    
+    .card-bottom-section {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 82px;
+      align-items: end;
+      p {
+        svg {
+          width: 15px;
+          height: 15px;
+          stroke-width: 1.5px;
+        }
+      }
+      a {
+        
+        font-weight: 600;
+        border-bottom: 1px dashed;
+        color: #304aca;
+
+        &:hover {
+          color: #445ede;
+        }
+
+      }
+    }
+  }      
+}

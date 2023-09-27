@@ -1,0 +1,71 @@
+@import '../../base/base';
+.splide__slide {
+  margin-left: 10px;
+}
+
+.splide__track img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.splide__pagination {
+  bottom: -50px;
+}
+
+.splide__pagination__page {
+  &.is-active {
+    transform: none;
+    background-color: #00ab55;
+    color: #fff;
+  }
+
+  background-color: #e0e6ed;
+  height: 12px;
+  width: 12px;
+  border-radius: 8px;
+  opacity: 1;
+}
+
+.splide__pagination.numberic-pagination {
+  .splide__pagination__page {
+    background-color: #e0e6ed;
+    height: 30px;
+    width: 30px;
+    border-radius: 8px;
+    opacity: 1;
+
+    &.is-active {
+      transform: none;
+      background-color: #00ab55;
+      color: #fff;
+    }
+  }
+
+  bottom: -50px;
+}
+
+.splide__arrow {
+  background-color: #e0e6ed;
+  opacity: 1;
+
+  svg {
+    fill: #000;
+  }
+}
+
+.splide--ttb > {
+  .splide__arrows .splide__arrow--next, .splide__slider > .splide__track > .splide__arrows .splide__arrow--next, .splide__track > .splide__arrows .splide__arrow--next {
+    bottom: -3em;
+  }
+
+  .splide__arrows .splide__arrow--prev, .splide__slider > .splide__track > .splide__arrows .splide__arrow--prev, .splide__track > .splide__arrows .splide__arrow--prev {
+    top: -3em;
+  }
+}
+
+@media (max-width: 640px) {
+  .splide-mainThubnail .splide__list li {
+    height: auto !important;
+    margin-bottom: 10px;
+  }
+}

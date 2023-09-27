@@ -1,0 +1,71 @@
+body {
+    &.dark {
+        .ts-wrapper {
+            
+            .ts-control {
+                border: 1px solid #1b2e4b;
+                border-radius: 6px;
+                background: #1b2e4b;
+                color: #fff;
+
+                input {
+                    color: #fff;
+
+                    &::placeholder {
+                        color: #bfc9d4;
+                    }
+
+                }
+            }
+
+            .ts-dropdown {
+                background: #1b2e4b;
+                border: none;
+                color: #e0e6ed;
+
+                .active {
+                    background-color: #0e1726;
+                    color: #fff;
+                    &.create {
+                        color: #fff;
+
+                        strong {
+                            font-weight: 500;
+                            color: #00ab55;
+                        }
+                    }
+                }
+
+                .no-results {
+                    color: #e0e6ed;
+                }
+            }
+            
+            &.multi {
+                .ts-control {    
+                    .item {
+                        background: #060818;
+                        border: 0 solid #dee2e6;
+                        color: #e0e6ed;
+                        margin: 0 6px 3px 0;
+                        padding: 4px 7px;
+                        font-weight: 500;
+                        border-radius: 6px;
+
+                        &.active {
+                            background-color: #515365;
+                        }
+                    }
+                }
+            }
+        
+            &.focus {
+                .ts-control {
+                    border-color: #3b3f5c;
+                    box-shadow: none;
+                    background: #1b2e4b;
+                }
+            }
+        }
+    }
+}

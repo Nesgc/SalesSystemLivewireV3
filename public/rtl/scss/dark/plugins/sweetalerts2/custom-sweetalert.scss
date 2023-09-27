@@ -1,0 +1,63 @@
+@import '../../base/base';
+body.dark {
+  .swal2-popup {
+    background-color: #0e1726 !important;
+  }
+
+  .swal2-title {
+    color: #bfc9d4;
+  }
+
+  .swal2-html-container {
+    color: #e95f2b;
+  }
+
+  .swal2-styled {
+    &.swal2-default-outline:focus, &.swal2-confirm:focus {
+      box-shadow: none;
+    }
+  }
+
+
+  .swal2-icon {
+  
+    &.swal2-success {
+      
+      .swal2-success-ring {
+        border-color: $l-success;
+      }
+  
+      [class^=swal2-success-line] {
+        background-color: #00ab55;
+      }
+      
+    }
+    
+    &.swal2-error {
+      border-color: $l-danger;
+  
+      [class^=swal2-x-mark-line] {
+        background-color: $danger;
+      }
+      
+    }
+  
+  
+    &.swal2-warning {
+      border-color: $l-warning;
+      color: $warning;
+    }
+  
+    &.swal2-info {
+      border-color: $l-info;
+      color: $info;
+    }
+  
+    &.swal2-question {
+      border-color: $l-secondary;
+      color: $secondary;
+    }
+    
+  }
+  
+}

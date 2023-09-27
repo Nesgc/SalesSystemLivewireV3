@@ -1,0 +1,68 @@
+@import '../../base/base';
+  /*
+      =====================
+          Account Info
+      =====================
+  */
+  // body.dark {
+    .widget {
+      &.widget-wallet-one {
+        .wallet-title {
+          letter-spacing: 0px;
+          font-size: 18px;
+          display: block;
+          color: #0e1726;
+          font-weight: 600;
+          margin-bottom: 0;
+        }
+      
+        .total-amount {
+          font-size: 38px;
+          color: #191e3a;
+          font-weight: 600;
+        }
+      
+        .wallet-text {
+          color: #506690;
+          letter-spacing: 1px;
+          font-weight: 700;
+      
+          &:hover {
+            color: $primary;
+          }
+      
+          svg {
+            width: 16px;
+            height: 16px;
+          }
+        }
+      
+        .wallet-action {
+          padding: 4px 0px;
+          border-radius: 10px;
+          max-width: 350px;
+          margin: 0 auto;
+        }
+      
+        .list-group {
+          .list-group-item {
+            border: none;
+            padding-right: 0;
+            padding-left: 0;
+            position: relative;
+          }
+      
+          &.list-group-media .list-group-item .media .media-body h6 {
+            color: #0e1726;
+            font-weight: 500;
+          }
+      
+          .list-group-item .amount {
+            position: absolute;
+            top: 21px;
+            left: 0;
+          }
+        }
+      }
+    }
+  // }

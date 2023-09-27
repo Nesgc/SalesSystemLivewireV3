@@ -1,0 +1,33 @@
+@import '../../base/base';
+// body.dark {
+    .layout-spacing {
+        padding-bottom: 25px;
+      }
+      
+      .widget {
+        position: relative;
+        padding: 0;
+        border-radius: 6px;
+        border: 1px solid #e0e6ed;
+        box-shadow: 0 0 40px 0 rgb(94 92 154 / 6%);
+      }
+      
+      .apexcharts-xaxis text, .apexcharts-yaxis text {
+        fill: $dark;
+      }
+      
+      .apexcharts-legend-text {
+        color: #3b3f5c !important;
+      }
+      
+      .apexcharts-tooltip.apexcharts-theme-dark {
+        background: #191e3a !important;
+        box-shadow: none;
+      
+        .apexcharts-tooltip-title {
+          background: #191e3a !important;
+          border-bottom: 1px solid #191e3a;
+        }
+      }
+
+// }

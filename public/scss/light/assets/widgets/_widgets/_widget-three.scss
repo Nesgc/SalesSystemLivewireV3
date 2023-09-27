@@ -1,0 +1,130 @@
+@import '../../base/base';
+  /*
+      ====================
+          Order Summary
+      ====================
+  */
+  // body.dark {
+    .widget-three {
+      position: relative;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      height: 100%;
+      border: 1px solid #e0e6ed;
+      box-shadow: 0 0 40px 0 rgb(94 92 154 / 6%);
+    
+      .widget-heading {
+        margin-bottom: 54px;
+        display: flex;
+        justify-content: space-between;
+    
+        h5 {
+          font-size: 19px;
+          display: block;
+          color: #0e1726;
+          font-weight: 600;
+          margin-bottom: 0;
+        }
+    
+        .task-action {
+          .dropdown-toggle svg {
+            color: #888ea8;
+            width: 19px;
+            height: 19px;
+          }
+    
+          .dropdown-menu {
+            transform: translate3d(-141px, 0, 0px);
+          }
+        }
+      }
+    
+      .widget-content {
+        font-size: 17px;
+    
+        .summary-list {
+          display: flex;
+    
+          &:not(:last-child) {
+            margin-bottom: 30px;
+          }
+        }
+    
+        .w-icon {
+          display: inline-block;
+          padding: 8px 8px;
+          border-radius: 50%;
+          display: inline-flex;
+          align-self: center;
+          height: 34px;
+          width: 34px;
+          margin-right: 12px;
+    
+          svg {
+            display: block;
+            width: 17px;
+            height: 17px;
+          }
+        }
+    
+        .summary-list {
+          &:nth-child(1) .w-icon {
+            background: #f2eafa;
+          }
+    
+          &:nth-child(2) .w-icon {
+            background: #ddf5f0;
+          }
+    
+          &:nth-child(3) .w-icon {
+            background: #fcf5e9;
+          }
+    
+          &:nth-child(1) .w-icon svg {
+            color: $secondary;
+          }
+    
+          &:nth-child(2) .w-icon svg {
+            color: #009688;
+          }
+    
+          &:nth-child(3) .w-icon svg {
+            color: $warning;
+          }
+        }
+    
+        .w-summary-details {
+          width: 100%;
+          align-self: center;
+        }
+    
+        .w-summary-info {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 1px;
+    
+          h6 {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 0;
+            color: #888ea8;
+          }
+    
+          p {
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 0;
+            color: #888ea8;
+          }
+        }
+    
+        .w-summary-stats .progress {
+          margin-bottom: 0;
+          height: 6px;
+          border-radius: 20px;
+          box-shadow: none;
+        }
+      }
+    }
+  // }

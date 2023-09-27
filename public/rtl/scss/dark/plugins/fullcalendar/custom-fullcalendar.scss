@@ -1,0 +1,237 @@
+@import '../../base/base';
+body.dark {
+.calendar-container {
+  padding: 30px 30px;
+  background-color: #0e1726;
+  box-shadow: 0 0 40px 0 rgb(94 92 154 / 6%);
+  border-radius: 8px;
+  border: 1px solid #0e1726;
+}
+
+.fc {
+  .fc-button-primary {
+    background-color: #1b2e4b;
+    border-color: #1b2e4b;
+    letter-spacing: 1px;
+    font-size: 14px;
+    color: #fff;
+
+    &:not(:disabled).fc-button-active {
+      background-color: $secondary;
+      font-weight: 900;
+      border-color: #1b2e4b;
+    }
+
+    &:hover, &:not(:disabled):active {
+      background-color: #191e3a;
+      color: #fff;
+      border-color: #1b2e4b;
+    }
+
+    &:focus, &:active:focus {
+      box-shadow: none !important;
+    }
+  }
+
+  .fc-list-sticky .fc-list-day > * {
+    background-color: #0e1726;
+  }
+
+  .fc-daygrid-body {
+      width: 100%!important;
+  }
+  
+  .fc-scrollgrid-section {
+    table {
+      width: 100%!important;
+    }
+  }
+
+  .fc-scrollgrid-section-body {
+    table {
+      width: 100%!important;
+    }
+  }
+}
+
+.fc-theme-standard {
+  .fc-list-day-cushion {
+    background-color: #0e1726;
+  }
+
+  .fc-list {
+    border: 1px solid $dark;
+  }
+}
+
+.fc {
+  .fc-button {
+    border-radius: 8px;
+    padding: 7px 20px;
+    text-transform: capitalize;
+  }
+
+  .fc-addEventButton-button {
+    background-color: $primary;
+    border-color: $primary;
+    color: #fff;
+    font-weight: 700;
+    box-shadow: 0 10px 20px -10px rgb(27 85 226 / 59%);
+
+    &:hover, &:not(:disabled):active {
+      background-color: $primary;
+      border-color: $primary;
+      box-shadow: none;
+    }
+  }
+}
+
+.fc-theme-standard {
+  .fc-scrollgrid, td, th {
+    border: 1px solid $dark;
+  }
+}
+
+.fc .fc-list-table tr>* {
+  border-right: 0;
+  border-left: 0;
+}
+
+.fc-v-event .fc-event-main {
+  color: $dark;
+  .fc-event-main-frame {
+
+    .fc-event-time {
+      color: #e0e6ed;
+    }
+    .fc-event-title-container {
+      color: #e0e6ed;
+    }
+    
+  }
+}
+
+.fc-timegrid-event-harness-inset .fc-timegrid-event, .fc-timegrid-event.fc-event-mirror, .fc-timegrid-more-link {
+  box-shadow: none;
+}
+
+.event-fc-color {
+  background-color: #1b2e4b;
+  border: none;
+  padding: 4px 10px;
+  margin-bottom: 1px;
+  font-size: 13px;
+  letter-spacing: 1px;
+  font-weight: 300;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #060818;
+  }
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+  background-color: transparent;
+  padding: 3px;
+  border-radius: 23px;
+
+  .fc-daygrid-day-frame {
+    background-color: #1b2e4b;
+    border-radius: 8px;
+
+    .fc-daygrid-day-number {
+      font-size: 15px;
+      font-weight: 800;
+    }
+  }
+}
+
+.fc-daygrid-event-dot {
+  margin: 0 0 0 6px;
+}
+
+.fc-bg-primary {
+  color: $primary;
+  background-color: rgba(67, 97, 238, 0.15);
+
+  &.fc-h-event .fc-event-main {
+    color: $primary;
+  }
+}
+
+.fc-bg-success {
+  color: #00ab55;
+  background-color: rgba(26, 188, 156, 0.15);
+
+  &.fc-h-event .fc-event-main {
+    color: #00ab55;
+  }
+}
+
+.fc-bg-warning {
+  color: $warning;
+  background-color: rgba(226, 160, 63, 0.15);
+
+  &.fc-h-event .fc-event-main {
+    color: $warning;
+  }
+}
+
+.fc-bg-danger {
+  color: $danger;
+  background-color: rgba(231, 81, 90, 0.15);
+
+  &.fc-h-event .fc-event-main {
+    color: $danger;
+  }
+}
+
+.fc-bg-primary .fc-daygrid-event-dot {
+  border-color: $primary;
+}
+
+.fc-bg-success .fc-daygrid-event-dot {
+  border-color: #00ab55;
+}
+
+.fc-bg-warning .fc-daygrid-event-dot {
+  border-color: $warning;
+}
+
+.fc-bg-danger .fc-daygrid-event-dot {
+  border-color: $danger;
+}
+
+.fc .fc-list-event:hover td {
+  background-color: #060818;
+}
+}
+/* Modal CSS */
+body.dark {
+.btn-update-event {
+  display: none;
+}
+
+@media (max-width: 1199px) {
+  .calendar-container {
+    padding: 30px 0 0 0;
+  }
+
+  .fc-theme-standard .fc-list {
+    border: none;
+  }
+
+  .fc .fc-toolbar {
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .fc-toolbar-chunk:not(:first-child) {
+    margin-top: 35px;
+  }
+
+  .fc .fc-toolbar.fc-header-toolbar {
+    margin-bottom: 50px;
+  }
+}
+}

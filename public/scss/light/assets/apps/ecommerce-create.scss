@@ -1,0 +1,32 @@
+@import '../../base/base';
+.ecommerce-create-section {
+  border-radius: 8px;
+  border: 1px solid #e0e6ed;
+}
+
+.ql-toolbar.ql-snow {
+  border-radius: 8px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border: 1px solid #bfc9d4;
+
+  + .ql-container.ql-snow {
+    margin-top: 0;
+    padding: 13px 0;
+    border: 1px solid #bfc9d4;
+    border-top: none;
+    border-radius: 0;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    background: #fff;
+    height: 280px;
+  }
+}
+
+.multiple-file-upload .filepond {
+  margin: 0;
+}
+
+.tagify {
+  border: 1px solid #bfc9d4;
+}

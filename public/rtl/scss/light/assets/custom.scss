@@ -1,0 +1,48 @@
+/**
+*
+* ========================================================================================
+*
+*   @CUSTOM STYLESHEET - This stylesheet should be used for custom customization 
+*
+* ========================================================================================
+*
+*/
+
+/* ScrollBar Position */
+#sidebar {
+    .ps__rail-y {
+        right: 0!important;
+    }
+}
+
+/* c-custom-dropdown */
+
+.c-custom-dropdown {
+
+    button {
+        background: none;
+        border: none;
+        padding: 0 5px;
+    }
+}
+
+/* gcontainer */
+
+.glightbox-container {
+    .gcontainer {
+        .gnext {
+            &.gbtn {
+                transform: rotate(180deg);
+            }
+        }
+        .gprev {
+            &.gbtn {
+                transform: rotate(180deg);
+            }
+        }
+    }
+}
+
+
+
+

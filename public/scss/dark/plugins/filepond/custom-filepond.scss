@@ -1,0 +1,98 @@
+@import '../../base/base';
+body.dark {
+.filepond {
+  margin: 0 auto;
+}
+
+.profile-image .filepond {
+  width: 120px;
+  height: 120px !important;
+}
+
+.multiple-file-upload .filepond {
+  width: 100%;
+}
+
+.filepond--drop-label {
+  cursor: pointer;
+  font-size: 12px;
+
+  label {
+    cursor: pointer;
+    font-size: 12px;
+  }
+}
+
+.filepond .no-image-placeholder {
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+.filepond--panel {
+  background-color: #1b2e4b !important;
+
+  &[data-scalable=true] {
+    background-color: #1b2e4b !important;
+  }
+}
+
+.filepond--root .filepond--drop-label, .filepond--drip, .filepond--panel-center, .filepond--panel-top, .filepond--panel-bottom {
+  background-color: #1b2e4b;
+  border-radius: 9px;
+}
+
+.filepond--file, .filepond--file-action-button {
+  background-color: #060818 !important;
+}
+
+.filepond--file-info {
+  background-color: #060818 !important;
+
+  .filepond--file-info-main {
+    background-color: #060818 !important;
+  }
+}
+
+.filepond--file .filepond--file-status {
+  background-color: #060818 !important;
+}
+
+[data-filepond-item-state=processing-complete] .filepond--item-panel {
+  background-color: #369763 !important;
+  background-color: #369763 !important;
+  background-color: #369763 !important;
+}
+
+.filepond--file-action-button {
+  &.filepond--file-action-button svg {
+    background: #1b2e4b;
+    border-radius: 60px;
+    color: #bfc9d4;
+  }
+
+  &:focus, &:hover {
+    box-shadow: none;
+  }
+}
+
+.filepond {
+  .no-image-placeholder svg {
+    height: 34px;
+    width: 34px;
+    stroke-width: 1.2;
+    color: #000;
+    fill: #0000001f;
+  }
+
+  .drag-para {
+    margin-bottom: 0;
+    font-size: 12px;
+    color: #000;
+    margin-top: 9px;
+  }
+}
+
+.filepond--root .filepond--credits {
+  display: none;
+}
+}

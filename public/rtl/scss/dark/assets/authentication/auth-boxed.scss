@@ -1,0 +1,82 @@
+@import '../../base/base';
+
+body.dark {
+
+  &:before {
+    display: none;
+  }
+
+  .card {
+    background-color: transparent;
+    border: 1px solid #191e3a;
+  }
+  
+  .auth-container {
+    min-height: 100vh;
+  
+    .container {
+      max-width: 1440px;
+    }
+  }
+  
+  .seperator {
+    position: relative;
+  
+    .seperator-text {
+      position: absolute;
+      top: -10px;
+      display: block;
+      text-align: center;
+      width: 100%;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 1px;
+  
+      span {
+        background-color: #060818;
+        padding: 0 12px;
+        display: inline-block;
+      }
+    }
+  }
+  
+  .opt-input {
+    padding: 12px 14px;
+    text-align: center;
+  }
+  
+  .btn-social-login img {
+    width: 25px;
+    height: 25px;
+  }
+}
+  
+  @media (max-width: 575px) {
+    body.dark {
+      height: 100vh;
+    }
+  
+    body.dark {
+      
+      .card {
+        border: none;
+      }
+    
+      .auth-container {
+        height: auto;
+        
+        .card {
+          background-color: transparent;
+          box-shadow: none;
+    
+          .card-body {
+            padding-top: 24px;
+            padding-bottom: 24px;
+          }
+        }
+      }
+
+    }
+    
+  }
+
