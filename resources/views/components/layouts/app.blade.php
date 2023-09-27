@@ -665,7 +665,6 @@
     </script>
     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
     @livewireScripts
-    <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="../src/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="../src/plugins/src/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="../src/plugins/src/mousetrap/mousetrap.min.js"></script>
@@ -676,7 +675,6 @@
 
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 
-    <script src="../src/assets/js/dashboard/dash_2.js"></script>
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
     <script src="https://kit.fontawesome.com/8ec20c0fa9.js" crossorigin="anonymous"></script>
 </body>

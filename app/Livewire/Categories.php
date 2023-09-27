@@ -36,4 +36,14 @@ class Categories extends Component
 
         return view('livewire.categories', compact('categories'));
     }
+
+    public function Edit($id)
+    {
+        $record = Category::find($id);
+        $this->name = $record->name;
+        $this->selected_id = $record->id;
+        $this->image = null;
+
+        $this->dispatch('show-modal', 'show modal!');
+    }
 }

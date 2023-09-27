@@ -16,20 +16,20 @@ class CategorySeeder extends Seeder
         //
         Category::create([
             'name' => 'CURSOS',
-            'image' => 'https://dummyimage.com/400x300/f20323/ffffff.jpg&text=CURSOS'
+            'image' => 'CURSOS.png'
         ]);
-        
+
         Category::create([
             'name' => 'TENIS',
-            'image' => 'https://dummyimage.com/400x300/f20323/ffffff.jpg&text=TENIS'
+            'image' => 'TENIS.png'
         ]);
         Category::create([
             'name' => 'CELULARES',
-            'image' => 'https://dummyimage.com/400x300/f20323/ffffff.jpg&text=CELULARES'
+            'image' => 'CELULARES.png'
         ]);
         Category::create([
             'name' => 'COMPUTADORAS',
-            'image' => 'https://dummyimage.com/400x300/f20323/ffffff.jpg&text=COMPUTADORAS'
+            'image' => 'COMPUTADORAS.png'
         ]);
     }
 }
