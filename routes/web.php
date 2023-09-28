@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Livewire\Categories;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\PostComponent;
+use App\Livewire\ImageUpload;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,8 @@ Route::middleware('auth')->group(function () {
 
 Route::get('categories', Categories::class);
 
-Route::get('/posts', PostComponent::class)->name('posts');
+Route::get('/posts', PostComponent::class)->name('posts2');
+
+Route::get('/image-upload', ImageUpload::class)->name('posts');
 
 require __DIR__ . '/auth.php';

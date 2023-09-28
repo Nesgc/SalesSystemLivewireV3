@@ -6,7 +6,7 @@
 
         <div class="input-group mb-3">
             <span class="input-group-text fas fa-edit" id="basic-addon1"></span>
-            <input type="text" wire:model.lazy='name' class="form-control" placeholder="courses example"
+            <input type="text" wire:model.lazy='name' class="form-control" placeholder="Category name"
                 aria-label="Username" aria-describedby="basic-addon1">
         </div>
 
@@ -17,11 +17,23 @@
     <div class="col-sm-12 mt-3">
 
 
-        <div class="col-sm-12 mt-3">
+        <div class="col-sm-12 mt-1">
+            <div class="mb-3">
+                <label for="formFile" class="form-label">Default file input example</label>
+                <input class="form-control" type="file" wire:model="image" id="formFile">
+            </div>
 
-            <label for="formFile" class="form-label">Image {{ $image }}</label>
-            <input wire:model='image' class="form-control" type="file" id="formFile"
-                accept="image/x-png, image/gif, image/jpeg">
+
+            @if ($image)
+                <img src="{{ $image->temporaryUrl() }}">
+            @endif
+
+
+
+            @error('image')
+                <span class="error">{{ $message }}</span>
+            @enderror
+
 
         </div>
 

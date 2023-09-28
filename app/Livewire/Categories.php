@@ -19,6 +19,8 @@ class Categories extends Component
     public $name, $searchengine, $selected_id, $pageTitle, $componentName;
     #[Rule('image|max:1024')] // 1MB Max
     public $image;
+    public $isOpen = 0;
+    public $path;
 
     public function mount()
     {
@@ -51,26 +53,25 @@ class Categories extends Component
 
     public function Store()
     {
-        $rules = [
-            'name' => 'required|unique:categories|min:3'
-        ];
-        $messages = [
-            'name.required' => 'Nombre de la categoria es requerido',
-            'name.unique' => 'Ya existe el nombre de la categoria',
-            'name.min' => 'El nombre de la categoria debe tener almenos 3 caracteres'
-        ];
-        $this->validate($rules, $messages);
-        $category = Category::create([
-            'name' => $this->name
+        $this->validate();
+        Category::create([
+            'name' => $this->name,
+            'image' => $this->image->store('public/photos')
         ]);
-
-        $this->image->store('categories');
-
-
-        $this->resetUI();
-        $this->dispatch('category-added', 'Categoria Registrada');
+        session()->flash('success', 'Image uploaded successfully.');
+        $this->reset('name', 'image');
+        $this->closeModal();
     }
 
+    public function openModal()
+    {
+        $this->isOpen = true;
+        $this->resetValidation();
+    }
+    public function closeModal()
+    {
+        $this->isOpen = false;
+    }
     public function resetUI()
     {
         $this->name = '';
