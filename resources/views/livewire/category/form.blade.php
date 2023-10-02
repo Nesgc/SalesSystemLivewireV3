@@ -50,4 +50,4 @@
 </div>
 
 
-@include('common.modalFooter')
+@include('common.modalzFooter')
