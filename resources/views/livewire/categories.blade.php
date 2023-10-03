@@ -48,8 +48,9 @@
                                                 class="fa-solid fa-pen-to-square"></i></a>
 
                                         <a href="javascript:void(0)" class="btn btn-dark" title="Delete"
-                                            wire:click="Delete({{ $category->id }})"><i
+                                            wire:confirm="Are you sure?" wire:click="Delete({{ $category->id }})"><i
                                                 class="fa-solid fa-trash"></i></a>
+
                                     </td>
                                 </tr>
                             @endforeach
@@ -64,12 +65,45 @@
         </div>
     </div>
     @include('livewire.category.form')
-</div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        Livewire.on('modalClose', function() {
-            $('#theModal').modal('hide'); // Cerrar el modal usando jQuery
-        });
-    });
-</script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        document.addEventListener('livewire:init', () => {
+            Livewire.directive('confirm', ({
+                el,
+                directive,
+                component,
+                cleanup
+            }) => {
+                let content = directive.expression
+
+                // The "directive" object gives you access to the parsed directive.
+                // For example, here are its values for: wire:click.prevent="deletePost(1)"
+                //
+                // directive.raw = wire:click.prevent
+                // directive.value = "click"
+                // directive.modifiers = ['prevent']
+                // directive.expression = "deletePost(1)"
+
+                let onClick = e => {
+                    if (!confirm(content)) {
+                        e.preventDefault()
+                        e.stopImmediatePropagation()
+                    }
+                }
+
+                el.addEventListener('click', onClick, {
+                    capture: true
+                })
+
+                // Register any cleanup code inside `cleanup()` in the case
+                // where a Livewire component is removed from the DOM while
+                // the page is still active.
+                cleanup(() => {
+                    el.removeEventListener('click', onClick)
+                })
+            })
+        })
+    </script>
+</div>

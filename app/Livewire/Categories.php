@@ -113,7 +113,7 @@ class Categories extends Component
             session()->flash('success', 'Post updated successfully.');
 
             $this->resetUI();
-            $this->closeModal();
+            $this->dispatch('alert', 'El post se actualizó satisfactoriamente');
         }
     }
 
@@ -133,6 +133,8 @@ class Categories extends Component
     {
         $this->isOpen = false;
     }
+
+
 
     public function resetUI()
     {
