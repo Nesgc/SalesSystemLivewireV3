@@ -9,7 +9,7 @@
                 </h4>
                 <ul class="tabs tab-pills">
                     <li>
-                        <a href="javascript:void(0)" data-bs-toggle="modal" class="btn btn-dark"
+                        <a href="javascript:void(0)" data-bs-toggle="modal" class="btn btn-dark" wire:click="create"
                             data-bs-target="#theModal">Agregar</a>
                     </li>
                 </ul>
@@ -46,8 +46,10 @@
                                             data-bs-toggle="modal" data-bs-target="#theModal"
                                             wire:click="Edit({{ $category->id }})"><i
                                                 class="fa-solid fa-pen-to-square"></i></a>
-                                        <a href="javascript:void(0)" onclick="Confirm('{{ $category->id }}')"
-                                            class="btn btn-dark" title="Delete"><i class="fa-solid fa-trash"></i></a>
+
+                                        <a href="javascript:void(0)" class="btn btn-dark" title="Delete"
+                                            wire:click="Delete({{ $category->id }})"><i
+                                                class="fa-solid fa-trash"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -63,3 +65,11 @@
     </div>
     @include('livewire.category.form')
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        Livewire.on('modalClose', function() {
+            $('#theModal').modal('hide'); // Cerrar el modal usando jQuery
+        });
+    });
+</script>

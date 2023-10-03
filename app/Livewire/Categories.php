@@ -16,11 +16,15 @@ class Categories extends Component
     use WithFileUploads;
     use WithPagination;
 
-    public $name, $searchengine, $selected_id, $pageTitle, $componentName;
-    #[Rule('image|max:1024')] // 1MB Max
+    public $currentImage, $searchengine, $selected_id, $pageTitle, $componentName;
+    #[Rule('required|image|max:3024')] // 1MB Max
     public $image;
+    public $isEditMode = false;
     public $isOpen = 0;
     public $path;
+
+    #[Rule('required|min:3|unique:categories,name,{$this->selected_id}')]
+    public $name;
 
     public function mount()
     {
@@ -33,7 +37,7 @@ class Categories extends Component
         if ($this->searchengine == "") {
             $categories = Category::paginate(4);
         } else {
-            $categories = Category::where('name', 'like', '%' . $this->searchengine . '%')->paginate(50);
+            $categories = Category::where('name', 'like', '%' . $this->searchengine . '%')->paginate(10);
         }
 
 
@@ -41,18 +45,30 @@ class Categories extends Component
         return view('livewire.categories', compact('categories'));
     }
 
+    public function create()
+    {
+        $this->isEditMode = false; // Asegurarse de que está en modo "crear"
+        $this->reset('name', 'image');
+
+        $this->resetUI();
+        $this->openModal();
+    }
+
     public function Edit($id)
     {
+        $this->isEditMode = true;
         $record = Category::find($id, ['id', 'name', 'image']);
         $this->name = $record->name;
         $this->selected_id = $record->id;
-        $this->image = null;
+        $this->currentImage = $record->image;  // Imagen actual, no la sobrescribe con la nueva imagen.
 
-        $this->dispatch('show-modal', 'show modal!');
+        $this->openModal();
     }
+
 
     public function Store()
     {
+        $this->isEditMode = false;
         $this->validate();
         Category::create([
             'name' => $this->name,
@@ -61,6 +77,51 @@ class Categories extends Component
         session()->flash('success', 'Image uploaded successfully.');
         $this->reset('name', 'image');
         $this->closeModal();
+    }
+
+    /* public function Update()
+    {
+        $this->validate();
+
+        $category = Category::find($this->selected_id);
+        $category->update([
+            'name' => $this->name
+        ]);
+
+        if ($this->image) {
+            $customeFileName = uniqid() . '_.' . $this->image->extension();
+            $this->image->store('public/photos');
+        }
+    }*/
+
+    public function Update()
+    {
+        $this->validate();
+
+        if ($this->selected_id) {
+            $category = Category::find($this->selected_id);
+
+            $data = [
+                'name' => $this->name,
+            ];
+
+            if ($this->image) {
+                $data['image'] = $this->image->store('public/photos');
+            }
+
+            $category->update($data);
+            session()->flash('success', 'Post updated successfully.');
+
+            $this->resetUI();
+            $this->closeModal();
+        }
+    }
+
+    public function Delete($id)
+    {
+        Category::find($id)->delete();
+        session()->flash('success', 'Post deleted successfully.');
+        $this->reset('name', 'image');
     }
 
     public function openModal()
@@ -72,11 +133,12 @@ class Categories extends Component
     {
         $this->isOpen = false;
     }
+
     public function resetUI()
     {
         $this->name = '';
         $this->image = null;
-        $this->searchengine = '';
+        $this->currentImage = null; // Agregado para manejar la imagen actual en la edición.
         $this->selected_id = 0;
     }
 }

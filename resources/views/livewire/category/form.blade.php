@@ -19,14 +19,18 @@
 
         <div class="col-sm-12 mt-1">
             <div class="mb-3">
-                <label for="formFile" class="form-label">Default file input example</label>
+                <label for="formFile" class="form-label">Image</label>
                 <input class="form-control" type="file" wire:model="image" id="formFile">
             </div>
 
 
-            @if ($image)
+            @if ($selected_id > 1 && !$image)
+                <img src="{{ asset('storage/' . $currentImage) }}" alt="example" height="70" width="80"
+                    class="rounded">
+            @elseif($image)
                 <img src="{{ $image->temporaryUrl() }}">
             @endif
+
 
 
 
