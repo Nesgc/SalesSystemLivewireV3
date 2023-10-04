@@ -17,7 +17,7 @@ class Categories extends Component
     use WithPagination;
 
     public $currentImage, $searchengine, $selected_id, $pageTitle, $componentName;
-    #[Rule('required|image|max:3024')] // 1MB Max
+    #[Rule('nullable|image|max:3024')] // 1MB Max
     public $image;
     public $isEditMode = false;
     public $isOpen = 0;
@@ -72,7 +72,7 @@ class Categories extends Component
         $this->validate();
         Category::create([
             'name' => $this->name,
-            'image' => $this->image->store('public/photos')
+            'image' => $this->image->store('categories')
         ]);
         session()->flash('success', 'Image uploaded successfully.');
         $this->reset('name', 'image');
@@ -106,7 +106,7 @@ class Categories extends Component
             ];
 
             if ($this->image) {
-                $data['image'] = $this->image->store('public/photos');
+                $data['image'] = $this->image->store('categories');
             }
 
             $category->update($data);

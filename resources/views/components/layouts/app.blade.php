@@ -426,7 +426,7 @@
                                     <line x1="8" y1="2" x2="8" y2="18"></line>
                                     <line x1="16" y1="6" x2="16" y2="22"></line>
                                 </svg>
-                                <span>Categories</span>
+                                <span class="fs-5">Categories</span>
                             </div>
                         </a>
                     </li>
@@ -442,7 +442,7 @@
                                     <line x1="8" y1="2" x2="8" y2="18"></line>
                                     <line x1="16" y1="6" x2="16" y2="22"></line>
                                 </svg>
-                                <span>Products</span>
+                                <span class="fs-5">Products</span>
                             </div>
                         </a>
                     </li>
@@ -457,7 +457,7 @@
                                     <line x1="8" y1="2" x2="8" y2="18"></line>
                                     <line x1="16" y1="6" x2="16" y2="22"></line>
                                 </svg>
-                                <span>Sales</span>
+                                <span class="fs-5">Sales</span>
                             </div>
                         </a>
                     </li>
@@ -472,7 +472,7 @@
                                     <line x1="8" y1="2" x2="8" y2="18"></line>
                                     <line x1="16" y1="6" x2="16" y2="22"></line>
                                 </svg>
-                                <span>Roles</span>
+                                <span class="fs-5">Roles</span>
                             </div>
                         </a>
                     </li>
@@ -486,7 +486,7 @@
                                     <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
                                     <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
                                 </svg>
-                                <span>Permissions</span>
+                                <span class="fs-5">Permissions</span>
                             </div>
                         </a>
                     </li>
@@ -500,7 +500,7 @@
                                     <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
                                     <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
                                 </svg>
-                                <span>Assign</span>
+                                <span class="fs-5">Assign</span>
                             </div>
                         </a>
                     </li>
@@ -513,7 +513,7 @@
                                     <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
                                     <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
                                 </svg>
-                                <span>Users</span>
+                                <span class="fs-5">Users</span>
                             </div>
                         </a>
                     </li>
@@ -526,7 +526,7 @@
                                     <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
                                     <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
                                 </svg>
-                                <span>Coins</span>
+                                <span class="fs-5">Coins</span>
                             </div>
                         </a>
                     </li>
@@ -539,7 +539,7 @@
                                     <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
                                     <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
                                 </svg>
-                                <span>Arqueos</span>
+                                <span class="fs-5">Cash Counts</span>
                             </div>
                         </a>
                     </li>
@@ -552,7 +552,7 @@
                                     <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
                                     <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
                                 </svg>
-                                <span>Reports</span>
+                                <span class="fs-5">Reports</span>
                             </div>
                         </a>
                     </li>

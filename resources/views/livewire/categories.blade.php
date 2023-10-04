@@ -47,10 +47,13 @@
                                             wire:click="Edit({{ $category->id }})"><i
                                                 class="fa-solid fa-pen-to-square"></i></a>
 
-                                        <a href="javascript:void(0)" class="btn btn-dark" title="Delete"
-                                            wire:confirm="Are you sure?" wire:click="Delete({{ $category->id }})"><i
-                                                class="fa-solid fa-trash"></i></a>
+                                        @if ($category->products->count() < 1)
+                                            <a href="javascript:void(0)" class="btn btn-dark" title="Delete"
+                                                wire:confirm="Are you sure?" wire:click="Delete({{ $category->id }})"><i
+                                                    class="fa-solid fa-trash"></i></a>
+                                        @endif
 
+                                        {{-- {{ $category->image }} --}}
                                     </td>
                                 </tr>
                             @endforeach

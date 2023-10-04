@@ -28,7 +28,7 @@
                 <img src="{{ asset('storage/' . $currentImage) }}" alt="example" height="70" width="80"
                     class="rounded">
             @elseif($image)
-                <img src="{{ $image->temporaryUrl() }}">
+                <img height="270" width="280" src="{{ $image->temporaryUrl() }}">
             @endif
 
 
