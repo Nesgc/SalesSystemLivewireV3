@@ -5,6 +5,7 @@ use App\Livewire\Categories;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\PostComponent;
 use App\Livewire\ImageUpload;
+use App\Livewire\Products;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,9 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('categories', Categories::class);
+
+Route::get('products', Products::class);
+
 
 Route::get('/posts', PostComponent::class)->name('posts2');
 

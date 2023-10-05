@@ -69,15 +69,28 @@ class Categories extends Component
     public function Store()
     {
         $this->isEditMode = false;
-        $this->validate();
+
+        // Validar si la imagen no es obligatoria o hacer validaciones personalizadas
+        $this->validate([
+            'name' => 'required|string|max:255', // Solo como ejemplo, ajusta según tus necesidades
+            'image' => 'nullable|image|max:2048' // Haciendo la imagen opcional
+        ]);
+
+        // Verificar si la imagen está presente
+        $imagePath = $this->image
+            ? $this->image->store('categories')
+            : null;  // puedes ajustar esto según tus necesidades
+
         Category::create([
             'name' => $this->name,
-            'image' => $this->image->store('categories')
+            'image' => $imagePath
         ]);
-        session()->flash('success', 'Image uploaded successfully.');
+
+        session()->flash('success', 'Category created successfully.');
         $this->reset('name', 'image');
         $this->closeModal();
     }
+
 
     /* public function Update()
     {
