@@ -89,9 +89,5 @@
         @include('livewire.products.productForm')
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
 
-        });
-    </script>
 </div>

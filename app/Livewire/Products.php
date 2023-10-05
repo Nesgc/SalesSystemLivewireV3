@@ -14,7 +14,7 @@ class Products extends Component
     use WithFileUploads;
     use WithPagination;
 
-    public $currentImage, $searchengine, $selected_id, $pageTitle, $componentName;
+    public $currentImage, $searchengine, $selected_id, $pageTitle, $componentName, $barcode, $price, $stock, $alerts, $cost, $categories;
 
     #[Rule('nullable|image|max:3024')] // 1MB Max
     public $image;
@@ -39,13 +39,13 @@ class Products extends Component
             $products = Product::where('name', 'like', '%' . $this->searchengine . '%')->paginate(10);
         }
 
-        return view('livewire.products', compact('products'));
+        return view('livewire.products', compact('products', 'categories'));
     }
 
     public function create()
     {
         $this->isEditMode = false; // Asegurarse de que está en modo "crear"
-        $this->reset('name', 'image');
+        $this->reset('name', 'image', 'barcode', 'price', 'stock', 'alerts');
 
         $this->resetUI();
     }
@@ -53,8 +53,13 @@ class Products extends Component
     public function Edit($id)
     {
         $this->isEditMode = true;
-        $record = Product::find($id, ['id', 'name', 'image']);
+        $record = Product::find($id, ['id', 'name', 'image', 'barcode', 'price', 'stock', 'alerts', 'cost']);
         $this->name = $record->name;
+        $this->barcode = $record->barcode;
+        $this->price = $record->price;
+        $this->stock = $record->stock;
+        $this->alerts = $record->alerts;
+        $this->cost = $record->cost;
         $this->selected_id = $record->id;
         $this->currentImage = $record->image;  // Imagen actual, no la sobrescribe con la nueva imagen.
 
