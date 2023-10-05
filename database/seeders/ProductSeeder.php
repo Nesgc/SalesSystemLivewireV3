@@ -15,44 +15,44 @@ class ProductSeeder extends Seeder
     {
         //
         Product::create([
-            'name'=>'LARAVEL Y LIVEWIRE',
+            'name' => 'LARAVEL Y LIVEWIRE',
             'cost' => 200,
             'price' => 350,
             'barcode' => '750213213',
             'stock' => 1000,
             'alerts' => 10,
             'category_id' => 1,
-            'image' => 'curso.png'
+            'image' => 'products/laravellivewire.png'
         ]);
         Product::create([
-            'name'=>'RUNNING NIKE',
+            'name' => 'RUNNING NIKE',
             'cost' => 600,
             'price' => 1500,
             'barcode' => '750213213',
             'stock' => 1000,
             'alerts' => 10,
             'category_id' => 2,
-            'image' => 'tenis.png'
+            'image' => 'products/runningnike.png'
         ]);
         Product::create([
-            'name'=>'IPHONE 11',
+            'name' => 'IPHONE 15',
             'cost' => 900,
             'price' => 1400,
             'barcode' => '750213213',
             'stock' => 1000,
             'alerts' => 10,
             'category_id' => 3,
-            'image' => 'iphone11.png'
+            'image' => 'products/iphone15.png'
         ]);
         Product::create([
-            'name'=>'PC GAMER',
+            'name' => 'PC GAMER',
             'cost' => 790,
             'price' => 1700,
             'barcode' => '750213213',
             'stock' => 1000,
             'alerts' => 10,
             'category_id' => 4,
-            'image' => 'pcgamer.png'
+            'image' => 'products/pcgamer.png'
         ]);
     }
 }

@@ -5,7 +5,7 @@
 
 
         <div class="input-group mb-3">
-            <span class="input-group-text fas fa-edit" id="basic-addon1"></span>
+            <span class="input-group-text d-flex align-items-center fas fa-edit" id="basic-addon1"></span>
             <input type="text" wire:model.lazy='name' class="form-control" placeholder="Category name"
                 aria-label="Username" aria-describedby="basic-addon1">
         </div>
@@ -24,7 +24,7 @@
             </div>
 
 
-            @if ($selected_id > 1 && !$image)
+            @if ($selected_id > 0 && !$image)
                 <img src="{{ asset('storage/' . $currentImage) }}" alt="example" height="70" width="80"
                     class="rounded">
             @elseif($image)

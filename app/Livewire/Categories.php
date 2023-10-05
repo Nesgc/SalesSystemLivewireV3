@@ -79,7 +79,7 @@ class Categories extends Component
         // Verificar si la imagen está presente
         $imagePath = $this->image
             ? $this->image->store('categories')
-            : null;  // puedes ajustar esto según tus necesidades
+            : 'null';  // puedes ajustar esto según tus necesidades
 
         Category::create([
             'name' => $this->name,

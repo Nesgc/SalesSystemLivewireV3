@@ -10,7 +10,7 @@
                 <ul class="tabs tab-pills">
                     <li>
                         <a href="javascript:void(0)" data-bs-toggle="modal" class="btn btn-dark" wire:click="create"
-                            data-bs-target="#theModal">Agregar</a>
+                            data-bs-target="#theModal">Add</a>
                     </li>
                 </ul>
             </div>
@@ -24,7 +24,7 @@
                     <table class="table-bordered table striped mt-1">
                         <thead class="text-white" style="background: #3B3F5C;">
                             <tr>
-                                <th class="table-th text-white">Description</th>
+                                <th class="table-th text-white">Name</th>
                                 <th class="table-th text-white">Image</th>
                                 <th class="table-th text-white">Actions</th>
 
@@ -67,7 +67,7 @@
             </div>
         </div>
     </div>
-    @include('livewire.category.form')
+    @include('livewire.category.categoriesForm')
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 

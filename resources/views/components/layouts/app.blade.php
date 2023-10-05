@@ -433,7 +433,7 @@
 
 
                     <li class="menu">
-                        <a href="./products" aria-expanded="false" class="dropdown-toggle" wire:navigate>
+                        <a href="./products" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -448,7 +448,7 @@
                     </li>
 
                     <li class="menu">
-                        <a href="./map-leaflet.html" aria-expanded="false" class="dropdown-toggle">
+                        <a href="./sales" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -463,7 +463,7 @@
                     </li>
 
                     <li class="menu">
-                        <a href="./map-leaflet.html" aria-expanded="false" class="dropdown-toggle" wire:navigate>
+                        <a href="./roles" aria-expanded="false" class="dropdown-toggle" wire:navigate>
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -478,7 +478,7 @@
                     </li>
 
                     <li class="menu">
-                        <a href="./charts-apex.html" aria-expanded="false" class="dropdown-toggle">
+                        <a href="./permissions" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -492,7 +492,7 @@
                     </li>
 
                     <li class="menu">
-                        <a href="./charts-apex.html" aria-expanded="false" class="dropdown-toggle">
+                        <a href="./assign" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -505,7 +505,7 @@
                         </a>
                     </li>
                     <li class="menu">
-                        <a href="./charts-apex.html" aria-expanded="false" class="dropdown-toggle">
+                        <a href="./users" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -518,7 +518,7 @@
                         </a>
                     </li>
                     <li class="menu">
-                        <a href="./charts-apex.html" aria-expanded="false" class="dropdown-toggle">
+                        <a href="./coins" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -531,7 +531,7 @@
                         </a>
                     </li>
                     <li class="menu">
-                        <a href="./charts-apex.html" aria-expanded="false" class="dropdown-toggle">
+                        <a href="./cash-counts" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -544,7 +544,7 @@
                         </a>
                     </li>
                     <li class="menu">
-                        <a href="./charts-apex.html" aria-expanded="false" class="dropdown-toggle">
+                        <a href="./reports" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -678,6 +678,7 @@
     </script>
     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
     @livewireScripts
+
     <script src="../src/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="../src/plugins/src/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="../src/plugins/src/mousetrap/mousetrap.min.js"></script>
