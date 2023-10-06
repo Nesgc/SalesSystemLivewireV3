@@ -93,15 +93,12 @@
         <div class="form-group">
             <label for="">Categories</label>
             <select class="form-select" name="" id="" wire:model="category_id">
-                @if (!empty($categories))
-                    <option value="Select">Select</option>
 
-                    @foreach ($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                    @endforeach
-                @else
-                    <option value="" disabled>No categories available</option>
-                @endif
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
+
+
             </select>
             @error('category_id')
                 <span class="text-danger er">{{ $message }}</span>

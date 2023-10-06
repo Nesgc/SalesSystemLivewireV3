@@ -82,6 +82,9 @@ class Products extends Component
         $this->alerts = $record->alerts;
         $this->cost = $record->cost;
         $this->selected_id = $record->id;
+        $this->category_id = $record->category_id;
+
+
         $this->currentImage = $record->image;  // Imagen actual, no la sobrescribe con la nueva imagen.
 
     }

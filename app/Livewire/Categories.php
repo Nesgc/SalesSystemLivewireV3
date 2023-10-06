@@ -17,12 +17,15 @@ class Categories extends Component
     use WithPagination;
     public $categories;
 
-    public $currentImage, $searchengine, $selected_id, $pageTitle, $componentName;
+    public $currentImage, $searchengine, $pageTitle, $componentName;
     #[Rule('nullable|image|max:3024')] // 1MB Max
     public $image;
     public $isEditMode = false;
     public $isOpen = 0;
     public $path;
+
+    #[Rule('required')]
+    public $selected_id;
 
     #[Rule('required|min:3|unique:categories,name,{$this->selected_id}')]
     public $name;
@@ -31,7 +34,6 @@ class Categories extends Component
     {
         $this->pageTitle = 'Listing';
         $this->componentName = 'Categories';
-        $this->categories = Category::all();
     }
     public function render()
     {
