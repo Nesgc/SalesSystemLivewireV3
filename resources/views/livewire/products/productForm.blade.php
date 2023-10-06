@@ -4,8 +4,9 @@
     <div class="col-sm-12 col-md-8">
 
 
-        <div class="input-group mb-3">
-            <span class="input-group-text d-flex align-items-center fa-solid fa-pen-to-square" id="basic-addon1"></span>
+        <div class="form-group">
+            <label>Product Name</label>
+
             <input type="text" wire:model.lazy='name' class="form-control" placeholder="Product name"
                 aria-label="Username" aria-describedby="basic-addon1">
         </div>
@@ -13,15 +14,17 @@
         @error('name')
             <span class="text-danger er">{{ $message }}</span>
         @enderror
+
     </div>
 
     <div class="col-sm-12 col-md-4">
 
 
-        <div class="input-group mb-3">
-            <span class="input-group-text d-flex align-items-center fa-solid fa-pen-to-square" id="basic-addon1"></span>
-            <input type="text" wire:model.lazy='barcode' class="form-control" placeholder="Product name"
+        <div class="form-group">
+            <label>Barcode</label>
+            <input type="text" wire:model.lazy='barcode' class="form-control" placeholder="Product barcode"
                 aria-label="Username" aria-describedby="basic-addon1">
+
         </div>
 
         @error('barcode')
@@ -29,13 +32,13 @@
         @enderror
     </div>
 
-    <div class="col-sm-12 col-md-4">
+    <div class="col-sm-12 col-md-4 mt-3 mt-3">
 
+        <div class="form-group">
+            <label for="">Cost</label>
 
-        <div class="input-group mb-3">
-            <span class="input-group-text d-flex align-items-center fa-solid fa-pen-to-square" id="basic-addon1"></span>
             <input type="text" data-type="currency" wire:model.lazy='cost' class="form-control"
-                placeholder="Product name" aria-label="Username" aria-describedby="basic-addon1">
+                placeholder="Product cost" aria-label="Username" aria-describedby="basic-addon1">
         </div>
 
         @error('cost')
@@ -43,13 +46,13 @@
         @enderror
     </div>
 
-    <div class="col-sm-12 col-md-4">
+    <div class="col-sm-12 col-md-4 mt-3">
 
+        <div class="form-group">
+            <label for="">Price</label>
 
-        <div class="input-group mb-3">
-            <span class="input-group-text d-flex align-items-center fa-solid fa-pen-to-square" id="basic-addon1"></span>
             <input type="text" data-type="currency" wire:model.lazy='price' class="form-control"
-                placeholder="Product name" aria-label="Username" aria-describedby="basic-addon1">
+                placeholder="Product price" aria-label="Username" aria-describedby="basic-addon1">
         </div>
 
         @error('price')
@@ -57,12 +60,12 @@
         @enderror
     </div>
 
-    <div class="col-sm-12 col-md-4">
+    <div class="col-sm-12 col-md-4 mt-3">
 
+        <div class="form-group">
+            <label for="">Stock</label>
 
-        <div class="input-group mb-3">
-            <span class="input-group-text d-flex align-items-center fa-solid fa-pen-to-square" id="basic-addon1"></span>
-            <input type="number" wire:model.lazy='stock' class="form-control" placeholder="Product name"
+            <input type="number" wire:model.lazy='stock' class="form-control" placeholder="Product stock"
                 aria-label="Username" aria-describedby="basic-addon1">
         </div>
 
@@ -71,12 +74,12 @@
         @enderror
     </div>
 
-    <div class="col-sm-12 col-md-4">
+    <div class="col-sm-12 col-md-6 mt-3">
 
+        <div class="form-group">
+            <label for="">Alerts</label>
 
-        <div class="input-group mb-3">
-            <span class="input-group-text d-flex align-items-center fa-solid fa-pen-to-square" id="basic-addon1"></span>
-            <input type="number" wire:model.lazy='alerts' class="form-control" placeholder="Product name"
+            <input type="number" wire:model.lazy='alerts' class="form-control" placeholder="Product alerts"
                 aria-label="Username" aria-describedby="basic-addon1">
         </div>
 
@@ -86,20 +89,23 @@
     </div>
 
 
-    <div class="col-sm-12 col-md-4">
+    <div class="col-sm-12 col-md-6 mt-3">
         <div class="form-group">
             <label for="">Categories</label>
-            <select name="" id="" class="form-group">
-                <option value="Select" disabled>Select</option>
-                @foreach ($categories as $category)
-                    <option value="{{ $category->id }}" disabled>{{ $category->name }}</option>
+            <select class="form-select" name="" id="" wire:model="category_id">
+                <option value="Select">Select</option>
+                @foreach ($products as $product)
+                    <option value="{{ $product->category->id }}">{{ $product->category->name }}</option>
                 @endforeach
             </select>
+            @error('category_id')
+                <span class="text-danger er">{{ $message }}</span>
+            @enderror
         </div>
     </div>
 
 
-    <div class="col-sm-12 col-md-8 mt-3">
+    <div class="col-sm-12 col-md-12 mt-3">
 
 
         <div class="col-sm-12 mt-1">

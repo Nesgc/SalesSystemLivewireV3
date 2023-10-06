@@ -15,20 +15,20 @@ class CategorySeeder extends Seeder
     {
         //
         Category::create([
-            'name' => 'CURSOS',
+            'name' => 'Courses',
             'image' => 'categories/CURSOS.png'
         ]);
 
         Category::create([
-            'name' => 'TENIS',
+            'name' => 'Sneakers',
             'image' => 'categories/TENIS.png'
         ]);
         Category::create([
-            'name' => 'CELULARES',
+            'name' => 'Smartphones',
             'image' => 'categories/CELULARES.png'
         ]);
         Category::create([
-            'name' => 'COMPUTADORAS',
+            'name' => 'Computers',
             'image' => 'categories/COMPUTADORAS.png'
         ]);
     }

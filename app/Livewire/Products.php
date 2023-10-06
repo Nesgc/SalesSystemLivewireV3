@@ -14,7 +14,7 @@ class Products extends Component
     use WithFileUploads;
     use WithPagination;
 
-    public $currentImage, $searchengine, $selected_id, $pageTitle, $componentName, $barcode, $price, $stock, $alerts, $cost, $categories;
+    public $currentImage, $searchengine, $selected_id, $pageTitle, $componentName, $barcode, $price, $stock, $alerts, $cost, $categories, $category, $category_id;
 
     #[Rule('nullable|image|max:3024')] // 1MB Max
     public $image;
@@ -33,10 +33,14 @@ class Products extends Component
     public function render()
     {
 
+        $products = Product::with('category')->get();
+        $categories = Category::with('products')->get();
+
         if ($this->searchengine == "") {
-            $products = Product::paginate(2);
+            $products = Product::paginate(10);
         } else {
-            $products = Product::where('name', 'like', '%' . $this->searchengine . '%')->paginate(10);
+            $products = Product::where('name', 'like', '%' . $this->searchengine . '%')
+                ->orWhere('barcode', 'like', '%' . $this->searchengine . '%')->paginate(10);
         }
 
         return view('livewire.products', compact('products', 'categories'));
@@ -45,7 +49,7 @@ class Products extends Component
     public function create()
     {
         $this->isEditMode = false; // Asegurarse de que está en modo "crear"
-        $this->reset('name', 'image', 'barcode', 'price', 'stock', 'alerts');
+        $this->reset('name', 'image', 'barcode', 'price', 'stock', 'alerts', 'cost', 'category_id');
 
         $this->resetUI();
     }
@@ -53,7 +57,7 @@ class Products extends Component
     public function Edit($id)
     {
         $this->isEditMode = true;
-        $record = Product::find($id, ['id', 'name', 'image', 'barcode', 'price', 'stock', 'alerts', 'cost']);
+        $record = Product::find($id, ['id', 'name', 'image', 'barcode', 'price', 'stock', 'alerts', 'cost', 'category_id']);
         $this->name = $record->name;
         $this->barcode = $record->barcode;
         $this->price = $record->price;
@@ -81,13 +85,20 @@ class Products extends Component
             ? $this->image->store('products')
             : 'null';  // puedes ajustar esto según tus necesidades
 
-        Category::create([
+        Product::create([
             'name' => $this->name,
-            'image' => $imagePath
+            'image' => $imagePath,
+            'barcode' => $this->barcode,
+            'price' => $this->price,
+            'stock' => $this->stock,
+            'alerts' => $this->alerts,
+            'cost' => $this->cost,
+            'category_id' => $this->category_id,
+
         ]);
 
         session()->flash('success', 'Category created successfully.');
-        $this->reset('name', 'image');
+        $this->reset('name', 'image', 'barcode', 'price', 'stock', 'alerts', 'cost', 'category_id');
     }
 
 
@@ -98,8 +109,16 @@ class Products extends Component
         if ($this->selected_id) {
             $product = Product::find($this->selected_id);
 
+
             $data = [
                 'name' => $this->name,
+                'barcode' => $this->barcode,
+                'price' => $this->price,
+                'stock' => $this->stock,
+                'alerts' => $this->alerts,
+                'cost' => $this->cost,
+                'category_id' => $this->category_id,
+
             ];
 
             if ($this->image) {
@@ -118,13 +137,19 @@ class Products extends Component
     {
         Product::find($id)->delete();
         session()->flash('success', 'Post deleted successfully.');
-        $this->reset('name', 'image');
+        $this->reset('name', 'image', 'barcode', 'price', 'stock', 'alerts', 'cost', 'category_id');
     }
 
 
     public function resetUI()
     {
         $this->name = '';
+        $this->barcode = '';
+        $this->price = '';
+        $this->stock = '';
+        $this->alerts = '';
+        $this->cost = '';
+        $this->category_id = '';
         $this->image = null;
         $this->currentImage = null; // Agregado para manejar la imagen actual en la edición.
         $this->selected_id = 0;
