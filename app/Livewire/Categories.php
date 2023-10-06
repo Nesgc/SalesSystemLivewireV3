@@ -15,7 +15,7 @@ class Categories extends Component
 {
     use WithFileUploads;
     use WithPagination;
-    public $categories;
+
 
     public $currentImage, $searchengine, $pageTitle, $componentName;
     #[Rule('nullable|image|max:3024')] // 1MB Max
@@ -35,15 +35,12 @@ class Categories extends Component
         $this->pageTitle = 'Listing';
         $this->componentName = 'Categories';
     }
+
     public function render()
     {
-
-        if ($this->searchengine == "") {
-            $categories = Category::paginate(4);
-        } else {
-            $categories = Category::where('name', 'like', '%' . $this->searchengine . '%')->paginate(10);
-        }
-
+        $categories = $this->searchengine
+            ? Category::where('name', 'like', '%' . $this->searchengine . '%')->paginate(10)
+            : Category::paginate(4);
 
 
         return view('livewire.categories', compact('categories'));

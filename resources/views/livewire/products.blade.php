@@ -11,7 +11,7 @@
                     <ul class="tabs tab-pills">
                         <li>
                             <a href="javascript:void(0)" data-bs-toggle="modal" class="btn btn-dark" wire:click="create"
-                                data-bs-target="#theModal">Agregar</a>
+                                data-bs-target="#theModal">Add</a>
                         </li>
                     </ul>
                 </div>

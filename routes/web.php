@@ -18,9 +18,11 @@ use App\Livewire\Products;
 |
 */
 
+/*
+
 Route::get('/', function () {
     return view('welcome');
-});
+}); */
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -36,9 +38,13 @@ Route::get('categories', Categories::class);
 
 Route::get('products', Products::class);
 
+Route::get('/', Categories::class);
+
 
 Route::get('/posts', PostComponent::class)->name('posts2');
 
 Route::get('/image-upload', ImageUpload::class)->name('posts');
+
+
 
 require __DIR__ . '/auth.php';
