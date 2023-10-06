@@ -22,7 +22,7 @@ class Category extends Model
     public function getImageAttribute($image)
     {
 
-        if (file_exists('storage/' . $image))
+        if ($image && file_exists('storage/' . $image))
             return $image;
         else
             return 'categories/noimage.png';

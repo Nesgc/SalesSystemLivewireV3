@@ -385,48 +385,17 @@
                 <div class="shadow-bottom"></div>
                 <ul class="list-unstyled menu-categories" id="accordionExample">
                     <li class="menu active">
-                        <a href="#dashboard" data-bs-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
-                            <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
-                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                                </svg>
-                                <span>Dashboard</span>
-                            </div>
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round"
-                                    class="feather feather-chevron-right">
-                                    <polyline points="9 18 15 12 9 6"></polyline>
-                                </svg>
-                            </div>
-                        </a>
-                        <ul class="collapse submenu list-unstyled " id="dashboard"
-                            data-bs-parent="#accordionExample">
-                            <li>
-                                <a href="./index.html"> Example </a>
-                            </li>
-                            <li>
-                                <a href="./index2.html"> Example </a>
-                            </li>
-                        </ul>
+
                     </li>
 
 
-                    <li class="menu">
+                    <li class="menu mt-3">
                         <a href="./categories" aria-expanded="false" class="dropdown-toggle">
-                            <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-map">
-                                    <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
-                                    <line x1="8" y1="2" x2="8" y2="18"></line>
-                                    <line x1="16" y1="6" x2="16" y2="22"></line>
-                                </svg>
-                                <span class="fs-5">Categories</span>
+                            <div class="d-flex flex-row gap-3">
+                                <i class="fa fa-list-alt d-flex align-items-center fa-lg" aria-hidden="true"></i>
+
+
+                                <span class="fs-5"> Categories</span>
                             </div>
                         </a>
                     </li>
@@ -434,14 +403,9 @@
 
                     <li class="menu">
                         <a href="./products" aria-expanded="false" class="dropdown-toggle">
-                            <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-map">
-                                    <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
-                                    <line x1="8" y1="2" x2="8" y2="18"></line>
-                                    <line x1="16" y1="6" x2="16" y2="22"></line>
-                                </svg>
+                            <div class="d-flex flex-row gap-3">
+                                <i class="fa-solid fa-truck  d-flex align-items-center fa-lg"></i>
+
                                 <span class="fs-5">Products</span>
                             </div>
                         </a>
@@ -449,7 +413,7 @@
 
                     <li class="menu">
                         <a href="./sales" aria-expanded="false" class="dropdown-toggle">
-                            <div class="">
+                            <div class="d-flex flex-row gap-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                     stroke-linecap="round" stroke-linejoin="round" class="feather feather-map">
