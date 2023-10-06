@@ -15,6 +15,7 @@ class Categories extends Component
 {
     use WithFileUploads;
     use WithPagination;
+    public $categories;
 
     public $currentImage, $searchengine, $selected_id, $pageTitle, $componentName;
     #[Rule('nullable|image|max:3024')] // 1MB Max
@@ -30,6 +31,7 @@ class Categories extends Component
     {
         $this->pageTitle = 'Listing';
         $this->componentName = 'Categories';
+        $this->categories = Category::all();
     }
     public function render()
     {

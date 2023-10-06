@@ -41,7 +41,7 @@
                                             <h6>{{ $product->name }}</h6>
                                         </td>
                                         <td>
-                                            <h6>{{ $product->category->name }}</h6>
+                                            <h6>{{ $product->category }}</h6>
                                         </td>
                                         <td>
                                             <h6>{{ $product->barcode }}</h6>

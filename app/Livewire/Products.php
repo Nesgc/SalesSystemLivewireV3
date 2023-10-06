@@ -29,18 +29,35 @@ class Products extends Component
     {
         $this->pageTitle = 'Listing';
         $this->componentName = 'Products';
+        $this->categories = Category::all();
     }
     public function render()
     {
 
-        $products = Product::with('category')->get();
-        $categories = Category::with('products')->get();
+        // Obtén los productos
+        $products = Product::with('category')->paginate(10);
+
+        // Obtén las categorías - Asegurándonos de que esto se hace correctamente
+        $categories = Category::all();  // Esto obtendrá todas las categorías
+
+        // Verifica si $categories tiene datos
+        if ($categories->isEmpty()) {
+            // Esto imprimirá un mensaje en tu consola si $categories está vacío
+            error_log('No categories found!');
+        }
 
         if ($this->searchengine == "") {
-            $products = Product::paginate(10);
+            $products = Product::join('categories as c', 'c.id', 'products.category_id')
+                ->select('products.*', 'c.name as category')
+                ->orderBy('products.name', 'asc')->paginate(10);
         } else {
-            $products = Product::where('name', 'like', '%' . $this->searchengine . '%')
-                ->orWhere('barcode', 'like', '%' . $this->searchengine . '%')->paginate(10);
+            $products = Product::join('categories as c', 'c.id', 'products.category_id')
+                ->select('products.*', 'c.name as category')
+                ->where('products.name', 'like', '%' . $this->searchengine . '%')
+                ->orWhere('products.barcode', 'like', '%' . $this->searchengine . '%')
+                ->orWhere('c.name', 'like', '%' . $this->searchengine . '%')
+                ->orderBy('products.name', 'asc')
+                ->paginate(10);
         }
 
         return view('livewire.products', compact('products', 'categories'));
@@ -77,7 +94,13 @@ class Products extends Component
         // Validar si la imagen no es obligatoria o hacer validaciones personalizadas
         $this->validate([
             'name' => 'required|string|max:255', // Solo como ejemplo, ajusta según tus necesidades
-            'image' => 'nullable|image|max:2048' // Haciendo la imagen opcional
+            'image' => 'nullable|image|max:2048', // Haciendo la imagen opcional
+            'cost' => 'required',
+            'price' => 'required',
+            'stock' => 'required',
+            'barcode' => 'required',
+            'alerts' => 'required',
+            'category_id' => 'required|not_in:Elegir',
         ]);
 
         // Verificar si la imagen está presente
@@ -96,6 +119,7 @@ class Products extends Component
             'category_id' => $this->category_id,
 
         ]);
+
 
         session()->flash('success', 'Category created successfully.');
         $this->reset('name', 'image', 'barcode', 'price', 'stock', 'alerts', 'cost', 'category_id');
