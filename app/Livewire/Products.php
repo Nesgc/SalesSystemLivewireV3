@@ -38,7 +38,7 @@ class Products extends Component
         $products = Product::with('category')->paginate(10);
 
         // Obtén las categorías - Asegurándonos de que esto se hace correctamente
-        $categories = Category::all();  // Esto obtendrá todas las categorías
+        $categories = Category::all();  // Esto obtendrá todas las categorías.
 
         // Verifica si $categories tiene datos
         if ($categories->isEmpty()) {
