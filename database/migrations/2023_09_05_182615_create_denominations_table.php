@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('denominations', function (Blueprint $table) {
             $table->id();
-            $table->enum('type',['BILLETE', 'MONEDA', 'OTRO'])->default('BILLETE');
-            $table->string('value',255);
-            $table->string('image',100)->nullable();
+            $table->enum('type', ['Bill', 'Coin', 'Other'])->default('Bill');
+            $table->string('value', 255);
+            $table->string('image', 100)->nullable();
             $table->timestamps();
         });
     }

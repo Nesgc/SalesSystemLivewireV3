@@ -32,7 +32,7 @@
         @enderror
     </div>
 
-    <div class="col-sm-12 col-md-4 mt-3 mt-3">
+    <div class="col-sm-12 col-md-4 mt-3">
 
         <div class="form-group">
             <label for="">Cost</label>

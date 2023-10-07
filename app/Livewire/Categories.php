@@ -86,7 +86,6 @@ class Categories extends Component
 
         session()->flash('success', 'Category created successfully.');
         $this->reset('name', 'image');
-        $this->closeModal();
     }
 
 
