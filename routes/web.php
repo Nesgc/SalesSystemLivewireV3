@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Categories;
+use App\Livewire\Coins;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\PostComponent;
 use App\Livewire\ImageUpload;
@@ -37,6 +38,9 @@ Route::middleware('auth')->group(function () {
 Route::get('categories', Categories::class);
 
 Route::get('products', Products::class);
+
+Route::get('coins', Coins::class);
+
 
 Route::get('/', Categories::class);
 

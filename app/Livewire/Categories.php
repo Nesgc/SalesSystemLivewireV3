@@ -21,7 +21,6 @@ class Categories extends Component
     #[Rule('nullable|image|max:3024')] // 1MB Max
     public $image;
     public $isEditMode = false;
-    public $isOpen = 0;
     public $path;
 
     #[Rule('required')]
@@ -52,7 +51,6 @@ class Categories extends Component
         $this->reset('name', 'image');
 
         $this->resetUI();
-        $this->openModal();
     }
 
     public function Edit($id)
@@ -63,7 +61,6 @@ class Categories extends Component
         $this->selected_id = $record->id;
         $this->currentImage = $record->image;  // Imagen actual, no la sobrescribe con la nueva imagen.
 
-        $this->openModal();
     }
 
 
@@ -93,20 +90,7 @@ class Categories extends Component
     }
 
 
-    /* public function Update()
-    {
-        $this->validate();
 
-        $category = Category::find($this->selected_id);
-        $category->update([
-            'name' => $this->name
-        ]);
-
-        if ($this->image) {
-            $customeFileName = uniqid() . '_.' . $this->image->extension();
-            $this->image->store('public/photos');
-        }
-    }*/
 
     public function Update()
     {
@@ -136,16 +120,6 @@ class Categories extends Component
         Category::find($id)->delete();
         session()->flash('success', 'Post deleted successfully.');
         $this->reset('name', 'image');
-    }
-
-    public function openModal()
-    {
-        $this->isOpen = true;
-        $this->resetValidation();
-    }
-    public function closeModal()
-    {
-        $this->isOpen = false;
     }
 
 
