@@ -24,6 +24,10 @@
 
     <link href="../src/assets/css/dark/components/list-group.css" rel="stylesheet" type="text/css">
     <link href="../src/assets/css/dark/dashboard/dash_2.css" rel="stylesheet" type="text/css" />
+
+
+    <link href="assets/css/apps/scrumboard.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/apps/notes.css" rel="stylesheet" type="text/css" />
     <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
 
 </head>
@@ -173,10 +177,10 @@
                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                         stroke-linecap="round" stroke-linejoin="round"
                                         class="feather feather-server">
-                                        <rect x="2" y="2" width="20" height="8"
-                                            rx="2" ry="2"></rect>
-                                        <rect x="2" y="14" width="20" height="8"
-                                            rx="2" ry="2"></rect>
+                                        <rect x="2" y="2" width="20" height="8" rx="2"
+                                            ry="2"></rect>
+                                        <rect x="2" y="14" width="20" height="8" rx="2"
+                                            ry="2"></rect>
                                         <line x1="6" y1="6" x2="6" y2="6"></line>
                                         <line x1="6" y1="18" x2="6" y2="18"></line>
                                     </svg>
@@ -320,8 +324,8 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                     stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock">
-                                    <rect x="3" y="11" width="18" height="11"
-                                        rx="2" ry="2"></rect>
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2">
+                                    </rect>
                                     <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                                 </svg> <span>Lock Screen</span>
                             </a>

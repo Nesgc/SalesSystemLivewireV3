@@ -125,7 +125,29 @@ class Coins extends Component
     }
 
 
+    public function Delete()
+    {
+        $denomination = Denomination::find($this->selected_id);
+        if ($denomination) {
+            $denomination->delete();
+            $this->dispatch('alert', ['type' => 'success', 'message' => 'Denomination deleted successfully!']);
+        }
+    }
 
+    public function Delete2($id)
+    {
+        $record = Denomination::find($id, ['id', 'type', 'value', 'image']);
+        $this->type = $record->type;
+        $this->value = $record->value;
+        $this->selected_id = $record->id;
+        $this->currentImage = $record->image;  // Imagen actual, no la sobrescribe con la nueva imagen.
+
+    }
+    public function deletePost($id)
+    {
+        $this->selected_id = $id;
+        $this->dispatch('deletePost'); // Esto es solo un ejemplo, podrías necesitar algo diferente aquí.
+    }
 
     public function resetUI()
     {

@@ -6,6 +6,7 @@ use App\Livewire\Coins;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\PostComponent;
 use App\Livewire\ImageUpload;
+use App\Livewire\Pos;
 use App\Livewire\Products;
 
 /*
@@ -40,6 +41,8 @@ Route::get('categories', Categories::class);
 Route::get('products', Products::class);
 
 Route::get('coins', Coins::class);
+
+Route::get('sales', Pos::class);
 
 
 Route::get('/', Categories::class);

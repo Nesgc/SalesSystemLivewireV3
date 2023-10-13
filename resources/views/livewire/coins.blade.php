@@ -37,7 +37,7 @@
                             @foreach ($denominations as $denomination)
                                 <tr>
                                     <td>
-                                        <h6>{{ $denomination->value }}</h6>
+                                        <h6>${{ $denomination->value }}</h6>
                                     </td>
                                     <td>
                                         <h6>{{ $denomination->type }}</h6>
@@ -59,6 +59,11 @@
                                             wire:confirm="Are you sure?" wire:click="Delete({{ $denomination->id }})"><i
                                                 class="fa-solid fa-trash"></i></a>
 
+                                        <a href="javascript:void(0)" class="btn btn-dark" title="Delete"
+                                            data-bs-toggle="modal" data-bs-target="#delete"
+                                            wire:click="Delete2({{ $denomination->id }})"><i
+                                                class="fa-solid fa-trash"></i></a>
+
                                         {{-- {{ $category->image }} --}}
                                     </td>
                                 </tr>
@@ -74,6 +79,7 @@
         </div>
     </div>
     @include('livewire.coins.coinsForm')
+    @include('livewire.coins.coinsDel')
 
 
     <script>
@@ -112,6 +118,49 @@
                     el.removeEventListener('click', onClick)
                 })
             })
+        })
+    </script>
+
+    <script>
+        document.addEventListener('livewire:init', () => {
+
+            $(function() {
+                $('.edit').click(function(e) {
+                    e.preventDefault();
+                    console.log(
+                        'Edit button clicked!'
+                    ); // Agregar mensaje de consola para verificar el evento click
+                    $('#edit').modal('show');
+                    var id = $(this).data('id');
+                    getRow(id);
+                });
+
+                $('.delete').click(function(e) {
+                    e.preventDefault();
+                    $('#delete').modal('show');
+                    var id = $(this).data('id');
+                    getRow(id);
+                });
+            });
+
+            function getRow(id) {
+                $.ajax({
+                    type: 'POST',
+                    url: 'unidades_row.php',
+                    data: {
+                        id: id
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        $('#id').val(response.id);
+                        $('#edit_economico').val(response.economico);
+                        $('#edit_tipo').val(response.tipo);
+                        $('#edit_operador').val(response.operador);
+                        $('#del_id').val(response.id);
+                        $('#del_unidades').html(response.economico);
+                    }
+                });
+            }
         })
     </script>
 </div>
