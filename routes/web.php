@@ -8,7 +8,7 @@ use App\Livewire\PostComponent;
 use App\Livewire\ImageUpload;
 use App\Livewire\Pos;
 use App\Livewire\Products;
-
+use App\Livewire\Select2;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,6 +44,8 @@ Route::get('coins', Coins::class);
 
 Route::get('sales', Pos::class);
 
+
+Route::get('select2', select2::class);
 
 Route::get('/', Categories::class);
 
