@@ -6,6 +6,11 @@ use App\Models\Denomination;
 use App\Models\Product;
 use Livewire\Component;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
+use DB;
+use App\Models\Sale;
+use App\Models\SaleDetail;
+use Exception;
+use Redirect;
 
 
 class Pos extends Component
@@ -149,5 +154,78 @@ class Pos extends Component
         $this->itemsQuantity = Cart::getTotalQuantity();
 
         $this->dispatch('scan-ok', 'Cantidad actualizada');
+    }
+
+    public function clearCart()
+    {
+        Cart::clear();
+        $this->efectivo = 0;
+        $this->change = 0;
+
+        $this->total = Cart::getTotal();
+        $this->itemsQuantity = Cart::getTotalQuantity();
+
+        $this->dispatch('scan-ok', 'Empty Cart');
+    }
+
+    public function saveSale()
+    {
+        if ($this->total <= 0) {
+            $this->dispatch('sale-error', 'Add available products');
+            return;
+        }
+        if ($this->efectivo <= 0) {
+            $this->dispatch('sale-error', 'Add cash');
+            return;
+        }
+        if ($this->change > $this->efectivo) {
+            $this->dispatch('sale-error', 'Cash must be more or equal to the total');
+            return;
+        }
+        DB::beginTransaction();
+
+        try {
+            $sale = Sale::create([
+                'total' => $this->total,
+                'items' => $this->itemsQuantity,
+                'cash' => $this->efectivo,
+                'change' => $this->change,
+                'user_id' => $this->Auth()->user()->id
+            ]);
+
+            if ($sale) {
+                $items = Cart::getContent();
+                foreach ($items as $item) {
+                    SaleDetail::create([
+                        'price' => $item->price,
+                        'quantity' => $item->quantity,
+                        'product_id' => $item->id,
+                        'sale_id' => $item->id,
+                    ]);
+
+                    $product = Product::find($item->id);
+                    $product->stock = $product->stock - $item->quantity;
+                    $product->save();
+                }
+            }
+
+            DB::commit();
+
+            Cart::clear();
+            $this->efectivo = 0;
+            $this->change = 0;
+            $this->total = Cart::getTotal();
+            $this->itemsQuantity = Cart::getTotalQuantity();
+
+            $this->dispatch('sale-ok', 'Successful sale');
+            $this->dispatch('print-ticket', $sale->id);
+        } catch (Exception $e) {
+            DB::rollBack();
+            $this->dispatch('sale-error', $e->getMessage());
+        }
+    }
+    public function printTicket($sale)
+    {
+        return Redirect::to("print://$sale->id");
     }
 }
