@@ -40,6 +40,8 @@ return [
 
     'layout' => 'components.layouts.app',
 
+
+
     /*
     |---------------------------------------------------------------------------
     | Lazy Loading Placeholder
