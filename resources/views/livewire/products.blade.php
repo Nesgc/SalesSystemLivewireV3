@@ -11,7 +11,7 @@
                     <ul class="tabs tab-pills">
                         <li>
                             <a href="javascript:void(0)" data-bs-toggle="modal" class="btn btn-dark" wire:click="create"
-                                data-bs-target="#theModal">Add</a>
+                                data-bs-target="#themodal">Add</a>
                         </li>
                     </ul>
                 </div>
@@ -65,13 +65,11 @@
 
                                         <td class="text-center">
                                             <a href="javascript:void(0)" class="btn btn-dark mtmobile" title="Edit"
-                                                data-bs-toggle="modal" data-bs-target="#theModal"
-                                                wire:click="Edit({{ $product->id }})"><i
+                                                wire:click.prevent="Edit({{ $product->id }})"><i
                                                     class="fa-solid fa-pen-to-square"></i></a>
 
                                             <a href="javascript:void(0)" class="btn btn-dark" title="Delete"
-                                                wire:confirm="Are you sure?"
-                                                wire:click="Delete({{ $product->id }})"><i
+                                                wire:click="delete({{ $product->id }})"><i
                                                     class="fa-solid fa-trash"></i></a>
 
                                     </tr>
@@ -90,42 +88,47 @@
         @include('livewire.products.productForm')
     </div>
     <script>
-        document.addEventListener('livewire:init', () => {
-            Livewire.directive('confirm', ({
-                el,
-                directive,
-                component,
-                cleanup
-            }) => {
-                let content = directive.expression
+        document.addEventListener('livewire:initialized', () => {
+            @this.on('product-added', msg => {
+                $('#themodal').modal('hide');
+                Swal.fire(
+                    'Genial!',
+                    `${msg}`,
+                    'success'
+                )
+            });
 
-                // The "directive" object gives you access to the parsed directive.
-                // For example, here are its values for: wire:click.prevent="deletePost(1)"
-                //
-                // directive.raw = wire:click.prevent
-                // directive.value = "click"
-                // directive.modifiers = ['prevent']
-                // directive.expression = "deletePost(1)"
+            @this.on('product-updated', msg => {
+                $('#themodal').modal('hide');
+                //   noty(msg);
+                Swal.fire(
+                    'Genial!',
+                    `${msg}`,
+                    'success'
+                )
+            });
 
-                let onClick = e => {
-                    if (!confirm(content)) {
-                        e.preventDefault()
-                        e.stopImmediatePropagation()
-                    }
-                }
+            @this.on('product-deleted', msg => {
+                $('#themodal').modal('hide');
+                Swal.fire(
+                    ':(',
+                    `${msg}`,
+                    'danger'
+                )
+            });
 
-                el.addEventListener('click', onClick, {
-                    capture: true
-                })
+            @this.on('hide-modal', msg => {
+                $('#themodal').modal('hide');
+            });
 
-                // Register any cleanup code inside `cleanup()` in the case
-                // where a Livewire component is removed from the DOM while
-                // the page is still active.
-                cleanup(() => {
-                    el.removeEventListener('click', onClick)
-                })
-            })
-        })
+            @this.on('show-modal', msg => {
+                $('#themodal').modal('show');
+            });
+
+            @this.on('hidden.bs.modal', msg => {
+                $('.er').css('display', 'none');
+            });
+        });
     </script>
 
 
