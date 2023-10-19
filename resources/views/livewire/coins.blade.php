@@ -56,13 +56,9 @@
                                                 class="fa-solid fa-pen-to-square"></i></a>
 
                                         <a href="javascript:void(0)" class="btn btn-dark" title="Delete"
-                                            wire:confirm="Are you sure?" wire:click="Delete({{ $denomination->id }})"><i
+                                            wire:click="delete({{ $denomination->id }})"><i
                                                 class="fa-solid fa-trash"></i></a>
 
-                                        <a href="javascript:void(0)" class="btn btn-dark" title="Delete"
-                                            data-bs-toggle="modal" data-bs-target="#delete"
-                                            wire:click="Delete2({{ $denomination->id }})"><i
-                                                class="fa-solid fa-trash"></i></a>
 
                                         {{-- {{ $category->image }} --}}
                                     </td>

@@ -7,12 +7,15 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Rule;
 use Livewire\WithPagination;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
+
 
 class Coins extends Component
 {
 
     use WithFileUploads;
     use WithPagination;
+    use LivewireAlert;
 
 
     public $currentImage, $searchengine, $pageTitle, $componentName, $type, $value;
@@ -85,7 +88,7 @@ class Coins extends Component
             'image' => $imagePath
         ]);
 
-        session()->flash('success', 'Denomination created successfully.');
+        $this->alert('success', 'Created Succesfully');
         $this->reset('type', 'image', 'value');
     }
 
@@ -120,19 +123,48 @@ class Coins extends Component
             'image' => $this->image ? $this->image->store('denominations') : $denomination->image,
         ]);
 
-        session()->flash('success', 'Denominación actualizada con éxito.');
+        $this->alert('success', 'Updated Succesfully');
         $this->resetUI();
     }
 
 
-    public function Delete()
+    public function delete($id)  // Asegúrate de que el ID se pasa a esta función
     {
+        $this->selected_id = $id;  // Almacena el ID para usarlo en la confirmación
+        $this->alert('warning', 'Are you sure you want to delete?', [
+            'position' => 'center',
+            'timer' => 3000,
+            'toast' => false,  // Cambiado a false para que la alerta no desaparezca automáticamente
+            'showConfirmButton' => true,
+            'onConfirmed' => 'confirmedDeletion',  // Agregado un manejador para la confirmación
+            'showCancelButton' => true,
+            'onDismissed' => '',
+            'showDenyButton' => false,
+            'onDenied' => '',
+            'timerProgressBar' => false,
+            'width' => '400',
+        ]);
+    }
+
+
+
+    public function confirmedDeletion()
+    {
+        // Mensaje de depuración para verificar que este método se está llamando
+        logger('confirmedDeletion called, ID: ' . $this->selected_id);
+
         $denomination = Denomination::find($this->selected_id);
         if ($denomination) {
             $denomination->delete();
-            $this->dispatch('alert', ['type' => 'success', 'message' => 'Denomination deleted successfully!']);
+            $this->alert('success', 'The denomination has been eliminated.');
+        } else {
+            $this->alert('error', 'La denominación no se pudo encontrar.');
         }
     }
+
+    protected $listeners = [
+        'confirmedDeletion'
+    ];
 
     public function Delete2($id)
     {
