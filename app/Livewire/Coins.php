@@ -8,6 +8,7 @@ use Livewire\WithFileUploads;
 use Livewire\Attributes\Rule;
 use Livewire\WithPagination;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use LivewireUI\Modal\ModalComponent;
 
 
 class Coins extends Component
@@ -57,13 +58,12 @@ class Coins extends Component
 
     public function Edit($id)
     {
-        $this->isEditMode = true;
         $record = Denomination::find($id, ['id', 'type', 'value', 'image']);
         $this->type = $record->type;
         $this->value = $record->value;
         $this->selected_id = $record->id;
         $this->currentImage = $record->image;  // Imagen actual, no la sobrescribe con la nueva imagen.
-
+        $this->dispatch('show-modal', 'Show Modal!');
     }
 
 
@@ -90,6 +90,7 @@ class Coins extends Component
 
         $this->alert('success', 'Created Succesfully');
         $this->reset('type', 'image', 'value');
+        $this->dispatch('denomination-added', 'Denominacion Registrada!');
     }
 
 
@@ -125,6 +126,7 @@ class Coins extends Component
 
         $this->alert('success', 'Updated Succesfully');
         $this->resetUI();
+        $this->dispatch('denomination-updated', 'Denominacion Actualizada!');
     }
 
 

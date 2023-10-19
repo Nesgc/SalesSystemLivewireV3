@@ -4,8 +4,68 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cca4e7e0ee64f471c0d58e073f698b37",
+    "content-hash": "429101359ffe163cacfd174fb1605598",
     "packages": [
+        {
+            "name": "aliqasemzadeh/livewire-bootstrap-modal",
+            "version": "V2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aliqasemzadeh/livewire-bootstrap-modal.git",
+                "reference": "c17390e6d1cee96e5906668f8f008d1481f4ac9d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aliqasemzadeh/livewire-bootstrap-modal/zipball/c17390e6d1cee96e5906668f8f008d1481f4ac9d",
+                "reference": "c17390e6d1cee96e5906668f8f008d1481f4ac9d",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^8.0|^9.0|^10.0",
+                "livewire/livewire": "^3.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "AliQasemzadeh\\LaravelLivewireModals\\Providers\\LaravelLivewireModalsProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AliQasemzadeh\\LaravelLivewireModals\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kevin Dion",
+                    "email": "bastinald@icloud.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Ali Qasemzadeh",
+                    "email": "aliqasemzadeh7@gmail.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Lungdsuo Mozhui",
+                    "email": "mozhui.lungdsuo@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Dynamic Laravel Livewire 3 Bootstrap modals.",
+            "homepage": "https://github.com/aliqasemzadeh/livewire-bootstrap-modal",
+            "support": {
+                "issues": "https://github.com/aliqasemzadeh/livewire-bootstrap-modal/issues",
+                "source": "https://github.com/aliqasemzadeh/livewire-bootstrap-modal/tree/V2"
+            },
+            "time": "2023-10-13T08:53:40+00:00"
+        },
         {
             "name": "brick/math",
             "version": "0.11.0",
@@ -3296,6 +3356,66 @@
             "time": "2023-04-15T23:01:58+00:00"
         },
         {
+            "name": "spatie/laravel-package-tools",
+            "version": "1.16.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-package-tools.git",
+                "reference": "cc7c991555a37f9fa6b814aa03af73f88026a83d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/cc7c991555a37f9fa6b814aa03af73f88026a83d",
+                "reference": "cc7c991555a37f9fa6b814aa03af73f88026a83d",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^9.28|^10.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.5",
+                "orchestra/testbench": "^7.7|^8.0",
+                "pestphp/pest": "^1.22",
+                "phpunit/phpunit": "^9.5.24",
+                "spatie/pest-plugin-test-time": "^1.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\LaravelPackageTools\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Tools for creating Laravel packages",
+            "homepage": "https://github.com/spatie/laravel-package-tools",
+            "keywords": [
+                "laravel-package-tools",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-package-tools/issues",
+                "source": "https://github.com/spatie/laravel-package-tools/tree/1.16.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-08-23T09:04:39+00:00"
+        },
+        {
             "name": "spatie/laravel-permission",
             "version": "5.11.0",
             "source": {
@@ -5896,6 +6016,64 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.11.0"
             },
             "time": "2022-06-03T18:03:27+00:00"
+        },
+        {
+            "name": "wire-elements/modal",
+            "version": "2.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wire-elements/modal.git",
+                "reference": "0f64fc4c4be49a343a6e025d81629113d5ccdc93"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wire-elements/modal/zipball/0f64fc4c4be49a343a6e025d81629113d5ccdc93",
+                "reference": "0f64fc4c4be49a343a6e025d81629113d5ccdc93",
+                "shasum": ""
+            },
+            "require": {
+                "livewire/livewire": "^3.0",
+                "php": "^8.1",
+                "spatie/laravel-package-tools": "^1.9"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^8.5",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "LivewireUI\\Modal\\LivewireModalServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "LivewireUI\\Modal\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Philo Hermans",
+                    "email": "me@philohermans.com"
+                }
+            ],
+            "description": "Laravel Livewire modal component",
+            "keywords": [
+                "laravel",
+                "livewire",
+                "modal"
+            ],
+            "support": {
+                "issues": "https://github.com/wire-elements/modal/issues",
+                "source": "https://github.com/wire-elements/modal/tree/2.0.7"
+            },
+            "time": "2023-09-08T20:15:14+00:00"
         }
     ],
     "packages-dev": [

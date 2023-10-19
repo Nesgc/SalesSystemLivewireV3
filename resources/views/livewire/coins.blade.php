@@ -10,7 +10,7 @@
                 <ul class="tabs tab-pills">
                     <li>
                         <a href="javascript:void(0)" data-bs-toggle="modal" class="btn btn-dark" wire:click="create"
-                            data-bs-target="#theModal">Add</a>
+                            data-bs-target="#themodal">Add</a>
                     </li>
                 </ul>
             </div>
@@ -51,13 +51,14 @@
 
                                     <td class="text-center">
                                         <a href="javascript:void(0)" class="btn btn-dark mtmobile" title="Edit"
-                                            data-bs-toggle="modal" data-bs-target="#theModal"
                                             wire:click="Edit({{ $denomination->id }})"><i
                                                 class="fa-solid fa-pen-to-square"></i></a>
 
                                         <a href="javascript:void(0)" class="btn btn-dark" title="Delete"
                                             wire:click="delete({{ $denomination->id }})"><i
                                                 class="fa-solid fa-trash"></i></a>
+
+
 
 
                                         {{-- {{ $category->image }} --}}
@@ -78,85 +79,34 @@
     @include('livewire.coins.coinsDel')
 
 
+
     <script>
-        document.addEventListener('livewire:init', () => {
-            Livewire.directive('confirm', ({
-                el,
-                directive,
-                component,
-                cleanup
-            }) => {
-                let content = directive.expression
-
-                // The "directive" object gives you access to the parsed directive.
-                // For example, here are its values for: wire:click.prevent="deletePost(1)"
-                //
-                // directive.raw = wire:click.prevent
-                // directive.value = "click"
-                // directive.modifiers = ['prevent']
-                // directive.expression = "deletePost(1)"
-
-                let onClick = e => {
-                    if (!confirm(content)) {
-                        e.preventDefault()
-                        e.stopImmediatePropagation()
-                    }
-                }
-
-                el.addEventListener('click', onClick, {
-                    capture: true
-                })
-
-                // Register any cleanup code inside `cleanup()` in the case
-                // where a Livewire component is removed from the DOM while
-                // the page is still active.
-                cleanup(() => {
-                    el.removeEventListener('click', onClick)
-                })
+        document.addEventListener('livewire:initialized', () => {
+            @this.on('denomination-added', msg => {
+                $('#themodal').modal('hide');
+                noty(msg);
             })
-        })
-    </script>
-
-    <script>
-        document.addEventListener('livewire:init', () => {
-
-            $(function() {
-                $('.edit').click(function(e) {
-                    e.preventDefault();
-                    console.log(
-                        'Edit button clicked!'
-                    ); // Agregar mensaje de consola para verificar el evento click
-                    $('#edit').modal('show');
-                    var id = $(this).data('id');
-                    getRow(id);
-                });
-
-                $('.delete').click(function(e) {
-                    e.preventDefault();
-                    $('#delete').modal('show');
-                    var id = $(this).data('id');
-                    getRow(id);
-                });
-            });
-
-            function getRow(id) {
-                $.ajax({
-                    type: 'POST',
-                    url: 'unidades_row.php',
-                    data: {
-                        id: id
-                    },
-                    dataType: 'json',
-                    success: function(response) {
-                        $('#id').val(response.id);
-                        $('#edit_economico').val(response.economico);
-                        $('#edit_tipo').val(response.tipo);
-                        $('#edit_operador').val(response.operador);
-                        $('#del_id').val(response.id);
-                        $('#del_unidades').html(response.economico);
-                    }
-                });
-            }
-        })
+            @this.on('denomination-updated', msg => {
+                $('#themodal').modal('hide');
+                //   noty(msg);
+                Swal.fire(
+                    'Genial!',
+                    `${msg}`,
+                    'success'
+                )
+            })
+            @this.on('denomiation-deleted', msg => {
+                noty(msg);
+            })
+            //   window.livewire.on('hide-modal', msg => {
+            //       $('#themodal').modal('hide');
+            //   })
+            @this.on('show-modal', msg => {
+                $('#themodal').modal('show');
+            })
+            //   window.livewire.on('hidden.bs.modal', msg => {
+            //       $('.er').css('display', 'none');
+            //   })
+        });
     </script>
 </div>
