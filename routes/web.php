@@ -7,8 +7,10 @@ use App\Livewire\EditCoin;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\PostComponent;
 use App\Livewire\ImageUpload;
+use App\Livewire\Permissions;
 use App\Livewire\Pos;
 use App\Livewire\Products;
+use App\Livewire\Roles;
 use App\Livewire\Select2;
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +46,10 @@ Route::get('products', Products::class);
 Route::get('coins', Coins::class);
 
 Route::get('sales', Pos::class);
+
+Route::get('roles', Roles::class)->name('roles');;
+
+Route::get('permissions', Permissions::class);
 
 
 Route::get('select2', select2::class);

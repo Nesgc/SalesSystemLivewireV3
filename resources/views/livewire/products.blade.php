@@ -71,7 +71,7 @@
                                             <a href="javascript:void(0)" class="btn btn-dark" title="Delete"
                                                 wire:click="delete({{ $product->id }})"><i
                                                     class="fa-solid fa-trash"></i></a>
-
+                                        </td>
                                     </tr>
                                 @endforeach
 

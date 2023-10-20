@@ -20,5 +20,12 @@
     </div>
 </div>
 
+@include('livewire.pos.partials.scripts.shortcuts')
+@include('livewire.pos.partials.scripts.general')
+@include('livewire.pos.partials.scripts.scan')
+@include('livewire.pos.partials.scripts.events')
+
+
+
 <script src="{{ asset('js/keypress.js') }}"></script>
 <script src="{{ asset('js/onscan.js') }}"></script>
