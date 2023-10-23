@@ -22,7 +22,7 @@
                                         <td class="text-center table-th">
                                             @if (count($item->attributes) > 0)
                                                 <span>
-                                                    <img src="{{ asset('storage/products/' . $item->attributes[0]) }}"
+                                                    <img src="{{ asset('storage/' . $item->attributes[0]) }}"
                                                         alt="Product image" height="90" width="90"
                                                         class="rounded">
                                                 </span>
@@ -34,7 +34,7 @@
                                         </td>
                                         <td class="text-center">${{ number_format($item->price, 2) }}</td>
                                         <td>
-                                            <input type="number" id="r{{ $itm->id }}"
+                                            <input type="number" id="r{{ $item->id }}"
                                                 wire:change="updateQty({{ $item->id }}, $('#r' +
                                             {{ $item->id }}).val())"
                                                 style="font-size: 1rem!important" class="form-control text-center"

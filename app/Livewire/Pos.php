@@ -4,19 +4,22 @@ namespace App\Livewire;
 
 use App\Models\Denomination;
 use App\Models\Product;
-use Livewire\Component;
-use Darryldecode\Cart\Facades\CartFacade as Cart;
-use Illuminate\Support\Facades\DB;
 use App\Models\Sale;
 use App\Models\SaleDetail;
+use Darryldecode\Cart\Facades\CartFacade as Cart;
+use Illuminate\Support\Facades\DB;
 use Exception;
 use Illuminate\Support\Facades\Redirect;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Component;
+
 
 
 class Pos extends Component
 {
+    use LivewireAlert;
 
-    public $total, $itemsQuantity, $denominations, $efectivo, $change, $componentName;
+    public $total, $itemsQuantity, $denominations, $efectivo, $change, $componentName, $products, $barcode;
 
     public function mount()
     {
@@ -50,34 +53,49 @@ class Pos extends Component
     ];
 
 
-    public function ScanCode($barcode, $cant = 1)
+    public function ScanCode()
     {
-        //dd($barcode); //** LLega el barcode OK!!
-        $product = Product::where('barcode', $barcode)->first();
-        dd($barcode, $product); //
-        if ($product == null || empty($product)) {
-            $this->dispatch('scan-notfound', 'El producto no fue encontrado');
-        } else {
-            if ($this->InCart($product->id)) {
-                $this->increaseQty($product->id);
-                return;
-            }
+        $barcode = $this->barcode; // Obtener el valor del código de barras del modelo de Livewire
 
-            if ($product->stock < 1) {
-                $this->dispatch('no-stock', 'Stock insuficiente');
-                return;
-            }
-
-            Cart::add($product->id, $product->name, $product->price, $cant, $product->image);
-            /*$carro = Cart::getContent();
-            dd($carro);*/
-
-            $this->total = Cart::getTotal();
-            $this->itemsQuantity = Cart::getTotalQuantity();
-
-            $this->dispatch('scan-ok', 'Producto agregado');
+        // Validar si el código de barras está presente
+        if (empty($barcode)) {
+            $this->alert('warning', 'El código de barras está vacío');
+            return;
         }
+
+        // Buscar el producto por el código de barras
+        $product = Product::where('barcode', $barcode)->first();
+
+        // Validar si el producto fue encontrado
+        if (!$product) {
+            $this->alert('warning', 'El producto no fue encontrado');
+            return;
+        }
+
+        // Validar si el producto ya está en el carrito
+        if ($this->InCart($product->id)) {
+            $this->increaseQty($product->id);
+            $this->alert('success', 'Cantidad actualizada');
+            return;
+        }
+
+        // Validar si hay stock disponible
+        if ($product->stock < 1) {
+            $this->alert('warning', 'Stock insuficiente');
+            return;
+        }
+
+        // Agregar el producto al carrito
+        Cart::add($product->id, $product->name, $product->price, 1, $product->image);
+
+        // Actualizar el total y la cantidad de ítems
+        $this->total = Cart::getTotal();
+        $this->itemsQuantity = Cart::getTotalQuantity();
+
+        // Enviar una notificación de éxito
+        $this->alert('success', 'Producto agregado');
     }
+
 
     public function InCart($productId)
     {
@@ -99,14 +117,14 @@ class Pos extends Component
             $title = 'Producto agregada';
 
         if ($product->stock < ($cant + $exist->quantity)) {
-            $this->dispatch('no-stock', 'Stock insuficiente');
+            $this->alert('no-stock', 'Stock insuficiente');
             return;
         }
 
         Cart::add($product->id, $product->name, $product->price, $cant, $product->image);
         $this->total = Cart::getTotal();
         $this->itemsQuantity = Cart::getTotalQuantity();
-        $this->dispatch('scan-ok', $title);
+        $this->alert('success', $title);
     }
 
     public function updateQty($productId, $cant = 1)
@@ -121,7 +139,7 @@ class Pos extends Component
 
         if ($exist) {
             if ($product->stock < $cant) {
-                $this->dispatch('no-stock', 'Stock insuficiente :/');
+                $this->alert('no-stock', 'Stock insuficiente :/');
                 return;
             }
         }
@@ -131,7 +149,7 @@ class Pos extends Component
             Cart::add($product->id, $product->name, $product->price, $cant, $product->image);
             $this->total = Cart::getTotal();
             $this->itemsQuantity = Cart::getTotalQuantity();
-            $this->dispatch('scan-ok', $title);
+            $this->alert('success', $title);
         }
     }
 
@@ -140,7 +158,7 @@ class Pos extends Component
         Cart::remove($productId);
         $this->total = Cart::getTotal();
         $this->itemsQuantity = Cart::getTotalQuantity();
-        $this->dispatch('scan-ok', 'Producto eliminado');
+        $this->alert('success', 'Producto eliminado');
     }
 
     public function decreaseQty($productId)
@@ -152,7 +170,7 @@ class Pos extends Component
             Cart::add($item->id, $item->name, $item->price, $newQty);
         $this->total = Cart::getTotal();
         $this->itemsQuantity = Cart::getTotalQuantity();
-        $this->dispatch('scan-ok', 'Cantidad actualizada');
+        $this->alert('success', 'Cantidad actualizada');
     }
 
     public function clearCart()
@@ -162,21 +180,21 @@ class Pos extends Component
         $this->change = 0;
         $this->total = Cart::getTotal();
         $this->itemsQuantity = Cart::getTotalQuantity();
-        $this->dispatch('scan-ok', 'Carro vacío');
+        $this->alert('success', 'Carro vacío');
     }
 
     public function saveSale()
     {
         if ($this->total <= 0) {
-            $this->dispatch('sale-error', 'AGREGA PRODUCTOS A LA VENTA');
+            $this->alert('warning', 'AGREGA PRODUCTOS A LA VENTA');
             return;
         }
         if ($this->efectivo <= 0) {
-            $this->dispatch('sale-error', 'INGRESA EL EFECTIVO');
+            $this->alert('warning', 'INGRESA EL EFECTIVO');
             return;
         }
         if ($this->total > $this->efectivo) {
-            $this->dispatch('sale-error', 'EL EFECTIVO DEBE SER MAYOR O IGUAL AL TOTAL');
+            $this->alert('warning', 'EL EFECTIVO DEBE SER MAYOR O IGUAL AL TOTAL');
             return;
         }
         DB::beginTransaction();
@@ -212,7 +230,7 @@ class Pos extends Component
             $this->total = Cart::getTotal();
             $this->itemsQuantity = Cart::getTotalQuantity();
 
-            $this->dispatch('sale-ok', 'Venta registrada con éxito');
+            $this->alert('alert', 'Venta registrada con éxito');
             $this->dispatch('print-ticket', $sale->id);
         } catch (Exception $e) {
             DB::rollBack();
