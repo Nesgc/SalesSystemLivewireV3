@@ -43,7 +43,7 @@ class Categories extends Component
             : Category::paginate(10);
 
 
-        return view('livewire.categories', compact('categories'));
+        return view('livewire.category.categories', compact('categories'));
     }
 
     public function create()

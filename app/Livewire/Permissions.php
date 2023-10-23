@@ -17,7 +17,7 @@ class Permissions extends Component
     use WithPagination;
     use LivewireAlert;
 
-    public  $componentName, $pageTitle, $PermissionName, $selected_id, $searchengine, $PermissionsList;
+    public  $componentName, $pageTitle, $permissionName, $selected_id, $searchengine, $PermissionsList;
     private $pagination = 10;
 
     #[Rule('required|min:3|unique:permissions,name,{$this->selected_id}')]
@@ -42,36 +42,35 @@ class Permissions extends Component
     }
     public function create()
     {
-        $this->reset('name', 'guard_name');
+        $this->reset('name');
 
         $this->resetUI();
     }
     public function Store()
     {
+        $rules = ['permissionName' => 'required|min:2|unique:permissions,name'];
 
-        // Validar si la imagen no es obligatoria o hacer validaciones personalizadas
-        $this->validate();
+        $messages = [
+            'permissionName.required' => 'Elnombre del permiso es requerido',
+            'permissionName.min'      => 'El nombre del permiso debe tener al menos 2 carateres',
+            'permissionName.unique'   => 'El permiso ya existe'
+        ];
 
-
-
+        $this->validate($rules, $messages);
 
         Permission::create([
-            'name' => $this->name,
-            'guard_name' => $this->guard_name,
+            'name' => $this->permissionName
         ]);
 
-        $this->alert('success', 'Created Succesfully');
-        $this->reset('name', 'guard_name');
-        $this->dispatch('Permission-added', 'se registo el rol con exito');
+        $this->dispatch('permission-added', 'Se registró el permiso con exito');
         $this->resetUI();
     }
 
     public function Edit($id)
     {
         $this->resetValidation();
-        $record = Permission::find($id, ['id', 'name', 'guard_name']);
+        $record = Permission::find($id, ['id', 'name']);
         $this->name = $record->name;
-        $this->guard_name = $record->guard_name;
         $this->selected_id = $record->id;
         $this->dispatch('show-modal', 'Show Modal!');
     }
@@ -87,7 +86,6 @@ class Permissions extends Component
 
         $Permission->update([
             'name' => $this->name,
-            'guard_name' => $this->guard_name,
         ]);
         $this->alert('success', 'Updated Succesfully');
         $this->resetUI();
@@ -138,7 +136,6 @@ class Permissions extends Component
     {
 
         $this->name = '';
-        $this->guard_name = '';
         $this->searchengine = '';
 
         $this->selected_id = 0;

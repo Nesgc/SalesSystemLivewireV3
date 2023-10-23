@@ -120,6 +120,23 @@
     <script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script>
 
     <script src="../src/plugins/keypress-2.1.5.min.js"></script>
+    <script src="{{ asset('plugins/notification/snackbar/snackbar.min.js') }}"></script>
+
+    <script>
+        document.addEventListener('livewire:initialized', () => {
+
+            function noty(msg, option = 1) {
+                Snackbar.show({
+                    text: msg.toUpperCase(),
+                    actionText: 'CERRAR',
+                    actionTextColor: '#fff',
+                    backgroundColor: option == 1 ? '#3b3f5c' : '#e7515a',
+                    pos: 'top-right'
+                });
+            }
+
+        });
+    </script>
     <!-- END GLOBAL MANDATORY SCRIPTS -->
 
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->

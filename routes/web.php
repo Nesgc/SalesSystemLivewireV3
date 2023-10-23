@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Livewire\Assign;
 use App\Livewire\Categories;
 use App\Livewire\Coins;
 use App\Livewire\EditCoin;
@@ -50,6 +51,8 @@ Route::get('sales', Pos::class);
 Route::get('roles', Roles::class)->name('roles');;
 
 Route::get('permissions', Permissions::class);
+
+Route::get('assign', Assign::class);
 
 
 Route::get('select2', select2::class);

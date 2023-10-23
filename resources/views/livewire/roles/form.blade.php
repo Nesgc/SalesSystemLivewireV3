@@ -13,7 +13,7 @@
                         <div class="input-group mb-3">
                             <span class="input-group-text d-flex align-items-center fas fa-edit"
                                 id="basic-addon1"></span>
-                            <input type="text" wire:model.lazy='name' class="form-control" placeholder="roleName"
+                            <input type="text" wire:model.lazy='roleName' class="form-control" placeholder="roleName"
                                 aria-label="Username" aria-describedby="basic-addon1">
                         </div>
 

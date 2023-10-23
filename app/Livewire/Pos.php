@@ -30,7 +30,7 @@ class Pos extends Component
     {
         $this->denominations = Denomination::all();
 
-        return view('livewire.pos', [
+        return view('livewire.pos.pos', [
             'denominations' => Denomination::orderBy('value', 'desc')->get(),
             'cart' => Cart::getContent()->sortBy('name'),
         ]);

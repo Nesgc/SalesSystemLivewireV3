@@ -20,10 +20,10 @@
                 <div class="card simple-title-task ui-sortable-handle">
                     <div class="card-body">
                         <div class="input-group input-group-md mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text input-gp hideonsm"
-                                    style="background: #3B3F5C; color:white">Efectivo F8</span>
-                            </div>
+
+                            <span class="btn d-flex align-items-center"
+                                style="background: #3B3F5C; color:white">Efectivo F8</span>
+
                             <input type="number" id="cash" wire:model='efectivo' wire:keydown.enter='saveSale'
                                 class="form-cotrol text-center" value="{{ $efectivo }}">
                             <div class="input-group-append">

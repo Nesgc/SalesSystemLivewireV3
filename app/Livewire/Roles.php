@@ -46,80 +46,56 @@ class Roles extends Component
 
     public function create()
     {
-        $this->reset('name', 'guard_name');
+        $this->reset('name');
 
         $this->resetUI();
     }
     public function CreateRole()
     {
-
-        // Validar si la imagen no es obligatoria o hacer validaciones personalizadas
-        $this->validate([
-            'name' => 'required|string|max:255', // Solo como ejemplo, ajusta según tus necesidades
-            'guard_name' => 'nullable|max:2048' // Haciendo la imagen opcional
-        ]);
-
-
-
-
-        Role::create([
-            'name' => $this->name,
-            'guard_name' => $this->guard_name,
-        ]);
-
-        $this->alert('success', 'Created Succesfully');
-        $this->reset('name', 'guard_name');
-        $this->dispatch('role-added', 'se registo el rol con exito');
-        $this->resetUI();
-    }
-
-    public function Edit($id)
-    {
-        $record = Role::find($id, ['id', 'name', 'guard_name']);
-        $this->name = $record->name;
-        $this->guard_name = $record->guard_name;
-        $this->selected_id = $record->id;
-        $this->dispatch('show-modal', 'Show Modal!');
-    }
-
-    public function UpdateRoles()
-    {
         $rules = ['roleName' => 'required|min:2|unique:roles,name'];
 
         $messages = [
-            'roleName.required' => 'The name is required',
-            'roleName.unique' => 'The name already exists',
-            'roleName.min' => 'The name must be at least 2 characters',
+            'roleName.required' => 'Elnombre del rol es requerido',
+            'roleName.min'      => 'El nombre debe tener al menos 3 carateres',
+            'roleName.unique'   => 'El rol ya existe'
         ];
 
         $this->validate($rules, $messages);
 
-        $role = Role::find($this->roleName);
-        $this->name = $role->name;
-        $this->guard_name = $role->guard_name;
-        $this->selected_id = $role->selected_id;
-        $this->dispatch('role-update', 'Se actualizo con exito');
+        Role::create([
+            'name' => $this->roleName
+        ]);
+
+        $this->dispatch('role-added', 'Se registró el rol con exito');
+        $this->resetUI();
+    }
+
+    public function Edit(Role $role)
+    {
+        //$role = Role::find($id);
+        $this->selected_id = $role->id;
+        $this->roleName = $role->name;
+
+        $this->dispatch('show-modal', 'Show modal');
     }
 
     public function UpdateRole()
     {
-        $this->validate([
-            'name' => 'required|string|max:255',
-            'guard_name' => 'nullable',  // Agrega tus propias reglas de validación aquí
-            // ... otras reglas de validación
-        ]);
+        $rules = ['roleName' => "required|min:2|unique:roles,name, {$this->selected_id}"];
+
+        $messages = [
+            'roleName.required' => 'Elnombre del rol es requerido',
+            'roleName.min'      => 'El nombre debe tener al menos 3 carateres',
+            'roleName.unique'   => 'El rol ya existe'
+        ];
+        $this->validate($rules, $messages);
 
         $role = Role::find($this->selected_id);
+        $role->name = $this->roleName;
+        $role->save();
 
-
-        $role->update([
-            'name' => $this->name,
-            'guard_name' => $this->guard_name,
-        ]);
-
-        $this->alert('success', 'Updated Succesfully');
+        $this->dispatch('role-updated', 'Se actualizó el rol con éxito');
         $this->resetUI();
-        $this->dispatch('role-updated', 'Se actualizo con exito');
     }
 
     public function delete($id)  // Asegúrate de que el ID se pasa a esta función
@@ -156,17 +132,7 @@ class Roles extends Component
         $this->alert('success', 'The role has been eliminated.');
     }
 
-    public function AssignRoles()
-    {
-        if ($this->userSelected > 0) {
-            $user = User::find($this->selected_id);
-            if ($user) {
-                $user->syncRoles($rolesList);
-                $this->alert('success', 'Roles assigns correctly');
-                $this->resetInput();
-            }
-        }
-    }
+
 
     protected $listeners = [
         'confirmedDeletion'
