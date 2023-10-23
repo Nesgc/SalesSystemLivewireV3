@@ -33,12 +33,15 @@ class Permissions extends Component
     public function render()
     {
 
-        $permissions = $this->searchengine
-            ? Permission::where('name', 'like', '%' . $this->searchengine . '%')
-            ->orWhere('id', 'like', '%' . $this->searchengine . '%')->paginate(10)
-            : Permission::paginate(10);
+        if (strlen($this->searchengine) > 0)
+            $permisos = Permission::where('name', 'like', '%' . $this->searchengine . '%')->paginate($this->pagination);
+        else
+            $permisos = Permission::orderBy('name', 'asc')->paginate($this->pagination);
 
-        return view('livewire.permissions.permissions', compact('permissions'));
+
+        return view('livewire.permissions.permissions', [
+            'permisos' => $permisos
+        ]);
     }
     public function create()
     {
@@ -62,7 +65,9 @@ class Permissions extends Component
             'name' => $this->permissionName
         ]);
 
-        $this->dispatch('permission-added', 'Se registró el permiso con exito');
+        $this->dispatch('permiso-added', 'Se registró el permiso con exito');
+        $this->alert('success', 'Created Succesfully');
+
         $this->resetUI();
     }
 
@@ -70,26 +75,31 @@ class Permissions extends Component
     {
         $this->resetValidation();
         $record = Permission::find($id, ['id', 'name']);
-        $this->name = $record->name;
         $this->selected_id = $record->id;
+        $this->permissionName = $record->name;
         $this->dispatch('show-modal', 'Show Modal!');
     }
 
 
     public function Update()
     {
-        $this->validate();
+        $rules = ['permissionName' => "required|min:2|unique:permissions,name, {$this->selected_id}"];
 
+        $messages = [
+            'permissionName.required' => 'Elnombre del permiso es requerido',
+            'permissionName.min'      => 'El nombre debe tener al menos 3 carateres',
+            'permissionName.unique'   => 'El permiso ya existe'
+        ];
+        $this->validate($rules, $messages);
 
-        $Permission = Permission::find($this->selected_id);
+        $permiso = Permission::find($this->selected_id);
+        $permiso->name = $this->permissionName;
+        $permiso->save();
 
-
-        $Permission->update([
-            'name' => $this->name,
-        ]);
+        $this->dispatch('permiso-updated', 'Se actualizó el permiso con éxito');
         $this->alert('success', 'Updated Succesfully');
+
         $this->resetUI();
-        $this->dispatch('Permission-updated', 'Se actualizo con exito');
     }
 
     public function delete($id)  // Asegúrate de que el ID se pasa a esta función
@@ -114,16 +124,22 @@ class Permissions extends Component
 
     public function confirmedDeletion()
     {
+        $permission = Permission::find($this->selected_id);
 
-
-        $rolesCount = Permission::find($this->selected_id)->getname->count();
-        if ($rolesCount > 0) {
-            $this->alert('danger', 'Cant eliminate this rol because it has assignated permissions');
+        if (!$permission) {
+            $this->alert('warning', 'Permission not found.');
             return;
         }
 
-        Permission::find($this->selected_id)->delete();
-        $this->alert('success', 'The Permission has been eliminated.');
+        $rolesCount = $permission->roles ? $permission->roles->count() : 0; // Asegurarse de que roles no es null antes de contar
+
+        if ($rolesCount > 0) {
+            $this->alert('warning', 'Cannot delete this permission because it has assigned roles.');
+            return;
+        }
+
+        $permission->delete();
+        $this->alert('success', 'The Permission has been deleted.');
     }
 
 

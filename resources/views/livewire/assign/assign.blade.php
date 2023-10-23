@@ -13,7 +13,7 @@
                 <div class="d-flex flex-row form-group mr-5 ">
                     <div>
                         <select wire:model="role" wire:change="updatePermissions" class="form-control col-lg-8">
-                            <option value="Elegir" disabled>Seleccione Rol</option>
+                            <option value="Elegir">Seleccione Rol</option>
                             @foreach ($roles as $role)
                                 <option value="{{ $role->id }}">{{ $role->name }}</option>
                             @endforeach
@@ -47,13 +47,12 @@
                                             </td>
                                             <td class="text-center">
                                                 <div class="n-check">
-                                                    <label class="new-control new-checkbox checkbox-primary">
-                                                        <input type="checkbox"
+                                                    <label class="d-flex justify-content-center">
+                                                        <input class="form-check-input mx-1" type="checkbox"
                                                             wire:change="SyncPermiso($('#p' + {{ $permiso->id }}).is(':checked'), '{{ $permiso->name }}' )"
                                                             id="p{{ $permiso->id }}" value="{{ $permiso->id }}"
-                                                            class="new-control-input"
                                                             {{ $permiso->checked == 1 ? 'checked' : '' }}>
-                                                        <span class="new-control-indicator"></span>
+                                                        <span class=" new-control-indicator"></span>
                                                         <h6>{{ $permiso->name }}</h6>
                                                     </label>
                                                 </div>
@@ -74,22 +73,4 @@
             </div>
         </div>
     </div>
-    Include Form
 </div>
-
-<script>
-    document.addEventListener('livewire:initialized', () => {
-        @this.on('sync-error', Msg => {
-            noty(Msg)
-        })
-        @this.on('permi', Msg => {
-            noty(Msg)
-        })
-        @this.on('syncall', Msg => {
-            noty(Msg)
-        })
-        @this.on('removeall', Msg => {
-            noty(Msg)
-        })
-    });
-</script>

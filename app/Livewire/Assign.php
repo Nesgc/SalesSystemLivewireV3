@@ -121,7 +121,7 @@ class Assign extends Component
 
     public function delete()  // Asegúrate de que el ID se pasa a esta función
     {
-        $this->alert('warning', 'Are you sure you want to delete?', [
+        $this->alert('warning', 'Are you sure you want to revoke all permissions?', [
             'position' => 'center',
             'timer' => 3000,
             'toast' => false,  // Cambiado a false para que la alerta no desaparezca automáticamente

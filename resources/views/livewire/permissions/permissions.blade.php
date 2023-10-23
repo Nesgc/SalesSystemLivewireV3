@@ -28,22 +28,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($permissions as $permission)
+                            @foreach ($permisos as $permiso)
                                 <tr>
                                     <td>
-                                        <h6>{{ $permission->id }}</h6>
+                                        <h6>{{ $permiso->id }}</h6>
                                     </td>
                                     <td>
-                                        <h6>{{ $permission->name }}</h6>
+                                        <h6>{{ $permiso->name }}</h6>
                                     </td>
 
                                     <td class="text-center">
                                         <a href="javascript:void(0)" class="btn btn-dark mtmobile" title="Edit"
-                                            wire:click.prevent="Edit({{ $permission->id }})"><i
+                                            wire:click.prevent="Edit({{ $permiso->id }})"><i
                                                 class="fa-solid fa-pen-to-square"></i></a>
 
                                         <a href="javascript:void(0)" class="btn btn-dark" title="Delete"
-                                            wire:click="delete({{ $permission->id }})"><i
+                                            wire:click="delete({{ $permiso->id }})"><i
                                                 class="fa-solid fa-trash"></i></a>
                                     </td>
                                 </tr>
@@ -51,7 +51,7 @@
 
                         </tbody>
                     </table>
-                    {{ $permissions->links() }}
+                    {{ $permisos->links() }}
                 </div>
             </div>
         </div>
@@ -62,15 +62,15 @@
 
 <script>
     document.addEventListener('livewire:initialized', () => {
-        @this.on('Permission-added', Msg => {
+        @this.on('permiso-added', Msg => {
             $('#themodal').modal('hide')
         })
-        @this.on('Permission-updated', Msg => {
+        @this.on('permiso-updated', Msg => {
             $('#themodal').modal('hide')
         })
-        @this.on('Permission-deleted', Msg => {})
-        @this.on('Permission-exists', Msg => {})
-        @this.on('Permission-error', Msg => {})
+        @this.on('permiso-deleted', Msg => {})
+        @this.on('permiso-exists', Msg => {})
+        @this.on('permiso-error', Msg => {})
         @this.on('hide-modal', Msg => {
             $('#themodal').modal('hide')
         })

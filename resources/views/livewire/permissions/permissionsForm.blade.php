@@ -14,7 +14,7 @@
                             <span class="input-group-text d-flex align-items-center fas fa-edit"
                                 id="basic-addon1"></span>
                             <input type="text" wire:model.lazy='permissionName' class="form-control"
-                                placeholder="name" aria-label="Username" aria-describedby="basic-addon1">
+                                placeholder="Permission Name" aria-label="Username" aria-describedby="basic-addon1">
                         </div>
 
                         @error('permissionName')

@@ -7,7 +7,7 @@
     </svg>
     <form class="form-inline search-full form-inline search" role="search">
         <div class="search-bar">
-            <input type="text" class="form-control search-form-control  ml-lg-auto"
+            <input type="text" id="code" class="form-control search-form-control  ml-lg-auto"
                 wire:keydown.enter.prevent="$dispatch('scan-code', $('#code').val())" placeholder="Search...">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -22,8 +22,7 @@
         document.addEventListener('livewire:initialized', () => {
             @this.on('scan-code', action => {
                 $('#code').val('')
-            })
-
+            });
         });
     </script>
 </div>

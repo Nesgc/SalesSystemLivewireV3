@@ -124,7 +124,7 @@ class Roles extends Component
 
         $permissionsCount = Role::find($this->selected_id)->permissions->count();
         if ($permissionsCount > 0) {
-            $this->alert('danger', 'Cant eliminate this rol because it has assignated permissions');
+            $this->alert('warning', 'Cant eliminate this rol because it has assignated permissions');
             return;
         }
 
