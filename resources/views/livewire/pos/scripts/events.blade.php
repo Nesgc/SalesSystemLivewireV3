@@ -16,7 +16,7 @@
             noty(Msg)
         })
 
-        @this.on('print-ticket', SaleId => {
+        @this.on('print-ticket', saleId => {
             window.open("print://" + saleId, '_blank')
         })
 

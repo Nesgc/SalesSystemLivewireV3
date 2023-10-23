@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Redirect;
 class Pos extends Component
 {
 
-    public $total, $itemsQuantity, $denominations, $efectivo, $change, $componentName;
+    public $total, $itemsQuantity, $denominations = [], $efectivo, $change;
 
     public function mount()
     {
@@ -24,10 +24,10 @@ class Pos extends Component
         $this->change = 0;
         $this->total = Cart::getTotal();
         $this->itemsQuantity = Cart::getTotalQuantity();
-        $this->componentName = 'Sales';
     }
     public function render()
     {
+
         $this->denominations = Denomination::all();
 
         return view('livewire.pos.pos', [
@@ -52,9 +52,12 @@ class Pos extends Component
 
     public function ScanCode($barcode, $cant = 1)
     {
+        dd($barcode);
+
         //dd($barcode); //** LLega el barcode OK!!
         $product = Product::where('barcode', $barcode)->first();
-        dd($barcode, $product); //
+
+        //dd($product); //Producto encontrado!
         if ($product == null || empty($product)) {
             $this->dispatch('scan-notfound', 'El producto no fue encontrado');
         } else {

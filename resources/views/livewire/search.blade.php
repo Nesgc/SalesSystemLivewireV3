@@ -21,8 +21,10 @@
     <script>
         document.addEventListener('livewire:initialized', () => {
             @this.on('scan-code', action => {
+
                 $('#code').val('')
-            });
+            })
+
         });
     </script>
 </div>

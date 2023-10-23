@@ -21,7 +21,7 @@
 <script src="{{ asset('js/keypress.js') }}"></script>
 <script src="{{ asset('js/onscan.js') }}"></script>
 
-@include('livewire.pos.partials.scripts.shortcuts')
-@include('livewire.pos.partials.scripts.events')
-@include('livewire.pos.partials.scripts.general')
-@include('livewire.pos.partials.scripts.scan')
+@include('livewire.pos.scripts.shortcuts')
+@include('livewire.pos.scripts.events')
+@include('livewire.pos.scripts.general')
+@include('livewire.pos.scripts.scan')

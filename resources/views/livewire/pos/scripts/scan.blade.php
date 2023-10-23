@@ -1,17 +1,17 @@
 <script>
-    try {
+    try{
         onScan.attachTo(document, {
             suffixKeyCodes: [13],
             onScan: function(barcode) {
                 console.log('scan-code', barcode)
             },
-            onScanError: function(e) {
+            onScanError: function(e){
                 console.log(e)
             }
         });
         console.log('Scanner ready!')
 
-    } catch (e) {
+    } catch (e){
         console.log('Error de lectura', e)
     }
 </script>
