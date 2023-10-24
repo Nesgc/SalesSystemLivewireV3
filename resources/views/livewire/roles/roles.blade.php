@@ -37,8 +37,10 @@
                                         <h6>{{ $role->name }}</h6>
                                     </td>
 
-                                    <td class="text-center">
-                                        <a href="javascript:void(0)" class="btn btn-dark mtmobile" title="Edit"
+                                    <td class="d-flex text-center">
+
+
+                                        <a href="javascript:void(0)" class="btn btn-dark mtmobile mx-1" title="Edit"
                                             wire:click.prevent="Edit({{ $role->id }})"><i
                                                 class="fa-solid fa-pen-to-square"></i></a>
 
@@ -58,6 +60,8 @@
 
     </div>
     @include('livewire.roles.form')
+    @include('livewire.roles.formPerm')
+
 </div>
 
 <script>
@@ -76,6 +80,9 @@
         })
         @this.on('show-modal', Msg => {
             $('#themodal').modal('show')
+        })
+        @this.on('show-modals', Msg => {
+            $('#themodals').modal('show')
         })
     });
 </script>

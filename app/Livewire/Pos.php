@@ -230,7 +230,7 @@ class Pos extends Component
             $this->total = Cart::getTotal();
             $this->itemsQuantity = Cart::getTotalQuantity();
 
-            $this->alert('alert', 'Venta registrada con éxito');
+            $this->alert('success', 'Venta registrada con éxito');
             $this->dispatch('print-ticket', $sale->id);
         } catch (Exception $e) {
             DB::rollBack();

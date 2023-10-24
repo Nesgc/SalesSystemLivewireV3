@@ -22,6 +22,9 @@ class Roles extends Component
     public  $componentName, $pageTitle, $roleName, $selected_id, $searchengine, $guard_name, $rolesList;
     private $pagination = 5;
 
+    public $role = 'Elegir';  // Default value
+    public $permisosChecked = [];  // To keep track of checked permissions
+
     public $name;
     public function mount()
     {
@@ -40,9 +43,30 @@ class Roles extends Component
             ->orWhere('id', 'like', '%' . $this->searchengine . '%')->paginate(10)
             : Role::paginate(10);
 
+        $permisos = Permission::orderBy('name', 'asc')->paginate($this->pagination);
 
-        return view('livewire.roles.roles', compact('roles', 'users'));
+
+        return view('livewire.roles.roles', compact('roles', 'users', 'permisos'));
     }
+
+    public function updatedRole()
+    {
+        // Reset checked permissions when role changes
+        $this->permisosChecked = [];
+        if ($this->role != 'Elegir') {
+            $role = Role::find($this->role);
+            $this->permisosChecked = $role->permissions->pluck('id')->toArray();
+        }
+    }
+
+    public function syncPermiso()
+    {
+        if ($this->role != 'Elegir') {
+            $role = Role::find($this->role);
+            $role->permissions()->sync($this->permisosChecked);
+        }
+    }
+
 
     public function create()
     {
@@ -70,6 +94,15 @@ class Roles extends Component
         $this->resetUI();
     }
 
+    public function PermModal(Role $role)
+    {
+        //$role = Role::find($id);
+        $this->selected_id = $role->id;
+        $this->roleName = $role->name;
+        $this->permisosChecked = $role->permissions->pluck('id')->toArray();  // Populate permisosChecked
+
+        $this->dispatch('show-modals', 'Show modal');
+    }
     public function Edit(Role $role)
     {
         //$role = Role::find($id);

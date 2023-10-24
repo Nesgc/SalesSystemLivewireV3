@@ -91,30 +91,18 @@
         document.addEventListener('livewire:initialized', () => {
             @this.on('product-added', msg => {
                 $('#themodal').modal('hide');
-                Swal.fire(
-                    'Genial!',
-                    `${msg}`,
-                    'success'
-                )
+
             });
 
             @this.on('product-updated', msg => {
                 $('#themodal').modal('hide');
                 //   noty(msg);
-                Swal.fire(
-                    'Genial!',
-                    `${msg}`,
-                    'success'
-                )
+
             });
 
             @this.on('product-deleted', msg => {
                 $('#themodal').modal('hide');
-                Swal.fire(
-                    ':(',
-                    `${msg}`,
-                    'danger'
-                )
+
             });
 
             @this.on('hide-modal', msg => {

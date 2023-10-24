@@ -12,16 +12,21 @@
 
                 <div class="d-flex flex-row form-group mr-5 ">
                     <div>
-                        <select wire:model="role" wire:change="updatePermissions" class="form-control col-lg-8">
+                        <select wire:model="role" wire:change="togglePermission" class="form-control col-lg-8">
                             <option value="Elegir">Seleccione Rol</option>
                             @foreach ($roles as $role)
                                 <option value="{{ $role->id }}">{{ $role->name }}</option>
                             @endforeach
                         </select>
+
                     </div>
+                    <button type="button" wire:click.prevent="savePermissions()"
+                        class="btn btn-dark mbmobile inblock mx-5 col-lg-2">
+                        Sincronizar Permisos
+                    </button>
                     <button type="button" wire:click.prevent="SyncAll()"
                         class="btn btn--dark mbmobile inblock mx-5 col-lg-2">
-                        Sincronizar Todos
+                        Asignar Todos
                     </button>
                     <button type="button" wire:click.prevent="delete()" class="btn btn--dark mbmobile mr-5 col-lg-2">
                         Revocar Todos
@@ -49,9 +54,10 @@
                                                 <div class="n-check">
                                                     <label class="d-flex justify-content-center">
                                                         <input class="form-check-input mx-1" type="checkbox"
-                                                            wire:change="SyncPermiso($('#p' + {{ $permiso->id }}).is(':checked'), '{{ $permiso->name }}' )"
+                                                            wire:click="toggleTempPermission('{{ $permiso->id }}')"
                                                             id="p{{ $permiso->id }}" value="{{ $permiso->id }}"
                                                             {{ $permiso->checked == 1 ? 'checked' : '' }}>
+
                                                         <span class=" new-control-indicator"></span>
                                                         <h6>{{ $permiso->name }}</h6>
                                                     </label>
@@ -72,5 +78,18 @@
                 </div>
             </div>
         </div>
+        @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
     </div>
+    <script>
+        document.addEventListener('livewire:initialized', () => {
+            @this.on('refreshPage', () => {
+                location.reload();
+            });
+        });
+    </script>
+
 </div>

@@ -193,6 +193,7 @@
 
     <script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script>
 
+
     <script src="../src/plugins/keypress-2.1.5.min.js"></script>
     <script src="{{ asset('plugins/notification/snackbar/snackbar.min.js') }}"></script>
 

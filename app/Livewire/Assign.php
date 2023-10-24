@@ -19,6 +19,7 @@ class Assign extends Component
 
     public $componentName, $role, $permisosSelected = [], $old_permissions = [];
 
+    public $tempPermissions = [];
 
     private $pagination = 10;
 
@@ -72,7 +73,13 @@ class Assign extends Component
     public function SyncAll()
     {
         if ($this->role == 'Elegir') {
-            $this->alert('warning', 'Selecciona un rol válido');
+            $this->alert('warning', 'Selecciona un rol valido!', [
+                'position' => 'center',
+                'timer' => 3000,
+                'toast' => true,
+                'width' => '400',
+                'text' => '',
+            ]);
             return;
         }
         $role = Role::find($this->role);
@@ -82,31 +89,29 @@ class Assign extends Component
         $this->alert('success', "Se sincronizaron todos los permisos al rol $role->name ");
     }
 
-    public function SyncPermiso($state, $permisoName)
+    public function togglePermission($state = null, $permisoName = null)
     {
         if ($this->role != 'Elegir') {
-            $roleName = Role::find($this->role);
-            if ($state) {
-                $roleName->givePermissionTo($permisoName);
-                $this->alert('success', 'Permiso asignado correctamente.');
-            } else {
-                $roleName->revokePermissionTo($permisoName);
-                $this->alert('success', 'Permiso revocado correctamente.');
-            }
-        } else {
-            $this->alert('warning', "Elige un rol válido");
-        }
-    }
+            $role = Role::find($this->role);
 
-    public function updatePermissions()
-    {
-        if ($this->role != 'Elegir') {
+            // Asignar o revocar el permiso si se proporciona un nombre de permiso
+            if ($permisoName) {
+                if ($state) {
+                    $role->givePermissionTo($permisoName);
+                    $this->alert('success', 'Permiso asignado correctamente.');
+                } else {
+                    $role->revokePermissionTo($permisoName);
+                    $this->alert('success', 'Permiso revocado correctamente.');
+                }
+            }
+            $this->render();
+
+            // Obtener y actualizar la lista de permisos
             $permisos = Permission::select('name', 'id', DB::raw("0 as checked"))
                 ->orderBy('name', 'asc')
                 ->paginate($this->pagination);
 
-            $list = Permission::join('role_has_permissions as rp', 'rp.permission_id', 'permissions.id')
-                ->where('role_id', $this->role)->pluck('permissions.id')->toArray();
+            $list = $role->permissions->pluck('id')->toArray();
 
             foreach ($permisos as $permiso) {
                 if (in_array($permiso->id, $list)) {
@@ -115,15 +120,58 @@ class Assign extends Component
             }
 
             $this->permisos = $permisos;
+        } else {
+            $this->alert('warning', "Elige un rol válido");
         }
     }
+
+    public function toggleTempPermission($permisoId)
+    {
+        if (in_array($permisoId, $this->tempPermissions)) {
+            // Si el permiso ya está en la lista, quítalo
+            $this->tempPermissions = array_filter($this->tempPermissions, function ($value) use ($permisoId) {
+                return $value != $permisoId;
+            });
+        } else {
+            // Si el permiso no está en la lista, agrégalo
+            $this->tempPermissions[] = $permisoId;
+        }
+    }
+
+    public function savePermissions()
+    {
+        $role = Role::find($this->role);
+
+        // Verificar si el rol tiene un nombre
+        if (empty($role->name)) {
+            // Opcional: Mostrar una alerta al usuario
+            $this->alert('warning', 'El rol no es valido.');
+            return;  // Salir de la función si el nombre del rol está vacío
+        }
+
+        foreach ($this->tempPermissions as $permisoId) {
+            $permiso = Permission::find($permisoId);
+            $tienePermiso = $role->hasPermissionTo($permiso->name);
+            if ($tienePermiso) {
+                $role->revokePermissionTo($permiso->name);
+            } else {
+                $role->givePermissionTo($permiso->name);
+            }
+        }
+
+        session()->flash('status', 'Role ' . $role->name . ' successfully updated ');
+
+        $this->redirect('/assign');
+    }
+
+
 
 
     public function delete()  // Asegúrate de que el ID se pasa a esta función
     {
         $this->alert('warning', 'Are you sure you want to revoke all permissions?', [
             'position' => 'center',
-            'timer' => 3000,
+            'timer' => 8000,
             'toast' => false,  // Cambiado a false para que la alerta no desaparezca automáticamente
             'showConfirmButton' => true,
             'onConfirmed' => 'revokeall',  // Agregado un manejador para la confirmación
@@ -132,7 +180,7 @@ class Assign extends Component
             'showDenyButton' => false,
             'onDenied' => '',
             'timerProgressBar' => false,
-            'width' => '400',
+            'width' => '600',
         ]);
     }
 }
