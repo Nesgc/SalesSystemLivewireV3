@@ -23,9 +23,17 @@ class User extends Authenticatable
         'email',
         'password',
         'image',
+        'phone',
 
     ];
+    public function getImageAttribute($image)
+    {
 
+        if (file_exists('storage/' . $image))
+            return $image;
+        else
+            return 'categories/noimage.png';
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

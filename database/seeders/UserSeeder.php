@@ -18,17 +18,18 @@ class UserSeeder extends Seeder
             'name' => 'Nes GC',
             'phone' => '2333035355',
             'email' => 'nesgc@gmail.com',
-            'profile' => 'ADMIN',
+            'role' => 'Admin',
             'status' => 'ACTIVE',
-            'PASSWORD' => bcrypt('admin')
+            'password' => bcrypt('admin'),
+            'image' => 'users/mapache.jpg'
         ]);
         User::create([
             'name' => 'Melissa Hall',
             'phone' => '785035355',
             'email' => 'melissah@gmail.com',
-            'profile' => 'EMPLOYEE',
+            'role' => 'Employee',
             'status' => 'ACTIVE',
-            'PASSWORD' => bcrypt('123')
+            'password' => bcrypt('123')
         ]);
     }
 }

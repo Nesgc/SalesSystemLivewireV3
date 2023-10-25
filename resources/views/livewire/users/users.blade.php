@@ -9,8 +9,8 @@
                 </h4>
                 <ul class="tabs tab-pills">
                     <li>
-                        <a href="javascript:void(0)" data-bs-toggle="modal" class="btn btn-dark" wire:click="create"
-                            data-bs-target="#themodal">Add</a>
+                        <button href="javascript:void(0)" data-bs-toggle="modal" class="btn btn-dark btn-lg"
+                            wire:click="create" data-bs-target="#themodal">Add</button>
                     </li>
                 </ul>
             </div>
@@ -50,20 +50,25 @@
                                         <h6>{{ $user->phone }}</h6>
                                     </td>
                                     <td>
-                                        <h6>{{ $user->profile }}</h6>
+                                        <h6>{{ $user->role }}</h6>
                                     </td>
                                     <td>
-                                        <h6>{{ $user->status }}</h6>
+                                        <span
+                                            class="badge {{ $user->status == 'ACTIVE' ? 'badge-success' : 'badge-danger' }} text-uppercase">{{ $user->status }}</span>
                                     </td>
 
-                                    <td class=""><span><img src="{{ asset('storage/' . $user->image) }}"
-                                                alt="example" height="70" width="80" class="rounded"></span>
+                                    <td class="">
+                                        @if ($user->image != null)
+                                            <span><img src="{{ asset('storage/' . $user->image) }}" alt="example"
+                                                    height="70" width="80" class=" "></span>
+                                        @endif
+
                                     </td>
 
 
                                     <td class="">
                                         <a href="javascript:void(0)" class="btn btn-dark mtmobile" title="Edit"
-                                            wire:click="Edit({{ $user->id }})"><i
+                                            wire:click="edit({{ $user->id }})"><i
                                                 class="fa-solid fa-pen-to-square"></i></a>
 
                                         <a href="javascript:void(0)" class="btn btn-dark" title="Delete"
@@ -87,7 +92,7 @@
             </div>
         </div>
     </div>
-    {{-- @include('livewire.coins.coinsForm') --}}
+    @include('livewire.users.usersForm')
 
 
 
@@ -96,16 +101,11 @@
         document.addEventListener('livewire:initialized', () => {
             @this.on('user-added', msg => {
                 $('#themodal').modal('hide');
-                noty(msg);
             })
             @this.on('user-updated', msg => {
                 $('#themodal').modal('hide');
                 //   noty(msg);
-                Swal.fire(
-                    'Genial!',
-                    `${msg}`,
-                    'success'
-                )
+
             })
             @this.on('denomiation-deleted', msg => {
                 noty(msg);

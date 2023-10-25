@@ -7,8 +7,7 @@
         <div class="d-flex flex-row form-group mr-5 ">
             <div>
                 <input type="text" wire:model.lazy='barcode' wire:keydown.enter.prevent='ScanCode()'
-                    class="form-control d-flex col-sm-4 col-md-12 col-lg-12" placeholder="Product barcode"
-                    aria-label="Username" aria-describedby="basic-addon1">
+                    class="form-control d-flex col-sm-4 col-md-12 col-lg-12" placeholder="Product barcode">
             </div>
             <button type="button" wire:click.prevent="ScanCode()" class="btn btn-dark col-md-2 col-lg-1 mx-2">Add
                 product</button>

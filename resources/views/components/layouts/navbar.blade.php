@@ -224,11 +224,12 @@
                         <div class="avatar-container">
                             <div class="avatar avatar-sm avatar-indicators avatar-online">
                                 <img alt="avatar"
-                                    src="https://as2.ftcdn.net/v2/jpg/00/99/13/07/1000_F_99130742_OsZsx8ku46AP6NPtguwOTr8bSqgfHM5W.jpg"
+                                    src="{{ Auth::user()->image ? asset('storage/' . Auth::user()->image) : 'https://as2.ftcdn.net/v2/jpg/00/99/13/07/1000_F_99130742_OsZsx8ku46AP6NPtguwOTr8bSqgfHM5W.jpg' }}"
                                     class="rounded-circle">
                             </div>
                         </div>
                     </a>
+
 
                     <div class="dropdown-menu position-absolute" aria-labelledby="userProfileDropdown">
                         <div class="user-profile-section">

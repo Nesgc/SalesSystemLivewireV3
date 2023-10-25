@@ -76,6 +76,8 @@ class Pos extends Component
         if ($this->InCart($product->id)) {
             $this->increaseQty($product->id);
             $this->alert('success', 'Cantidad actualizada');
+            $this->barcode = '';
+
             return;
         }
 
@@ -94,6 +96,7 @@ class Pos extends Component
 
         // Enviar una notificación de éxito
         $this->alert('success', 'Producto agregado');
+        $this->barcode = '';
     }
 
 
