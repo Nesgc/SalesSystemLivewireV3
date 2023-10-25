@@ -3,14 +3,14 @@
         <div class="card simple-title-task ui-sortable-handle">
             <div class="card-body">
                 @if ($total > 0)
-                    <div class="table responsive tblscroll" style="max-height: 650px; overflow: hidden">
+                    <div class="table-responsive tblscroll" style="max-height: 650px; overflow: hidden">
                         <table class="table table-bordered table-striped mt-1">
                             <thead class="text-white" style="background: #3B3F5C">
                                 <tr>
                                     <th width="10%"></th>
                                     <th class="table-th text-left text-white">Description</th>
                                     <th class="table-th text-center text-white">Price</th>
-                                    <th width="13%" class="table-th text-center text-white"> CANT</th>
+                                    <th width="13%" class="table-th text-center text-white"> Quantity</th>
                                     <th class="table-th text-center text-white">Import</th>
                                     <th class="table-th text-center text-white">Actions</th>
 
@@ -44,13 +44,13 @@
                                             <h6>${{ number_format($item->price * $item->quantity, 2) }}</h6>
                                         </td>
                                         <td class="text-center">
-                                            <button
-                                                onclick="Confirm('{{ $item->id }}', 'removeItem', 'Confirmas eliminar el registro?')"
-                                                class="btn btn-dark mbmobile"></button>
+                                            <button wire:click="deletes('{{ $item->id }}')"
+                                                class="btn btn-dark mbmobile"><i class="fas fa-trash-alt"></i>
+                                            </button>
                                             <button wire:click.prevent="decreaseQty({{ $item->id }})"
                                                 class="btn btn-dark mbmobile"> <i class="fas fa-minus"></i></button>
                                             <button wire:click.prevent="increaseQty({{ $item->id }})"
-                                                class="btn btn-dark mbmobile"> <i class="fas fa-minus"></i></button>
+                                                class="btn btn-dark mbmobile"> <i class="fas fa-plus"></i></button>
                                         </td>
 
                                     </tr>

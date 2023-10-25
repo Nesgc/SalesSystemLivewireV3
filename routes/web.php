@@ -13,6 +13,8 @@ use App\Livewire\Pos;
 use App\Livewire\Products;
 use App\Livewire\Roles;
 use App\Livewire\Select2;
+use App\Livewire\Users;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -53,6 +55,8 @@ Route::get('roles', Roles::class)->name('roles');;
 Route::get('permissions', Permissions::class);
 
 Route::get('assign', Assign::class);
+
+Route::get('users', Users::class);
 
 
 Route::get('select2', select2::class);

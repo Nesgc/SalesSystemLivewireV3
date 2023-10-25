@@ -10,7 +10,8 @@
                     class="form-control d-flex col-sm-4 col-md-12 col-lg-12" placeholder="Product barcode"
                     aria-label="Username" aria-describedby="basic-addon1">
             </div>
-            <button type="button" wire:click.prevent="ScanCode()" class="btn btn-dark col-lg-1 mx-2">Save</button>
+            <button type="button" wire:click.prevent="ScanCode()" class="btn btn-dark col-md-2 col-lg-1 mx-2">Add
+                product</button>
         </div>
 
 

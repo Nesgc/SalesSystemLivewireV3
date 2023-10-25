@@ -19,7 +19,7 @@ class Pos extends Component
 {
     use LivewireAlert;
 
-    public $total, $itemsQuantity, $denominations, $efectivo, $change, $componentName, $products, $barcode;
+    public $total, $itemsQuantity, $denominations, $efectivo, $change, $componentName, $products, $barcode, $selected_id;
 
     public function mount()
     {
@@ -152,10 +152,27 @@ class Pos extends Component
             $this->alert('success', $title);
         }
     }
-
-    public function removeItem($productId)
+    public function deletes($id)  // Asegúrate de que el ID se pasa a esta función
     {
-        Cart::remove($productId);
+        $this->selected_id = $id;  // Almacena el ID para usarlo en la confirmación
+        $this->alert('warning', 'Are you sure you want to delete this product?', [
+            'position' => 'center',
+            'timer' => 3000,
+            'toast' => false,  // Cambiado a false para que la alerta no desaparezca automáticamente
+            'showConfirmButton' => true,
+            'onConfirmed' => 'removeItem',  // Agregado un manejador para la confirmación
+            'showCancelButton' => true,
+            'onDismissed' => '',
+            'showDenyButton' => false,
+            'onDenied' => '',
+            'timerProgressBar' => false,
+            'width' => '400',
+        ]);
+    }
+
+    public function removeItem()
+    {
+        Cart::remove($this->selected_id);
         $this->total = Cart::getTotal();
         $this->itemsQuantity = Cart::getTotalQuantity();
         $this->alert('success', 'Producto eliminado');

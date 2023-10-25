@@ -63,7 +63,7 @@ class Products extends Component
                 ->paginate(10);
         }
 
-        return view('livewire.products', compact('products', 'categories'));
+        return view('livewire.products.products', compact('products', 'categories'));
     }
 
     public function create()

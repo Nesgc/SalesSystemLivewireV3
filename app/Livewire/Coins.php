@@ -46,7 +46,7 @@ class Coins extends Component
             ->orWhere('value', 'like', '%' . $this->searchengine . '%')->paginate(10)
             : Denomination::paginate(10);
 
-        return view('livewire.coins', compact('denominations'));
+        return view('livewire.coins.coins', compact('denominations'));
     }
     public function create()
     {
