@@ -9,8 +9,8 @@
                 </h4>
                 <ul class="tabs tab-pills">
                     <li>
-                        <a href="javascript:void(0)" data-bs-toggle="modal" class="btn btn-dark" wire:click="create"
-                            data-bs-target="#themodal">Add</a>
+                        <button href="javascript:void(0)" type="button" data-bs-toggle="modal" class="btn btn-dark btn-lg"
+                            wire:click="create" data-bs-target="#themodal">Add</button>
                     </li>
                 </ul>
             </div>
@@ -37,7 +37,7 @@
                                         <h6>{{ $permiso->name }}</h6>
                                     </td>
 
-                                    <td class="text-center">
+                                    <td class="d-flex text-center">
                                         <a href="javascript:void(0)" class="btn btn-dark mtmobile" title="Edit"
                                             wire:click.prevent="Edit({{ $permiso->id }})"><i
                                                 class="fa-solid fa-pen-to-square"></i></a>

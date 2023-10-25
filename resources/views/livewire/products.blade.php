@@ -10,8 +10,8 @@
                     </h4>
                     <ul class="tabs tab-pills">
                         <li>
-                            <a href="javascript:void(0)" data-bs-toggle="modal" class="btn btn-dark" wire:click="create"
-                                data-bs-target="#themodal">Add</a>
+                            <button href="javascript:void(0)" type="button" data-bs-toggle="modal"
+                                class="btn btn-dark btn-lg" wire:click="create" data-bs-target="#themodal">Add</button>
                         </li>
                     </ul>
                 </div>

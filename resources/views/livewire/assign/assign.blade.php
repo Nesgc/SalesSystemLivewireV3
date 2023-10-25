@@ -12,7 +12,7 @@
 
                 <div class="d-flex flex-row form-group mr-5 ">
                     <div>
-                        <select wire:model="role" wire:change="togglePermission" class="form-control col-lg-8">
+                        <select wire:model="role" wire:change="togglePermission" class="form-control col-lg-8 fw-bold">
                             <option value="Elegir">Seleccione Rol</option>
                             @foreach ($roles as $role)
                                 <option value="{{ $role->id }}">{{ $role->name }}</option>
@@ -35,8 +35,14 @@
 
                 <div class="row mt-3">
                     <div class="col-sm-12">
+                        @if (session('status'))
+                            <div class="alert alert-success fs-5">
+                                {{ session('status') }}
+                            </div>
+                        @endif
                         <div class="table-responsive">
-                            <table class="table table-bordered table striped mt-1">
+
+                            <table class="table table-bordered table-striped">
                                 <thead class="text-white" style="background: #3b3f5c">
                                     <tr>
                                         <th class="table-th text-white text-center">ID</th>
@@ -78,11 +84,7 @@
                 </div>
             </div>
         </div>
-        @if (session('status'))
-            <div class="alert alert-success">
-                {{ session('status') }}
-            </div>
-        @endif
+
     </div>
     <script>
         document.addEventListener('livewire:initialized', () => {
