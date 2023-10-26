@@ -39,11 +39,21 @@ class Users extends Component
             $users = User::select('*')->orderBy('name', 'asc')->paginate($this->pagination);
 
 
+        $valores = $this->valoresFiltro();
+
+
 
         return view('livewire.users.users', [
             'roles' => Role::orderBy('name', 'asc')->get(),
-            'users' => $users
+            'users' => $users,
+            'valores' => $valores
         ]);
+    }
+
+    public function valoresFiltro()
+    {
+        $valores = User::pluck('profile')->unique()->toArray();
+        return $valores;
     }
 
     public function create()
@@ -62,7 +72,9 @@ class Users extends Component
             'email' => 'required|unique:users|email',
             'status' => 'required|not_in:Elegir',
             'profile' => 'required|not_in:Elegir',
-            'password' => 'required|min:3'
+            'password' => 'required|min:3',
+            'phone' => 'required|min:3',
+
 
         ]);
 
@@ -71,7 +83,7 @@ class Users extends Component
             ? $this->image->store('users')
             : 'null';  // puedes ajustar esto según tus necesidades
 
-        User::create([
+        $user = User::create([
             'name' => $this->name,
             'image' => $imagePath,
             'email' => $this->email,
@@ -79,7 +91,10 @@ class Users extends Component
             'status' => $this->status,
             'profile' => $this->profile,
             'password' => bcrypt($this->password),
+
         ]);
+
+        $user->syncRoles($this->profile);
 
 
         $this->resetUI();
@@ -88,7 +103,59 @@ class Users extends Component
         $this->dispatch('user-added', 'Usuario Registrado');
     }
 
+    public function edit(User $user)
+    {
+        $this->selected_id = $user->id;
+        $this->name = $user->name;
+        $this->email = $user->email;
+        $this->password = '';
+        $this->phone = $user->phone;
+        $this->image = $user->image;  // Ruta de la imagen existente
+        $this->tempImage = null;  // Resetear la imagen temporal
+        $this->status = $user->status;
+        $this->profile = $user->profile;
+        $this->dispatch('show-modal', 'Show modal');
+    }
 
+    public function Update()
+    {
+        $this->validate([
+            'name' => 'required|min:3',
+            'email' => 'required|email|unique:users,email,' . $this->selected_id,
+            'phone' => 'required|min:3',
+            'status' => 'required|not_in:Elegir',
+            'profile' => 'required|not_in:Elegir',
+            'password' => 'required|min:3'
+
+        ]);
+
+        if ($this->selected_id) {
+            $user = User::find($this->selected_id);
+
+
+            $data = [
+                'name' => $this->name,
+                'email' => $this->email,
+                'phone' => $this->phone,
+                'status' => $this->status,
+                'profile' => $this->profile,
+                'password' => bcrypt($this->password),
+
+            ];
+
+            if ($this->tempImage) {
+                $data['image'] = $this->tempImage->store('users');
+            }
+
+            $user->update($data);
+            $user->syncRoles($this->profile);
+
+            $this->alert('success', 'Updated Succesfully');
+
+            $this->resetUI();
+            $this->dispatch('user-updated', 'user Actualizado');
+        }
+    }
 
     public function delete($id)  // Asegúrate de que el ID se pasa a esta función
     {
@@ -137,6 +204,7 @@ class Users extends Component
 
     public function resetUI()
     {
+        $this->profile = '';
 
         $this->name = '';
         $this->email = '';
@@ -147,57 +215,5 @@ class Users extends Component
         $this->status = 'Elegir';
         $this->selected_id = 0;
         $this->resetValidation();
-    }
-
-    public function edit(User $user)
-    {
-        $this->selected_id = $user->id;
-        $this->name = $user->name;
-        $this->email = $user->email;
-        $this->password = $user->password;
-        $this->phone = $user->phone;
-        $this->image = $user->image;  // Ruta de la imagen existente
-        $this->tempImage = null;  // Resetear la imagen temporal
-        $this->status = $user->status;
-        $this->profile = $user->profile;
-        $this->dispatch('show-modal', 'Show modal');
-    }
-
-    public function Update()
-    {
-        $this->validate([
-            'name' => 'required|min:3',
-            'email' => 'required|email|unique:users,email,' . $this->selected_id,
-            'phone' => 'required|min:3',
-            'status' => 'required|not_in:Elegir',
-            'profile' => 'required|not_in:Elegir',
-            'password' => 'required|min:3'
-
-        ]);
-
-        if ($this->selected_id) {
-            $user = User::find($this->selected_id);
-
-
-            $data = [
-                'name' => $this->name,
-                'email' => $this->email,
-                'phone' => $this->phone,
-                'status' => $this->status,
-                'profile' => $this->profile,
-                'password' => bcrypt($this->password),
-
-            ];
-
-            if ($this->tempImage) {
-                $data['image'] = $this->tempImage->store('users');
-            }
-
-            $user->update($data);
-            $this->alert('success', 'Updated Succesfully');
-
-            $this->resetUI();
-            $this->dispatch('user-updated', 'user Actualizado');
-        }
     }
 }

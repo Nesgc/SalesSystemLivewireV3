@@ -70,15 +70,12 @@
 
                     <div class="col-sm-12 col-md-6 mt-3">
                         <div class="form-group">
-                            <label>roles</label>
-                            <select class="form-select" wire:model="profile">
-                                <option value="Elegir" disabled>Choose role...</option>
-
+                            <label>Asignar Role</label>
+                            <select wire:model.lazy="profile" class="form-control">
+                                <option value="Elegir" selected>Elegir</option>
                                 @foreach ($roles as $role)
-                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                    <option value="{{ $role->name }}" selected>{{ $role->name }}</option>
                                 @endforeach
-
-
                             </select>
                             @error('profile')
                                 <span class="text-danger er">{{ $message }}</span>

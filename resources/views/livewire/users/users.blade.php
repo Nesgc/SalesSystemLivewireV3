@@ -50,7 +50,7 @@
                                         <h6>{{ $user->phone }}</h6>
                                     </td>
                                     <td>
-                                        <h6>{{ $user->role }}</h6>
+                                        <h6>{{ $user->profile }}</h6>
                                     </td>
                                     <td>
                                         <span

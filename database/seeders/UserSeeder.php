@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
             'name' => 'Nes GC',
             'phone' => '2333035355',
             'email' => 'nesgc@gmail.com',
-            'role' => 'Admin',
+            'profile' => 'Admin',
             'status' => 'ACTIVE',
             'password' => bcrypt('admin'),
             'image' => 'users/mapache.jpg'
@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
             'name' => 'Melissa Hall',
             'phone' => '785035355',
             'email' => 'melissah@gmail.com',
-            'role' => 'Employee',
+            'profile' => 'Employee',
             'status' => 'ACTIVE',
             'password' => bcrypt('123')
         ]);
