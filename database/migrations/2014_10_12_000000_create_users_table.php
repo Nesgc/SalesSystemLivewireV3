@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('phone', 10)->nullable();
             $table->string('email')->unique();
-            $table->string('profile', 50)->default('Admin');
+            $table->string('profile', 50)->default('Employee');
             $table->enum('status', ['ACTIVE', 'LOCKED'])->default('ACTIVE');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

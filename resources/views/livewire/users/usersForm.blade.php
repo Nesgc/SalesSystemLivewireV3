@@ -13,10 +13,10 @@
 
 
                         <div class="form-group">
-                            <label>Name</label>
+                            <label class="text-white">Name</label>
 
-                            <input type="text" wire:model.lazy='name' class="form-control" placeholder="name"
-                                aria-label="Username" aria-describedby="basic-addon1">
+                            <input type="text" wire:model.lazy='name' class="form-control"
+                                placeholder="E.g. John Smith">
                         </div>
 
                         @error('name')
@@ -25,56 +25,59 @@
 
                     </div>
 
+
                     <div class="col-sm-12 col-md-4">
 
-
                         <div class="form-group">
-                            <label>Email</label>
-                            <input type="text" wire:model.lazy='email' class="form-control"
-                                placeholder="Ej: nesgc@gmail.com" aria-label="Username" aria-describedby="basic-addon1">
-
-                        </div>
-
-                        @error('email')
-                            <span class="text-danger er">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="col-sm-12 col-md-4 mt-3">
-
-                        <div class="form-group">
-                            <label for="">phone</label>
+                            <label class="text-white" for="">Phone</label>
 
                             <input type="text" wire:model.lazy='phone' class="form-control"
-                                placeholder="Example 8332021323" maxlenght="10" aria-label="Username"
-                                aria-describedby="basic-addon1">
+                                placeholder="Example 8332021323" maxlenght="10">
+                            @error('phone')
+                                <span class="text-danger er">{{ $message }}</span>
+                            @enderror
                         </div>
 
-                        @error('phone')
-                            <span class="text-danger er">{{ $message }}</span>
-                        @enderror
+
                     </div>
 
-                    <div class="col-sm-12 col-md-4 mt-3">
+                    <div class="col-sm-12 col-md-6 mt-3">
+
 
                         <div class="form-group">
-                            <label for="">Password</label>
-
-                            <input type="text" wire:model.lazy='password' class="form-control">
+                            <label class="text-white">Email</label>
+                            <input type="text" wire:model.lazy='email' class="form-control"
+                                placeholder="E.g.: john@gmail.com">
+                            @error('email')
+                                <span class="text-danger er">{{ $message }}</span>
+                            @enderror
                         </div>
 
-                        @error('password')
-                            <span class="text-danger er">{{ $message }}</span>
-                        @enderror
+
+                    </div>
+
+
+                    <div class="col-sm-12 col-md-6 mt-3">
+
+                        <div class="form-group">
+                            <label class="text-white" class="text-white" for="">Password</label>
+
+                            <input type="text" wire:model.lazy='password' class="form-control">
+
+                            @error('password')
+                                <span class="text-danger er">{{ $message }}</span>
+                            @enderror
+                        </div>
+
                     </div>
 
                     <div class="col-sm-12 col-md-6 mt-3">
                         <div class="form-group">
-                            <label>Asignar Role</label>
+                            <label class="text-white">Assign Role</label>
                             <select wire:model.lazy="profile" class="form-control">
-                                <option value="Elegir" selected>Elegir</option>
+                                <option value="Elegir" selected>Choose</option>
                                 @foreach ($roles as $role)
-                                    <option value="{{ $role->name }}" selected>{{ $role->name }}</option>
+                                    <option value="{{ $role->name }}">{{ $role->name }}</option>
                                 @endforeach
                             </select>
                             @error('profile')
@@ -86,7 +89,7 @@
 
                     <div class="col-sm-12 col-md-6 mt-3">
                         <div class="form-group">
-                            <label for="">status</label>
+                            <label class="text-white" for="">Status</label>
                             <select class="form-select" wire:model="status">
                                 <option value="Elegir" selected disabled>Choose status...</option>
                                 <option value="ACTIVE">ACTIVE</option>
@@ -105,13 +108,13 @@
 
                         <div class="col-sm-12 mt-1">
                             <div class="mb-3">
-                                <label for="formFile" class="form-label">Image</label>
+                                <label class="text-white" for="formFile" class="form-label">Image</label>
                                 <input class="form-control" type="file" wire:model="tempImage" id="formFile">
                             </div>
 
 
                             @if ($selected_id > 0 && !$tempImage)
-                                <img src="{{ asset('storage/' . $image) }}" alt="example" height="70"
+                                <img src="{{ asset('storage/' . $image) }}" alt="" height="70"
                                     width="80" class="rounded">
                             @elseif($tempImage)
                                 <img height="270" width="280" src="{{ $tempImage->temporaryUrl() }}">

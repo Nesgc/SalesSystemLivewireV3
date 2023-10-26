@@ -18,10 +18,24 @@ class RolesAndPermissionsSeeder extends Seeder
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
         // create permissions
+        Permission::create(['name' => 'add products']);
         Permission::create(['name' => 'edit products']);
         Permission::create(['name' => 'delete products']);
+        Permission::create(['name' => 'add categories']);
         Permission::create(['name' => 'edit categories']);
         Permission::create(['name' => 'delete categories']);
+        Permission::create(['name' => 'add denominations']);
+        Permission::create(['name' => 'edit denominations']);
+        Permission::create(['name' => 'delete denominations']);
+        Permission::create(['name' => 'add users']);
+        Permission::create(['name' => 'edit users']);
+        Permission::create(['name' => 'delete users']);
+        Permission::create(['name' => 'products index']);
+        Permission::create(['name' => 'categories index']);
+        Permission::create(['name' => 'denominatons index']);
+        Permission::create(['name' => 'report index']);
+        Permission::create(['name' => 'cashout index']);
+
 
         // create roles and assign created permissions
 
@@ -33,7 +47,7 @@ class RolesAndPermissionsSeeder extends Seeder
         $role = Role::create(['name' => 'Admin'])
             ->givePermissionTo(['edit categories', 'delete categories']);
 
-        $role = Role::create(['name' => 'super-admin']);
+        $role = Role::create(['name' => 'Super-Admin']);
         $role->givePermissionTo(Permission::all());
     }
 }

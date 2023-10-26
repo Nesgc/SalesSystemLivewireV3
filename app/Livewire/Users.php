@@ -108,7 +108,7 @@ class Users extends Component
         $this->selected_id = $user->id;
         $this->name = $user->name;
         $this->email = $user->email;
-        $this->password = '';
+        $this->password = $user->password;
         $this->phone = $user->phone;
         $this->image = $user->image;  // Ruta de la imagen existente
         $this->tempImage = null;  // Resetear la imagen temporal
