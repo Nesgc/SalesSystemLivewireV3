@@ -9,8 +9,8 @@
 <h2 style="color:cyan">Installation</h2>
 <ul>
     <li>Clone the Repo: <br> </li>
-    <li style=""> > git clone https://github.com/tauseedzaman/hospitalMS.git</li>
-    <li> > cd hospitalMS</li>
+    <li style=""> > gh repo clone Nesgc/SalesSystemLivewireV3</li>
+    <li> > cd SalesSystemLivewireV3</li>
     <li> > composer install or composer update</li>
     <li> > cp .env.example .env</li>
     <li> > Set up .env file</li>
