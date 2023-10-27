@@ -18,17 +18,34 @@ class UserSeeder extends Seeder
             'name' => 'Nes GC',
             'phone' => '2333035355',
             'email' => 'nesgc@gmail.com',
-            'profile' => 'ADMIN',
+            'profile' => 'Super-Admin',
             'status' => 'ACTIVE',
-            'PASSWORD' => bcrypt('admin')
+            'password' => bcrypt('admin'),
+            'image' => 'users/mapache.jpg'
         ]);
         User::create([
-            'name' => 'Melissa Hall',
+            'name' => 'Melisa Hall',
             'phone' => '785035355',
-            'email' => 'melissah@gmail.com',
-            'profile' => 'EMPLOYEE',
+            'email' => 'melisah@gmail.com',
+            'profile' => 'Employee',
+            'status' => 'LOCKED',
+            'password' => bcrypt('admin')
+        ]);
+        User::create([
+            'name' => 'Manuel Espinas',
+            'phone' => '7850353552',
+            'email' => 'manuel@gmail.com',
+            'profile' => 'Employee',
             'status' => 'ACTIVE',
-            'PASSWORD' => bcrypt('123')
+            'password' => bcrypt('admin')
+        ]);
+        User::create([
+            'name' => 'Marcos Angel',
+            'phone' => '7850353551',
+            'email' => 'marcos@gmail.com',
+            'profile' => 'Employee',
+            'status' => 'ACTIVE',
+            'password' => bcrypt('admin')
         ]);
     }
 }

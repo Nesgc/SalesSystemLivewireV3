@@ -7,12 +7,16 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Rule;
 use Livewire\WithPagination;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
+use LivewireUI\Modal\ModalComponent;
+
 
 class Coins extends Component
 {
 
     use WithFileUploads;
     use WithPagination;
+    use LivewireAlert;
 
 
     public $currentImage, $searchengine, $pageTitle, $componentName, $type, $value;
@@ -42,7 +46,7 @@ class Coins extends Component
             ->orWhere('value', 'like', '%' . $this->searchengine . '%')->paginate(10)
             : Denomination::paginate(10);
 
-        return view('livewire.coins', compact('denominations'));
+        return view('livewire.coins.coins', compact('denominations'));
     }
     public function create()
     {
@@ -54,13 +58,12 @@ class Coins extends Component
 
     public function Edit($id)
     {
-        $this->isEditMode = true;
         $record = Denomination::find($id, ['id', 'type', 'value', 'image']);
         $this->type = $record->type;
         $this->value = $record->value;
         $this->selected_id = $record->id;
         $this->currentImage = $record->image;  // Imagen actual, no la sobrescribe con la nueva imagen.
-
+        $this->dispatch('show-modal', 'Show Modal!');
     }
 
 
@@ -85,8 +88,9 @@ class Coins extends Component
             'image' => $imagePath
         ]);
 
-        session()->flash('success', 'Denomination created successfully.');
+        $this->alert('success', 'Created Succesfully');
         $this->reset('type', 'image', 'value');
+        $this->dispatch('denomination-added', 'Denominacion Registrada!');
     }
 
 
@@ -120,11 +124,49 @@ class Coins extends Component
             'image' => $this->image ? $this->image->store('denominations') : $denomination->image,
         ]);
 
-        session()->flash('success', 'Denominación actualizada con éxito.');
+        $this->alert('success', 'Updated Succesfully');
         $this->resetUI();
+        $this->dispatch('denomination-updated', 'Denominacion Actualizada!');
     }
 
 
+    public function delete($id)  // Asegúrate de que el ID se pasa a esta función
+    {
+        $this->selected_id = $id;  // Almacena el ID para usarlo en la confirmación
+        $this->alert('warning', 'Are you sure you want to delete?', [
+            'position' => 'center',
+            'timer' => 3000,
+            'toast' => false,  // Cambiado a false para que la alerta no desaparezca automáticamente
+            'showConfirmButton' => true,
+            'onConfirmed' => 'confirmedDeletion',  // Agregado un manejador para la confirmación
+            'showCancelButton' => true,
+            'onDismissed' => '',
+            'showDenyButton' => false,
+            'onDenied' => '',
+            'timerProgressBar' => false,
+            'width' => '400',
+        ]);
+    }
+
+
+
+    public function confirmedDeletion()
+    {
+        // Mensaje de depuración para verificar que este método se está llamando
+        logger('confirmedDeletion called, ID: ' . $this->selected_id);
+
+        $denomination = Denomination::find($this->selected_id);
+        if ($denomination) {
+            $denomination->delete();
+            $this->alert('success', 'The denomination has been eliminated.');
+        } else {
+            $this->alert('error', 'La denominación no se pudo encontrar.');
+        }
+    }
+
+    protected $listeners = [
+        'confirmedDeletion'
+    ];
 
 
     public function resetUI()

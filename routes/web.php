@@ -1,12 +1,19 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Livewire\Assign;
 use App\Livewire\Categories;
 use App\Livewire\Coins;
+use App\Livewire\EditCoin;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\PostComponent;
 use App\Livewire\ImageUpload;
+use App\Livewire\Permissions;
+use App\Livewire\Pos;
 use App\Livewire\Products;
+use App\Livewire\Roles;
+use App\Livewire\Select2;
+use App\Livewire\Users;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +48,18 @@ Route::get('products', Products::class);
 
 Route::get('coins', Coins::class);
 
+Route::get('sales', Pos::class);
+
+Route::get('roles', Roles::class)->name('roles');;
+
+Route::get('permissions', Permissions::class);
+
+Route::get('assign', Assign::class);
+
+Route::get('users', Users::class);
+
+
+Route::get('select2', select2::class);
 
 Route::get('/', Categories::class);
 
@@ -49,6 +68,6 @@ Route::get('/posts', PostComponent::class)->name('posts2');
 
 Route::get('/image-upload', ImageUpload::class)->name('posts');
 
-
+Route::get('/modal', EditCoin::class)->name('editcoin');
 
 require __DIR__ . '/auth.php';

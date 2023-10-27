@@ -16,6 +16,8 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "onscan.js": "^1.5.2",
+        "perfect-scrollbar": "^1.5.5",
         "sweetalert2": "^11.6.13"
     }
 }

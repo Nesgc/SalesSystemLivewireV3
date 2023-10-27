@@ -9,12 +9,13 @@ use Livewire\WithFileUploads;
 use Livewire\Attributes\Rule;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Storage;
-
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Categories extends Component
 {
     use WithFileUploads;
     use WithPagination;
+    use LivewireAlert;
 
 
     public $currentImage, $searchengine, $pageTitle, $componentName;
@@ -39,10 +40,10 @@ class Categories extends Component
     {
         $categories = $this->searchengine
             ? Category::where('name', 'like', '%' . $this->searchengine . '%')->paginate(10)
-            : Category::paginate(4);
+            : Category::paginate(10);
 
 
-        return view('livewire.categories', compact('categories'));
+        return view('livewire.category.categories', compact('categories'));
     }
 
     public function create()
@@ -55,22 +56,20 @@ class Categories extends Component
 
     public function Edit($id)
     {
-        $this->isEditMode = true;
         $record = Category::find($id, ['id', 'name', 'image']);
         $this->name = $record->name;
         $this->selected_id = $record->id;
         $this->currentImage = $record->image;  // Imagen actual, no la sobrescribe con la nueva imagen.
-
+        $this->dispatch('show-modal', 'Show Modal!');
     }
 
 
     public function Store()
     {
-        $this->isEditMode = false;
 
         // Validar si la imagen no es obligatoria o hacer validaciones personalizadas
         $this->validate([
-            'name' => 'required|string|max:255', // Solo como ejemplo, ajusta según tus necesidades
+            'name' => 'required|string|max:255|min:3', // Solo como ejemplo, ajusta según tus necesidades
             'image' => 'nullable|image|max:2048' // Haciendo la imagen opcional
         ]);
 
@@ -84,8 +83,9 @@ class Categories extends Component
             'image' => $imagePath
         ]);
 
-        session()->flash('success', 'Category created successfully.');
         $this->reset('name', 'image');
+        $this->dispatch('category-added', 'Categoría Registrada!');
+        $this->alert('success', 'Categoria creada!');
     }
 
 
@@ -107,19 +107,50 @@ class Categories extends Component
             }
 
             $category->update($data);
-            session()->flash('success', 'Post updated successfully.');
 
             $this->resetUI();
-            $this->dispatch('alert', 'El post se actualizó satisfactoriamente');
+            $this->dispatch('category-updated', 'Categoría Actualizada!');
+            $this->alert('success', 'Categoría Actualizada!');
         }
     }
 
-    public function Delete($id)
+    public function Delete($id)  // Asegúrate de que el ID se pasa a esta función
     {
-        Category::find($id)->delete();
-        session()->flash('success', 'Post deleted successfully.');
-        $this->reset('name', 'image');
+        $this->selected_id = $id;  // Almacena el ID para usarlo en la confirmación
+        $this->alert('warning', 'Are you sure you want to delete?', [
+            'position' => 'center',
+            'timer' => 3000,
+            'toast' => false,  // Cambiado a false para que la alerta no desaparezca automáticamente
+            'showConfirmButton' => true,
+            'onConfirmed' => 'confirmedDeletion',  // Agregado un manejador para la confirmación
+            'showCancelButton' => true,
+            'onDismissed' => '',
+            'showDenyButton' => false,
+            'onDenied' => '',
+            'timerProgressBar' => false,
+            'width' => '400',
+        ]);
     }
+
+
+
+    public function confirmedDeletion()
+    {
+        // Mensaje de depuración para verificar que este método se está llamando
+        logger('confirmedDeletion called, ID: ' . $this->selected_id);
+
+        $category = Category::find($this->selected_id);
+        if ($category) {
+            $category->delete();
+            $this->alert('success', 'Succesfully Eliminated ' . $category->name);
+        } else {
+            $this->alert('error', 'La denominación no se pudo encontrar.');
+        }
+    }
+
+    protected $listeners = [
+        'confirmedDeletion'
+    ];
 
 
 

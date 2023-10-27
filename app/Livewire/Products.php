@@ -8,18 +8,21 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Rule;
 use Livewire\WithPagination;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Products extends Component
 {
     use WithFileUploads;
     use WithPagination;
+    use LivewireAlert;
+
 
     public $currentImage, $searchengine, $selected_id, $pageTitle, $componentName, $barcode, $price, $stock, $alerts, $cost, $categories, $category, $category_id;
 
     #[Rule('nullable|image|max:3024')] // 1MB Max
     public $image;
     public $isEditMode = false;
-    public $isOpen = 0;
+
     public $path;
 
     #[Rule('required|min:3|unique:categories,name,{$this->selected_id}')]
@@ -60,7 +63,7 @@ class Products extends Component
                 ->paginate(10);
         }
 
-        return view('livewire.products', compact('products', 'categories'));
+        return view('livewire.products.products', compact('products', 'categories'));
     }
 
     public function create()
@@ -83,10 +86,8 @@ class Products extends Component
         $this->cost = $record->cost;
         $this->selected_id = $record->id;
         $this->category_id = $record->category_id;
-
-
         $this->currentImage = $record->image;  // Imagen actual, no la sobrescribe con la nueva imagen.
-
+        $this->dispatch('show-modal', 'Show Modal');
     }
 
 
@@ -124,8 +125,10 @@ class Products extends Component
         ]);
 
 
-        session()->flash('success', 'Category created successfully.');
         $this->reset('name', 'image', 'barcode', 'price', 'stock', 'alerts', 'cost', 'category_id');
+        $this->alert('success', 'Created Succesfully');
+
+        $this->dispatch('product-added', 'Producto Registrado');
     }
 
 
@@ -153,19 +156,51 @@ class Products extends Component
             }
 
             $product->update($data);
-            session()->flash('success', 'Post updated successfully.');
+            $this->alert('success', 'Updated Succesfully');
 
             $this->resetUI();
-            $this->dispatch('alert', 'El post se actualizó satisfactoriamente');
+            $this->dispatch('product-updated', 'Producto Actualizado');
         }
     }
 
-    public function Delete($id)
+    public function delete($id)  // Asegúrate de que el ID se pasa a esta función
     {
-        Product::find($id)->delete();
-        session()->flash('success', 'Post deleted successfully.');
-        $this->reset('name', 'image', 'barcode', 'price', 'stock', 'alerts', 'cost', 'category_id');
+        $this->selected_id = $id;  // Almacena el ID para usarlo en la confirmación
+        $this->alert('warning', 'Are you sure you want to delete?', [
+            'position' => 'center',
+            'timer' => 3000,
+            'toast' => false,  // Cambiado a false para que la alerta no desaparezca automáticamente
+            'showConfirmButton' => true,
+            'onConfirmed' => 'confirmedDeletion',  // Agregado un manejador para la confirmación
+            'showCancelButton' => true,
+            'onDismissed' => '',
+            'showDenyButton' => false,
+            'onDenied' => '',
+            'timerProgressBar' => false,
+            'width' => '400',
+        ]);
     }
+
+
+
+    public function confirmedDeletion()
+    {
+        // Mensaje de depuración para verificar que este método se está llamando
+        logger('confirmedDeletion called, ID: ' . $this->selected_id);
+
+        $product = Product::find($this->selected_id);
+        if ($product) {
+            $product->delete();
+            $this->alert('success', 'The product has been eliminated.');
+        } else {
+            $this->alert('error', 'La denominación no se pudo encontrar.');
+        }
+    }
+
+    protected $listeners = [
+        'confirmedDeletion'
+    ];
+
 
 
     public function resetUI()
