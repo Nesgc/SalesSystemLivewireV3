@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Assign;
+use App\Livewire\Cashout;
 use App\Livewire\Categories;
 use App\Livewire\Coins;
 use App\Livewire\EditCoin;
@@ -15,22 +16,7 @@ use App\Livewire\Roles;
 use App\Livewire\Select2;
 use App\Livewire\Users;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
-/*
-
-Route::get('/', function () {
-    return view('welcome');
-}); */
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -58,11 +44,14 @@ Route::get('assign', Assign::class);
 
 Route::get('users', Users::class);
 
+Route::get('cash-counts', Cashout::class);
+
+
+
 
 Route::get('select2', select2::class);
 
-Route::get('/', Categories::class);
-
+Route::get('/', Pos::class);
 
 Route::get('/posts', PostComponent::class)->name('posts2');
 
