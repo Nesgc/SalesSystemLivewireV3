@@ -3,15 +3,14 @@
         <div class="modal-content">
             <div class="modal-header bg-dark">
                 <h5 class="modal-title text-white">
-                    <b>Detalle de ventas
+                    <b>Sale details
                         {{-- @foreach ($sales as $sale)
                         #{{ $sale->id }}
                         @endforeach --}}
                     </b>
                 </h5>
-                <button class="close" data-dismiss="modal" type="button" aria-label="Close">
-                    <span class="text-white">&times;</span>
-                </button>
+                <button class="close" data-bs-dismiss="modal" type="button" aria-label="Close">
+                    <img src="img/x.png" height="20" width="20" alt=""> </button>
             </div>
 
             <div class="modal-body">
