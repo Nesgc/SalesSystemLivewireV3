@@ -12,6 +12,7 @@ use App\Livewire\ImageUpload;
 use App\Livewire\Permissions;
 use App\Livewire\Pos;
 use App\Livewire\Products;
+use App\Livewire\Reports;
 use App\Livewire\Roles;
 use App\Livewire\Select2;
 use App\Livewire\Users;
@@ -45,6 +46,8 @@ Route::get('assign', Assign::class);
 Route::get('users', Users::class);
 
 Route::get('cash-counts', Cashout::class);
+
+Route::get('reports', Reports::class);
 
 
 
