@@ -15,7 +15,7 @@
                         <div class="form-group">
                             <label>User</label>
                             <select class="form-select" wire:model='user_id' name="" id="">
-                                <option value="0">Chooose</option>
+                                <option value="0">Choose</option>
                                 @foreach ($users as $user)
                                     <option value="{{ $user->id }}">{{ $user->name }}</option>
                                 @endforeach
@@ -50,9 +50,8 @@
 
 
                     <div class="col-sm-12 col-md-3 align-self-center d-flex justify-content-around">
-                        @if ($user_id > 0 && $fromDate != null && $toDate != null)
-                            <button class="btn btn-dark mr-2" wire:click.prevent='Consult'>Consult</button>
-                        @endif
+                        <button class="btn btn-dark mr-2" wire:click.prevent='Consult'>Consult</button>
+
 
                         @if ($total > 0)
                             <button class="btn-dark btn" wire:click.prevent='Print()'>Print</button>
@@ -76,7 +75,7 @@
                 <div class="col-sm-12 col-md-8">
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped mt-1">
-                            <thead class="text-white">
+                            <thead class="text-white" style="background: #3B3F5C">
                                 <tr>
                                     <th class="table-th text-center text-white">Invoice</th>
                                     <th class="table-th text-center text-white">Total</th>
@@ -92,23 +91,23 @@
                                     <td colspan="5" style="color:#ff0000; font-size:20px;">No sales
                                         found within the selected date range.</td>
                                 @endif
-                                @foreach ($sale as $row)
+                                @foreach ($sales as $row)
                                     <tr>
                                         <td>
-                                            <h6>${{ $row->id }}</h6>
+                                            <h6>{{ $row->id }}</h6>
                                         </td>
                                         <td>
                                             <h6>${{ number_format($row->total, 2) }}</h6>
                                         </td>
                                         <td>
-                                            <h6>${{ $row->items }}</h6>
+                                            <h6>{{ $row->items }}</h6>
                                         </td>
                                         <td>
                                             <h6>{{ $row->created_at }}</h6>
                                         </td>
 
                                         <td>
-                                            <button wire:click.prevent='viewDetails({{ $row->id }})'
+                                            <button wire:click.prevent='viewDetails({{ $row }})'
                                                 class="btn btn-dark btn-sm">
                                                 <i class="fas fa-list"></i></button>
                                         </td>
@@ -125,26 +124,11 @@
 
     <script>
         document.addEventListener('livewire:initialized', () => {
-            @this.on('user-added', msg => {
-                $('#themodal').modal('hide');
-            })
-            @this.on('user-updated', msg => {
-                $('#themodal').modal('hide');
-                //   noty(msg);
 
-            })
-            @this.on('denomiation-deleted', msg => {
-                noty(msg);
-            })
-            //   window.livewire.on('hide-modal', msg => {
-            //       $('#themodal').modal('hide');
-            //   })
             @this.on('show-modal', msg => {
                 $('#themodal').modal('show');
             })
-            //   window.livewire.on('hidden.bs.modal', msg => {
-            //       $('.er').css('display', 'none');
-            //   })
+
         });
     </script>
 </div>
