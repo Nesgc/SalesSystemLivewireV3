@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\export;
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Assign;
 use App\Livewire\Cashout;
@@ -49,6 +50,10 @@ Route::get('cash-counts', Cashout::class);
 
 Route::get('reports', Reports::class);
 
+
+//REPORTS PDF
+Route::get('report/pdf/{user}/{type}/{f1}/{f2}', [export::class, 'reportPDF']);
+Route::get('report/pdf/{user}/{type}', [Export::class, 'reportPDF']);
 
 
 

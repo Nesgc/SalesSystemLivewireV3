@@ -14,7 +14,7 @@
                         <div class="col-sm-12">
                             <h6>Choose user</h6>
                             <div class="form-group">
-                                <select class="form-control">
+                                <select wire:model='userId' class="form-control">
                                     <option value="0">All</option>
                                     @foreach ($users as $user)
                                         <option value="{{ $user->id }}">{{ $user->name }}</option>
@@ -26,7 +26,7 @@
                         <div class="col-sm-12">
                             <h6>Choose report type</h6>
                             <div class="form-group">
-                                <select class="form-control">
+                                <select wire:model='reportType' class="form-control">
                                     <option value="0">Today sales</option>
                                     <option value="1">Sales by date</option>
 
@@ -55,16 +55,18 @@
                                 Consult
                             </button>
 
-                            <a class="btn btn-dark btn-block {{ count($data) > 1 ? 'disabled' : '' }}"
-                                href="{{ url('report/pdf' . '/' . $userId . '/' . $reportType . '/' . $dateFrom . '/' . $dateTo) }}"
-                                target="_blank">Create
-                                PDF</a>
-
-                            <a class="btn btn-dark btn-block {{ count($data) > 1 ? 'disabled' : '' }}"
-                                href="{{ url('report/excel' . '/' . $userId . '/' . $reportType . '/' . $dateFrom . '/' . $dateTo) }}"
-                                target="_blank">Export
-                                to excel</a>
-
+                            @if (count($data) < 1)
+                                <a class="btn btn-dark btn-block disabled" href="#" target="_blank">Create PDF</a>
+                                <a class="btn btn-dark btn-block disabled" href="#" target="_blank">Export to
+                                    Excel</a>
+                            @else
+                                <a class="btn btn-dark btn-block"
+                                    href="{{ url('report/pdf' . '/' . $userId . '/' . $reportType . '/' . $dateFrom . '/' . $dateTo) }}"
+                                    target="_blank">Create PDF</a>
+                                <a class="btn btn-dark btn-block"
+                                    href="{{ url('report/excel' . '/' . $userId . '/' . $reportType . '/' . $dateFrom . '/' . $dateTo) }}"
+                                    target="_blank">Export to Excel</a>
+                            @endif
                         </div>
 
                     </div>
@@ -86,13 +88,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if (count($data) < 1)
-                                        <tr>
-                                            <td colspan="7">
-                                                <p class="text-center">No results.</p>
-                                            </td>
-                                        </tr>
-                                    @endif
 
 
                                     @foreach ($data as $d)
@@ -117,7 +112,8 @@
                                                 </h6>
                                             </td>
                                             <td class="text-center" width="50px">
-                                                <button class="btn btn-dark btn-sm">
+                                                <button wire:click.prevent="getDetails({{ $d->id }})"
+                                                    class="btn btn-dark btn-sm">
                                                     <i class="fas fa-list"></i>
                                                 </button>
                                             </td>
@@ -129,6 +125,14 @@
 
 
                         </div>
+                        @if (count($data) < 1)
+                            <tr>
+                                <td colspan="7">
+                                    <p class="text-center">No results.</p>
+                                </td>
+                            </tr>
+                        @endif
+
                     </div>
 
                 </div>
@@ -138,3 +142,18 @@
 
     @include('livewire.reports.sales-detail')
 </div>
+<script>
+    document.addEventListener('livewire:initialized', () => {
+
+        flatpickr(document.getElementsByClassName('flatpickr'), {
+            enableTime: false,
+            dateFormat: 'Y-m-d'
+
+        })
+
+        @this.on('show-modal', msg => {
+            $('#themodal').modal('show');
+        })
+
+    });
+</script>
