@@ -31,17 +31,20 @@
             </li>
 
 
-            <li class="menu mt-3">
-                <a href="./categories" aria-expanded="false" class="dropdown-toggle">
-                    <div class="d-flex flex-row gap-3">
-                        <i class="fa fa-list-alt d-flex align-items-center fa-lg" aria-hidden="true"></i>
+            @can('add categories')
 
 
-                        <span class="fs-5"> Categories</span>
-                    </div>
-                </a>
-            </li>
+                <li class="menu mt-3">
+                    <a href="./categories" aria-expanded="false" class="dropdown-toggle">
+                        <div class="d-flex flex-row gap-3">
+                            <i class="fa fa-list-alt d-flex align-items-center fa-lg" aria-hidden="true"></i>
 
+
+                            <span class="fs-5"> Categories</span>
+                        </div>
+                    </a>
+                </li>
+            @endcan
 
             <li class="menu">
                 <a href="./products" aria-expanded="false" class="dropdown-toggle">
@@ -61,45 +64,50 @@
                     </div>
                 </a>
             </li>
+            @role('Super-Admin')
 
-            <li class="menu">
-                <a href="{{ route('roles') }}" aria-expanded="false" class="dropdown-toggle">
-                    <div class="d-flex flex-row gap-3">
-                        <i class="fa-brands fa-github   d-flex align-items-center fa-lg"></i>
+                <li class="menu">
+                    <a href="{{ route('roles') }}" aria-expanded="false" class="dropdown-toggle">
+                        <div class="d-flex flex-row gap-3">
+                            <i class="fa-brands fa-github   d-flex align-items-center fa-lg"></i>
 
-                        <span class="fs-5">Roles</span>
-                    </div>
-                </a>
-            </li>
+                            <span class="fs-5">Roles</span>
+                        </div>
+                    </a>
+                </li>
 
-            <li class="menu">
-                <a href="./permissions" aria-expanded="false" class="dropdown-toggle">
-                    <div class="d-flex flex-row gap-3">
-                        <i class="fa-solid fa-key  d-flex align-items-center fa-lg"></i>
 
-                        <span class="fs-5">Permissions</span>
-                    </div>
-                </a>
-            </li>
 
-            <li class="menu">
-                <a href="./assign" aria-expanded="false" class="dropdown-toggle">
-                    <div class="d-flex flex-row gap-3">
-                        <i class="fa-solid fa-toggle-on d-flex align-items-center fa-lg"></i>
+                <li class="menu">
+                    <a href="./permissions" aria-expanded="false" class="dropdown-toggle">
+                        <div class="d-flex flex-row gap-3">
+                            <i class="fa-solid fa-key  d-flex align-items-center fa-lg"></i>
 
-                        <span class="fs-5">Assign</span>
-                    </div>
-                </a>
-            </li>
-            <li class="menu">
-                <a href="./users" aria-expanded="false" class="dropdown-toggle">
-                    <div class="d-flex flex-row gap-3">
-                        <i class="fa-solid fa-users d-flex align-items-center fa-lg"></i>
+                            <span class="fs-5">Permissions</span>
+                        </div>
+                    </a>
+                </li>
 
-                        <span class="fs-5">Users</span>
-                    </div>
-                </a>
-            </li>
+                <li class="menu">
+                    <a href="./assign" aria-expanded="false" class="dropdown-toggle">
+                        <div class="d-flex flex-row gap-3">
+                            <i class="fa-solid fa-toggle-on d-flex align-items-center fa-lg"></i>
+
+                            <span class="fs-5">Assign</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="menu">
+                    <a href="./users" aria-expanded="false" class="dropdown-toggle">
+                        <div class="d-flex flex-row gap-3">
+                            <i class="fa-solid fa-users d-flex align-items-center fa-lg"></i>
+
+                            <span class="fs-5">Users</span>
+                        </div>
+                    </a>
+                </li>
+
+            @endcan
             <li class="menu">
                 <a href="./coins" aria-expanded="false" class="dropdown-toggle">
                     <div class="d-flex flex-row gap-3">
