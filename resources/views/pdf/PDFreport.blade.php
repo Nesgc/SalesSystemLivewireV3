@@ -34,6 +34,49 @@
         .text-company {
             font-size: 16px;
         }
+
+        body {
+            position: relative;
+            padding-bottom: 60px;
+            /* Espacio para el footer */
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            /* Altura del footer */
+            text-align: center;
+            line-height: 50px;
+            /* Centrar el texto verticalmente */
+        }
+
+        .table-items th {
+            background-color: #2e2e2e;
+            /* Color azul oscuro */
+            color: white;
+            padding: 8px;
+        }
+
+        .table-items td {
+            padding: 8px;
+        }
+
+        .table-items tr:nth-child(even) {
+            background-color: #f2f2f2;
+            /* Color para las filas pares */
+        }
+
+        .table-items tr:nth-child(odd) {
+            background-color: white;
+            /* Color para las filas impares */
+        }
     </style>
 </head>
 
@@ -102,7 +145,7 @@
         </table>
     </section>
 
-    <section class="footer" style="margin-top: 10px;">
+    <section class="footer">
         <table class="table-items">
             <tr>
                 <td width="20%">POS System v1</td>

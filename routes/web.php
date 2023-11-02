@@ -55,6 +55,9 @@ Route::get('reports', Reports::class);
 Route::get('report/pdf/{user}/{type}/{f1}/{f2}', [export::class, 'reportPDF']);
 Route::get('report/pdf/{user}/{type}', [Export::class, 'reportPDF']);
 
+//REPORTS Excel
+Route::get('report/excel/{user}/{type}/{f1}/{f2}', [export::class, 'reportExcel']);
+Route::get('report/excel/{user}/{type}', [Export::class, 'reportExcel']);
 
 
 Route::get('select2', select2::class);

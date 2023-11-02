@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\SalesExport;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\Sale;
@@ -44,8 +45,14 @@ class export extends Controller
         }
 
         $user = $userId == 0 ? 'All' : User::find($userId)->name;
-        $pdf = Pdf::loadView('pdf.report', compact('data', 'reportType', 'user', 'dateFrom', 'dateTo'));
+        $pdf = Pdf::loadView('pdf.PDFreport', compact('data', 'reportType', 'user', 'dateFrom', 'dateTo'));
         return $pdf->stream('salesReport.pdf');
         //return $pdf->download('salesReport.pdf');
+    }
+
+    public function reportExcel($userId, $reportType, $dateFrom = null, $dateTo = null)
+    {
+        $reportName = 'Sales Report_' . uniqid() . '.xlsx';
+        return Excel::download(new SalesExport($userId, $reportType, $dateFrom, $dateTo), $reportName);
     }
 }

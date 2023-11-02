@@ -6,6 +6,10 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Sale;
 use App\Models\User;
+use App\Models\SaleDetail;
+use App\Models\Product;
+use Illuminate\Support\Str;
+
 
 class SaleSeeder extends Seeder
 {
@@ -14,21 +18,73 @@ class SaleSeeder extends Seeder
      */
     public function run()
     {
-        // Obtén los 4 usuarios por defecto (asegúrate de que existan en tu base de datos)
-        $users = User::limit(4)->get();
 
-        foreach ($users as $user) {
-            // Genera ventas de ejemplo para cada usuario
-            for ($i = 0; $i < 5; $i++) {
-                Sale::create([
-                    'total' => rand(50, 500),
-                    'items' => rand(1, 10),
-                    'cash' => rand(50, 500),
-                    'change' => rand(0, 50),
-                    'status' => 'PAID', // Puedes cambiar el estado según tus necesidades
-                    'user_id' => $user->id,
-                ]);
-            }
-        }
+
+        // Crear venta
+
+        Sale::create([
+            'total' => 1050,
+            'items' => 3,
+            'cash' => 2000,
+            'change' => 950,
+            'status' => 'PAID',
+            'user_id' => 1,
+        ]);
+        Sale::create([
+            'total' => 6000,
+            'items' => 4,
+            'cash' => 9000,
+            'change' => 3000,
+            'status' => 'PAID',
+            'user_id' => 1,
+        ]);
+        Sale::create([
+            'total' => 1050,
+            'items' => 3,
+            'cash' => 2000,
+            'change' => 950,
+            'status' => 'PAID',
+            'user_id' => 2,
+        ]);
+        Sale::create([
+            'total' => 6000,
+            'items' => 4,
+            'cash' => 9000,
+            'change' => 3000,
+            'status' => 'PAID',
+            'user_id' => 2,
+        ]);
+        Sale::create([
+            'total' => 1050,
+            'items' => 3,
+            'cash' => 2000,
+            'change' => 950,
+            'status' => 'PAID',
+            'user_id' => 3,
+        ]);
+        Sale::create([
+            'total' => 6000,
+            'items' => 4,
+            'cash' => 9000,
+            'change' => 3000,
+            'status' => 'PAID',
+            'user_id' => 3,
+        ]);
+        Sale::create([
+            'total' => 1050,
+            'items' => 3,
+            'cash' => 2000,
+            'change' => 950,
+            'status' => 'PAID',
+            'user_id' => 4,
+        ]);
+        Sale::create([
+            'total' => 6000,
+            'items' => 4,
+            'cash' => 9000,
+            'change' => 3000,
+            'status' => 'PAID',
+            'user_id' => 4,
+        ]);
     }
 }

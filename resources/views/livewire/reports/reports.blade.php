@@ -14,7 +14,7 @@
                         <div class="col-sm-12">
                             <h6>Choose user</h6>
                             <div class="form-group">
-                                <select wire:model='userId' class="form-control">
+                                <select wire:model.live='userId' class="form-control">
                                     <option value="0">All</option>
                                     @foreach ($users as $user)
                                         <option value="{{ $user->id }}">{{ $user->name }}</option>
@@ -23,10 +23,10 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-12">
+                        <div class="col-sm-12 mt-2">
                             <h6>Choose report type</h6>
                             <div class="form-group">
-                                <select wire:model='reportType' class="form-control">
+                                <select wire:model.live='reportType' class="form-control">
                                     <option value="0">Today sales</option>
                                     <option value="1">Sales by date</option>
 
@@ -34,26 +34,28 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-12 mt-2">
-                            <h6>From date</h6>
-                            <div class="form-group">
-                                <input type="text" wire:model='dateFrom' class="form-control flatpickr"
-                                    placeholder="Click to choose">
+                        @if ($reportType == 1)
+                            <div class="col-sm-12 mt-2">
+                                <h6>From date</h6>
+                                <div class="form-group">
+                                    <input type="text" wire:model="dateFrom" class="form-control flatpickr"
+                                        placeholder="Click to choose">
+                                </div>
                             </div>
-                        </div>
+
+                            <div class="col-sm-12 mt-2">
+                                <h6>To date</h6>
+                                <div class="form-group">
+                                    <input type="text" wire:model="dateTo" class="form-control flatpickr"
+                                        placeholder="Click to choose">
+                                </div>
+                            </div>
+                        @endif
 
                         <div class="col-sm-12 mt-2">
-                            <h6>To date</h6>
-                            <div class="form-group">
-                                <input type="text" wire:model='dateTo' class="form-control flatpickr"
-                                    placeholder="Click to choose">
-                            </div>
-                        </div>
-
-                        <div class="col-sm-12">
-                            <button wire:click='$refresh' class="btn btn-darl btn-block">
+                            {{-- <button wire:click='$refresh' class="btn btn-darl btn-block">
                                 Consult
-                            </button>
+                            </button> --}}
 
                             @if (count($data) < 1)
                                 <a class="btn btn-dark btn-block disabled" href="#" target="_blank">Create PDF</a>

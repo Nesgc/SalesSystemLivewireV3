@@ -21,16 +21,54 @@ class SaleDetailSeeder extends Seeder
         // Obtén todos los productos (asegúrate de que existan en tu base de datos)
         $products = Product::all();
 
-        foreach ($sales as $sale) {
-            // Genera detalles de venta de ejemplo para cada venta
-            for ($i = 0; $i < 3; $i++) {
-                SaleDetail::create([
-                    'price' => rand(10, 100),
-                    'quantity' => rand(1, 5),
-                    'sale_id' => $sale->id,
-                    'product_id' => $products->random()->id, // Asigna un producto aleatorio a la venta
-                ]);
-            }
-        }
+
+        SaleDetail::create([
+            'price' => 1050,
+            'quantity' => 1,
+            'sale_id' => 1,
+            'product_id' => 1,
+        ]);
+        SaleDetail::create([
+            'price' => 6000,
+            'quantity' => 1,
+            'sale_id' => 2,
+            'product_id' => 2,
+        ]);
+        SaleDetail::create([
+            'price' => 1050,
+            'quantity' => 1,
+            'sale_id' => 3,
+            'product_id' => 1,
+        ]);
+        SaleDetail::create([
+            'price' => 6000,
+            'quantity' => 1,
+            'sale_id' => 4,
+            'product_id' => 2,
+        ]);
+        SaleDetail::create([
+            'price' => 1050,
+            'quantity' => 1,
+            'sale_id' => 5,
+            'product_id' => 1,
+        ]);
+        SaleDetail::create([
+            'price' => 6000,
+            'quantity' => 1,
+            'sale_id' => 6,
+            'product_id' => 2,
+        ]);
+        SaleDetail::create([
+            'price' => 1050,
+            'quantity' => 1,
+            'sale_id' => 7,
+            'product_id' => 1,
+        ]);
+        SaleDetail::create([
+            'price' => 6000,
+            'quantity' => 1,
+            'sale_id' => 8,
+            'product_id' => 2,
+        ]);
     }
 }
