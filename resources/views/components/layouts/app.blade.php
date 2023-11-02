@@ -53,6 +53,9 @@
     <link href="{{ asset('assets/css/apps/scrumboard.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/css/apps/notes.css') }}" rel="stylesheet" type="text/css" />
 
+    <link href="{{ asset('plugins/flatpickr/dark.css') }}" rel="stylesheet" type="text/css" />
+
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
         integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -193,6 +196,7 @@
 
     <script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script>
 
+    <script src="{{ asset('plugins/flatpickr/flatpickr.js') }}"></script>
 
     <script src="../src/plugins/keypress-2.1.5.min.js"></script>
     <script src="{{ asset('plugins/notification/snackbar/snackbar.min.js') }}"></script>
