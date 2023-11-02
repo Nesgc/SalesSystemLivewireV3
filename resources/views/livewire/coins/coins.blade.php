@@ -43,13 +43,12 @@
                                         <h6>{{ $denomination->type }}</h6>
                                     </td>
 
-                                    <td class="text-center"><span><img
-                                                src="{{ asset('storage/' . $denomination->image) }}" alt="example"
-                                                height="70" width="80" class="rounded"></span>
+                                    <td class=""><span><img src="{{ asset('storage/' . $denomination->image) }}"
+                                                alt="example" height="70" width="80" class="rounded"></span>
                                     </td>
 
 
-                                    <td class="text-center">
+                                    <td class="">
                                         <a href="javascript:void(0)" class="btn btn-dark mtmobile" title="Edit"
                                             wire:click="Edit({{ $denomination->id }})"><i
                                                 class="fa-solid fa-pen-to-square"></i></a>

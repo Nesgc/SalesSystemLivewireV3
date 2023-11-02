@@ -30,39 +30,52 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('categories', Categories::class);
+Route::middleware('auth')->group(function () {
 
-Route::get('products', Products::class);
+    Route::group(['middleware' => ['role:super-admin']], function () {
+        Route::get('roles', Roles::class)->name('roles');;
 
-Route::get('coins', Coins::class);
+        Route::get('permissions', Permissions::class);
 
-Route::get('sales', Pos::class);
+        Route::get('assign', Assign::class);
 
-Route::get('roles', Roles::class)->name('roles');;
+        Route::get('users', Users::class);
+    });
 
-Route::get('permissions', Permissions::class);
+    Route::get('categories', Categories::class);
 
-Route::get('assign', Assign::class);
+    Route::get('products', Products::class);
 
-Route::get('users', Users::class);
+    Route::get('coins', Coins::class);
 
-Route::get('cash-counts', Cashout::class);
+    Route::get('sales', Pos::class);
 
-Route::get('reports', Reports::class);
+    Route::get('cash-counts', Cashout::class);
+
+    Route::get('reports', Reports::class);
+
+    Route::get('report/pdf/{user}/{type}/{f1}/{f2}', [export::class, 'reportPDF']);
+    Route::get('report/pdf/{user}/{type}', [Export::class, 'reportPDF']);
+
+    //REPORTS Excel
+    Route::get('report/excel/{user}/{type}/{f1}/{f2}', [export::class, 'reportExcel']);
+    Route::get('report/excel/{user}/{type}', [Export::class, 'reportExcel']);
+
+
+
+    Route::get('/', Pos::class);
+});
+
+
+
+
 
 
 //REPORTS PDF
-Route::get('report/pdf/{user}/{type}/{f1}/{f2}', [export::class, 'reportPDF']);
-Route::get('report/pdf/{user}/{type}', [Export::class, 'reportPDF']);
-
-//REPORTS Excel
-Route::get('report/excel/{user}/{type}/{f1}/{f2}', [export::class, 'reportExcel']);
-Route::get('report/excel/{user}/{type}', [Export::class, 'reportExcel']);
 
 
 Route::get('select2', select2::class);
 
-Route::get('/', Pos::class);
 
 Route::get('/posts', PostComponent::class)->name('posts2');
 

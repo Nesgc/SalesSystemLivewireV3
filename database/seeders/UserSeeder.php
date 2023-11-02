@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
             'name' => 'Nes GC',
             'phone' => '2333035355',
             'email' => 'nesgc@gmail.com',
-            'profile' => 'Super-Admin',
+            'profile' => 'super-admin',
             'status' => 'ACTIVE',
             'password' => bcrypt('admin'),
             'image' => 'users/mapache.jpg'

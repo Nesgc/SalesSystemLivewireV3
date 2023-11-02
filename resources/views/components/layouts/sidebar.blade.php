@@ -64,7 +64,7 @@
                     </div>
                 </a>
             </li>
-            @role('Super-Admin')
+            @role('super-admin')
 
                 <li class="menu">
                     <a href="{{ route('roles') }}" aria-expanded="false" class="dropdown-toggle">

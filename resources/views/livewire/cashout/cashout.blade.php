@@ -14,7 +14,7 @@
                     <div class="col-sm-12 col-md-3">
                         <div class="form-group">
                             <label>User</label>
-                            <select class="form-select" wire:model='user_id' name="" id="">
+                            <select class="form-select" wire:model.live='user_id' name="" id="">
                                 <option value="0">Choose</option>
                                 @foreach ($users as $user)
                                     <option value="{{ $user->id }}">{{ $user->name }}</option>
@@ -30,7 +30,7 @@
                     <div class="col-sm-12 col-md-2">
                         <div class="form-group">
                             <label>Starting date</label>
-                            <input type="date" wire:model.lazy='fromDate' class="form-control date">
+                            <input type="date" wire:model.live='fromDate' class="form-control date">
                             @error('fromDate')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -41,7 +41,7 @@
                     <div class="col-sm-12 col-md-2">
                         <div class="form-group">
                             <label>Ending date</label>
-                            <input type="date" wire:model.lazy='toDate' class="form-control">
+                            <input type="date" wire:model.live='toDate' class="form-control">
                             @error('toDate')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
